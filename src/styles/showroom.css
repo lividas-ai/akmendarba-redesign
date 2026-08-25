@@ -1,0 +1,53 @@
+/* Final showroom-level corrections loaded after the legacy component cascade. */
+
+.site-header,
+.site-header[data-scrolled] {
+  background: var(--color-bg-elevated);
+  backdrop-filter: none;
+}
+
+@media (min-width: 70rem) {
+  .site-header__inner.page-shell {
+    width: min(calc(100% - (2 * var(--space-gutter))), 90rem);
+    padding-inline: 0;
+  }
+
+  .site-header__mega-inner.page-shell {
+    width: min(calc(100% - (2 * var(--space-gutter))), 90rem);
+    padding-inline: 0;
+  }
+
+  .site-header__inner > .wordmark {
+    min-width: 13rem;
+  }
+
+  .wordmark__logo {
+    width: 2.45rem;
+    height: 2.85rem;
+  }
+
+  .wordmark__name {
+    display: inline;
+  }
+
+  .site-header__nav {
+    width: min(100%, 66rem);
+    justify-self: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .site-header__cta {
+    min-height: auto;
+    padding: 0.25rem 0 0.38rem;
+    border-bottom: 1px solid var(--color-border-primary);
+    background: transparent;
+    color: var(--color-text-primary);
+  }
+
+  .site-header__cta:hover {
+    border-color: var(--color-text-primary);
+    background: transparent;
+    color: var(--color-text-primary);
+  }
+}

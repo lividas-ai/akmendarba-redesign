@@ -1,0 +1,25 @@
+node_modules/
+.next/
+out/
+*.log
+.DS_Store
+.env*
+!.env.example
+.test-deps/
+.asset-source/
+tests/screenshots/
+
+# Generated test and build artifacts
+**/__pycache__/
+*.py[cod]
+*.tsbuildinfo
+coverage/
+playwright-report/
+test-results/
+.vercel/
+build/
+
+# Local visual QA captures; keep the design notes and audit scripts
+.design/**/screenshots/
+.design/**/*.png
+.design/**/*.jpg

@@ -1,0 +1,159 @@
+/* Granit Decor — restrained material modernism. */
+
+:root {
+  color-scheme: light;
+
+  /* Typography */
+  --font-family-display: "Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-family-body: "Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-family-mono: "Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-md: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  --font-size-lg: clamp(1.2rem, 1.1rem + 0.35vw, 1.45rem);
+  --font-size-xl: clamp(1.5rem, 1.25rem + 0.75vw, 2rem);
+  --font-size-2xl: clamp(2rem, 1.55rem + 1.45vw, 3rem);
+  --font-size-3xl: clamp(2.5rem, 2rem + 1.8vw, 3.5rem);
+  --font-size-4xl: clamp(3rem, 2.15rem + 2.8vw, 5rem);
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-none: 0.94;
+  --line-height-tight: 1.05;
+  --line-height-snug: 1.25;
+  --line-height-normal: 1.55;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.045em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.08em;
+  --letter-spacing-wider: 0.14em;
+
+  /* Spacing — controlled editorial scale */
+  --space-0: 0;
+  --space-1: 0.125rem;
+  --space-2: 0.25rem;
+  --space-3: 0.5rem;
+  --space-4: 0.75rem;
+  --space-5: 1rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 3rem;
+  --space-9: 4rem;
+  --space-10: 6rem;
+  --space-11: 7rem;
+  --space-12: 9rem;
+  --space-section: clamp(4rem, 6vw, 7rem);
+  --space-gutter: clamp(1rem, 2.5vw, 2.75rem);
+
+  /* Mineral palette */
+  --mineral-chalk: #f8f8f5;
+  --mineral-limestone: #efefeb;
+  --mineral-sand: #deded8;
+  --mineral-clay: #b7a694;
+  --mineral-graphite: #1a1b18;
+  --mineral-charcoal: #242521;
+  --mineral-smoke: #5c5b54;
+  --mineral-burnished: #7b3025;
+  --mineral-burnished-bright: #934437;
+  --mineral-bronze: #9b7759;
+
+  /* Semantic color */
+  --color-bg-primary: var(--mineral-chalk);
+  --color-bg-secondary: var(--mineral-limestone);
+  --color-bg-tertiary: #e2dbd0;
+  --color-bg-elevated: #ffffff;
+  --color-bg-inverse: var(--mineral-graphite);
+
+  --color-text-primary: #1c1d19;
+  --color-text-secondary: #56564f;
+  --color-text-tertiary: #74736b;
+  --color-text-inverse: #f3efe7;
+  --color-text-link: #6f2a21;
+
+  --color-border-primary: rgba(28, 29, 25, 0.25);
+  --color-border-secondary: rgba(28, 29, 25, 0.12);
+  --color-border-strong: rgba(28, 29, 25, 0.55);
+  --color-border-focus: #7b3025;
+
+  --color-accent-primary: var(--mineral-burnished);
+  --color-accent-primary-hover: #68251d;
+  --color-accent-primary-active: #561d17;
+  --color-accent-secondary: var(--mineral-bronze);
+  --color-accent-soft: rgba(123, 48, 37, 0.1);
+
+  --color-status-success: #35634a;
+  --color-status-warning: #805d21;
+  --color-status-error: #a12e29;
+  --color-status-info: #345e72;
+  --color-surface-overlay: rgba(18, 19, 16, 0.74);
+  --color-scrim-light: linear-gradient(180deg, rgba(13, 14, 12, 0.08), rgba(13, 14, 12, 0.65));
+  --color-scrim-side: linear-gradient(90deg, rgba(13, 14, 12, 0.74), rgba(13, 14, 12, 0.08) 72%);
+
+  /* Layout */
+  --max-width-content: 46rem;
+  --max-width-wide: 86rem;
+  --max-width-page: 112rem;
+  --header-height: 4.75rem;
+  --mobile-dock-height: 4rem;
+
+  --border-radius-xs: 0.125rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.625rem;
+  --border-radius-lg: 1.25rem;
+  --border-radius-xl: 2rem;
+  --border-radius-full: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(24, 25, 21, 0.08), 0 8px 24px rgba(24, 25, 21, 0.04);
+  --shadow-md: 0 12px 40px rgba(24, 25, 21, 0.11);
+  --shadow-lg: 0 28px 80px rgba(24, 25, 21, 0.18);
+  --shadow-focus: 0 0 0 3px rgba(123, 48, 37, 0.28);
+
+  /* Motion */
+  --duration-instant: 60ms;
+  --duration-fast: 160ms;
+  --duration-normal: 220ms;
+  --duration-slow: 420ms;
+  --duration-slower: 700ms;
+  --duration-cinematic: 1200ms;
+
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-in: cubic-bezier(0.5, 0, 1, 1);
+  --easing-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --easing-emphasized: cubic-bezier(0.77, 0, 0.18, 1);
+  --easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Component-level tokens */
+  --control-height-sm: 2.5rem;
+  --control-height-md: 3rem;
+  --control-height-lg: 3.5rem;
+  --control-padding-inline: 1.25rem;
+  --button-radius: var(--border-radius-xs);
+  --input-radius: var(--border-radius-sm);
+  --card-radius: var(--border-radius-sm);
+  --card-border: 1px solid var(--color-border-secondary);
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-border-focus) 30%, transparent);
+  --veil-blur: 18px;
+
+  /* Breakpoint reference tokens (custom properties cannot drive media queries) */
+  --breakpoint-sm: 23.4375rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 1ms;
+    --duration-normal: 1ms;
+    --duration-slow: 1ms;
+    --duration-slower: 1ms;
+    --duration-cinematic: 1ms;
+  }
+}
