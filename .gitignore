@@ -8,6 +8,7 @@ out/
 .test-deps/
 .asset-source/
 tests/screenshots/
+screenshots/
 
 # Generated test and build artifacts
 **/__pycache__/

@@ -28,6 +28,8 @@
 
   .wordmark__name {
     display: inline;
+    font-size: 1.12rem;
+    letter-spacing: 0.28em;
   }
 
   .site-header__nav {

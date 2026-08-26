@@ -44,8 +44,9 @@ The homepage hero is an explicitly AI-assisted visualization of the same photogr
 - Portrait motion job: `6c7aa086-6725-45ee-946d-bd5edde930da`.
 - Portrait source master: 1088 × 1920, 24 fps, with the island retained as the orbit's visual anchor.
 - Production desktop delivery: `public/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4`, 2560 × 1440, 24 fps, silent, network-optimized MP4.
-- Production portrait delivery: `public/assets/video/granit-decor-kitchen-orbit-v2-mobile-portrait.mp4`, 1088 × 1920, 24 fps, silent, network-optimized MP4.
-- Production portrait poster: `public/assets/video/granit-decor-kitchen-orbit-v2-mobile-poster.webp`, 1088 × 1920.
+- Rejected portrait delivery: `public/assets/video/granit-decor-kitchen-orbit-v2-mobile-portrait.mp4`, 1088 × 1920. This independent generation did not reproduce the approved desktop orbit and is retained only as an archive.
+- Production portrait delivery: `public/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4`, 810 × 1440, 24 fps, silent, fast-start MP4. It is a deterministic centered reframe of the approved desktop delivery, so every frame, camera angle, speed, and loop point matches desktop.
+- Production portrait poster: `public/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-poster.webp`, 810 × 1440, extracted from the first frame of the same delivery.
 - Review record: Seedance 2.5 job `69bb1ad8-32cf-40fd-afe0-3a996e8c31a2` was rejected for a visible loop jump; FLUX 3 job `dccb0f9e-6112-47e6-a70c-b896f5467d3b` failed; Kling 3.0 job `9a8516a5-c667-4afb-97e6-ba8e6bc72d36` was rejected because the camera remained effectively static.
 
 The generated scene preserves the photographed island, blue stone wall, cabinetry, dining and living areas, but the wide master composition contains generative reconstruction. Keep the original wide project photograph (`counter-curved.webp`) as the social-sharing image.

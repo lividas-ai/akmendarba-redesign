@@ -337,6 +337,7 @@ export function SiteHeader() {
         </div>
 
         <button
+          aria-label="Atverti meniu"
           aria-expanded={mobileMenuOpen}
           aria-haspopup="dialog"
           className="site-header__menu-button"
@@ -559,10 +560,19 @@ export function SiteHeader() {
                   </div>
                 ) : (
                   <>
-                    <div>
+                    <div className="mobile-menu__visual-grid">
                       {selectedMobileMenu.tiles.map((tile) => (
-                        <Link href={tile.href} key={tile.id} onClick={closeMobileMenu}>
-                          {tile.label}
+                        <Link
+                          aria-current={isNavigationActive(pathname, tile.href) ? "page" : undefined}
+                          className="mobile-menu__visual-tile"
+                          href={tile.href}
+                          key={tile.id}
+                          onClick={closeMobileMenu}
+                        >
+                          <span className="mobile-menu__visual">
+                            <Image alt="" fill loading="eager" sizes="72px" src={tile.image.src} />
+                          </span>
+                          <span>{tile.label}</span>
                         </Link>
                       ))}
                     </div>

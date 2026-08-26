@@ -1391,6 +1391,16 @@
     bottom: calc(env(safe-area-inset-bottom) + var(--space-6));
   }
 
+  .home-hero__project {
+    right: calc(var(--space-gutter) + 3.55rem);
+    bottom: calc(env(safe-area-inset-bottom) + var(--space-6));
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+
   .section-heading .display-title,
   .home-process .display-title {
     max-width: 15ch;
@@ -1405,7 +1415,7 @@
   }
 
   .home-applications .application-grid {
-    grid-auto-columns: min(68vw, 16.5rem);
+    grid-auto-columns: min(56vw, 13.25rem);
     gap: var(--space-4);
   }
 
@@ -1435,7 +1445,7 @@
   }
 
   .material-stage {
-    grid-auto-columns: min(62vw, 15.5rem);
+    grid-auto-columns: min(52vw, 12.5rem);
     gap: var(--space-4);
     scroll-padding-inline: var(--space-gutter);
     scrollbar-width: none;
@@ -1470,7 +1480,7 @@
   .project-editorial-grid {
     width: auto;
     grid-template-columns: none;
-    grid-auto-columns: min(74vw, 18rem);
+    grid-auto-columns: min(66vw, 16.5rem);
     grid-auto-flow: column;
     gap: var(--space-4);
     margin-inline: calc(var(--space-gutter) * -1);
@@ -1536,7 +1546,7 @@
 
   .home-professionals,
   .home-professionals__content {
-    min-height: min(22rem, 42svh);
+    min-height: min(18rem, 34svh);
   }
 
   .home-professionals__content {

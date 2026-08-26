@@ -3,96 +3,74 @@
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 
-type NetworkInformation = EventTarget & {
-  effectiveType?: string;
-  saveData?: boolean;
-};
-
 export function HomeHeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const userPausedRef = useRef(false);
-  const resumeAfterVisibilityRef = useRef(false);
-  const resumeAfterIntersectionRef = useRef(false);
-  const [motionAllowed, setMotionAllowed] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
+    const video = videoRef.current;
+    if (!video) return;
 
-    const syncMotionPreference = () => {
-      const constrainedConnection = Boolean(
-        connection?.saveData ||
-          connection?.effectiveType === "slow-2g" ||
-          connection?.effectiveType === "2g" ||
-          connection?.effectiveType === "3g",
-      );
-      const allowed = !motionQuery.matches && !constrainedConnection;
-      if (!allowed) {
-        videoRef.current?.pause();
-        setPlaying(false);
-        setHasStarted(false);
-      }
-      setMotionAllowed(allowed);
+    const requestPlayback = () => {
+      if (userPausedRef.current || document.hidden) return;
+      video.muted = true;
+      void video
+        .play()
+        .then(() => {
+          setHasStarted(true);
+          setPlaying(true);
+        })
+        .catch(() => setPlaying(false));
     };
-
-    syncMotionPreference();
-    motionQuery.addEventListener("change", syncMotionPreference);
-    connection?.addEventListener("change", syncMotionPreference);
-    return () => {
-      motionQuery.removeEventListener("change", syncMotionPreference);
-      connection?.removeEventListener("change", syncMotionPreference);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!motionAllowed) return;
 
     const handleVisibilityChange = () => {
-      const video = videoRef.current;
-      if (!video) return;
-
       if (document.hidden) {
-        resumeAfterVisibilityRef.current = !video.paused && !userPausedRef.current;
         video.pause();
         return;
       }
-
-      if (resumeAfterVisibilityRef.current && !userPausedRef.current) {
-        void video.play().catch(() => setPlaying(false));
-      }
-      resumeAfterVisibilityRef.current = false;
+      requestPlayback();
     };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, [motionAllowed]);
+    const handlePageShow = () => requestPlayback();
 
-  useEffect(() => {
-    if (!motionAllowed) return;
-    const video = videoRef.current;
-    if (!video || !("IntersectionObserver" in window)) return;
+    video.addEventListener("canplay", requestPlayback);
+    video.addEventListener("loadedmetadata", requestPlayback);
+    window.addEventListener("pageshow", handlePageShow);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    requestPlayback();
+
+    if (!("IntersectionObserver" in window)) {
+      return () => {
+        video.removeEventListener("canplay", requestPlayback);
+        video.removeEventListener("loadedmetadata", requestPlayback);
+        window.removeEventListener("pageshow", handlePageShow);
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+      };
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) {
-          resumeAfterIntersectionRef.current = !video.paused && !userPausedRef.current;
           video.pause();
           return;
         }
-
-        if (resumeAfterIntersectionRef.current && !userPausedRef.current && !document.hidden) {
-          void video.play().catch(() => setPlaying(false));
-        }
-        resumeAfterIntersectionRef.current = false;
+        requestPlayback();
       },
       { threshold: 0.12 },
     );
 
     observer.observe(video);
-    return () => observer.disconnect();
-  }, [motionAllowed]);
+    return () => {
+      observer.disconnect();
+      video.removeEventListener("canplay", requestPlayback);
+      video.removeEventListener("loadedmetadata", requestPlayback);
+      window.removeEventListener("pageshow", handlePageShow);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   async function togglePlayback() {
     const video = videoRef.current;
@@ -102,6 +80,8 @@ export function HomeHeroVideo() {
       userPausedRef.current = false;
       try {
         await video.play();
+        setHasStarted(true);
+        setPlaying(true);
       } catch {
         setPlaying(false);
       }
@@ -111,8 +91,6 @@ export function HomeHeroVideo() {
     userPausedRef.current = true;
     video.pause();
   }
-
-  if (!motionAllowed) return null;
 
   return (
     <>
@@ -124,19 +102,21 @@ export function HomeHeroVideo() {
         disablePictureInPicture
         loop
         muted
+        onError={() => setPlaying(false)}
         onPause={() => setPlaying(false)}
         onPlaying={() => {
           setHasStarted(true);
           setPlaying(true);
         }}
         playsInline
-        preload="metadata"
+        poster="/assets/video/granit-decor-kitchen-orbit-poster.webp"
+        preload="auto"
         ref={videoRef}
         tabIndex={-1}
       >
         <source
           media="(max-width: 69.999rem) and (orientation: portrait)"
-          src="/assets/video/granit-decor-kitchen-orbit-v2-mobile-portrait.mp4"
+          src="/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4"
           type="video/mp4"
         />
         <source src="/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4" type="video/mp4" />

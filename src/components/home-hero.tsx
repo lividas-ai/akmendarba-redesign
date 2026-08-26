@@ -11,7 +11,7 @@ export function HomeHero() {
         <picture>
           <source
             media="(max-width: 69.999rem) and (orientation: portrait)"
-            srcSet="/assets/video/granit-decor-kitchen-orbit-v2-mobile-poster.webp"
+            srcSet="/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-poster.webp"
             type="image/webp"
           />
           <Image
