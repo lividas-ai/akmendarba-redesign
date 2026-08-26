@@ -99,7 +99,7 @@
   --max-width-content: 46rem;
   --max-width-wide: 86rem;
   --max-width-page: 112rem;
-  --header-height: 4.75rem;
+  --header-height: calc(4.75rem + env(safe-area-inset-top));
   --mobile-dock-height: 4rem;
 
   --border-radius-xs: 0.125rem;
@@ -146,6 +146,12 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 96rem;
+}
+
+@media (max-width: 47.999rem) {
+  :root {
+    --space-section: clamp(3.25rem, 11vw, 4rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

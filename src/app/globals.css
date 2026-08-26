@@ -9,7 +9,7 @@
 }
 
 html {
-  min-width: 20rem;
+  min-width: 0;
   overflow-x: clip;
   background: var(--color-bg-primary);
   scroll-padding-top: calc(var(--header-height) + 1rem);
@@ -20,6 +20,21 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+
+  [data-reveal][data-reveal-ready] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-y, 1.75rem), 0);
+    transition:
+      opacity 720ms var(--easing-out) var(--reveal-delay, 0s),
+      transform 720ms var(--easing-out) var(--reveal-delay, 0s);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal][data-reveal-ready][data-revealed] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
   }
 }
 

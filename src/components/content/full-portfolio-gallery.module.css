@@ -396,3 +396,72 @@
     transform: none;
   }
 }
+
+@media (max-width: 47.999rem) {
+  .filterDock {
+    position: sticky;
+    top: var(--header-height);
+    margin-inline: calc(var(--space-gutter) * -1);
+    padding-block: var(--space-3);
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .filters {
+    display: flex;
+    gap: var(--space-3);
+    padding-inline: var(--space-gutter);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-gutter);
+    scroll-snap-type: inline proximity;
+    scrollbar-width: none;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filterButton {
+    min-width: max-content;
+    min-height: 2.75rem;
+    flex: none;
+    scroll-snap-align: start;
+    text-align: center;
+    text-wrap: nowrap;
+  }
+
+  .context {
+    min-height: 4rem;
+    padding-block: var(--space-4);
+  }
+
+  .dialog {
+    width: calc(100% - 1rem - env(safe-area-inset-left) - env(safe-area-inset-right));
+    height: calc(100dvh - 1rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+
+  .dialog::backdrop {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+}
+
+@media (min-width: 22rem) and (max-width: 33.999rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .imageOverlay {
+    min-height: 3.75rem;
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  .imageOverlay span {
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+  }
+}

@@ -1324,3 +1324,45 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* Mobile showroom rails preserve the editorial scale without creating a long stack. */
+
+@media (max-width: 41.999rem) {
+  .home-applications {
+    overflow: hidden;
+  }
+
+  .home-applications .application-grid {
+    width: auto;
+    grid-template-columns: none;
+    grid-auto-columns: min(82vw, 20rem);
+    grid-auto-flow: column;
+    gap: var(--space-4);
+    margin-inline: calc(var(--space-gutter) * -1);
+    padding-inline: var(--space-gutter);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-gutter);
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+
+  .home-applications .application-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-applications .application-grid__item {
+    scroll-snap-align: start;
+  }
+
+  .home-applications .application-card__arrow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .home-hero__text-action,
+  .home-hero__project {
+    min-height: 2.75rem;
+    align-items: center;
+  }
+}

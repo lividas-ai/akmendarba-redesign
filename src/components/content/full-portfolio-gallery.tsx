@@ -138,7 +138,7 @@ export function FullPortfolioGallery({
                     className={styles.image}
                     fill
                     loading="lazy"
-                    sizes="(min-width: 72rem) 55vw, (min-width: 34rem) 50vw, 100vw"
+                    sizes="(min-width: 72rem) 55vw, (min-width: 22rem) 46vw, 100vw"
                     src={item.localPath}
                   />
                 </span>

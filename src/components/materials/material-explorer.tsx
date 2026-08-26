@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowDown,
   Heart,
@@ -12,14 +12,13 @@ import {
   X,
 } from "lucide-react";
 import {
+  Suspense,
   useCallback,
   useDeferredValue,
   useEffect,
   useMemo,
-  useOptimistic,
   useRef,
   useState,
-  useTransition,
 } from "react";
 import { materialCategories } from "@/data/content";
 import {
@@ -38,6 +37,9 @@ import { MaterialQuickView } from "@/components/materials/material-quick-view";
 
 type CategoryFilter = "visi" | MaterialCategory;
 type SortMode = "az" | "za" | "saved";
+
+const initialVisibleMaterials = 24;
+const additionalVisibleMaterials = 24;
 
 const categoryNames = Object.fromEntries(
   materialCategories.map((category) => [category.id, category.name]),
@@ -59,6 +61,16 @@ const categoryCounts = materials.reduce<Record<MaterialCategory, number>>(
 
 const heroMaterial = materialBySlug.get("patagonia") ?? materials[0];
 
+function MaterialSearchParamSync({ onChange }: { onChange: (search: string) => void }) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    onChange(searchParams.toString());
+  }, [onChange, searchParams]);
+
+  return null;
+}
+
 function normalizeSearch(value: string) {
   return value
     .trim()
@@ -76,24 +88,29 @@ function isSortMode(value: string | null): value is SortMode {
 }
 
 export function MaterialExplorer() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [, startTransition] = useTransition();
-  const urlQuery = searchParams.get("q") ?? "";
-  const [query, setOptimisticQuery] = useOptimistic(urlQuery);
+  const [filterParams, setFilterParams] = useState(() => new URLSearchParams());
+  const query = filterParams.get("q") ?? "";
   const deferredQuery = useDeferredValue(query);
   const [savedSlugs, setSavedSlugs] = useState<string[]>([]);
   const [compareSlugs, setCompareSlugs] = useState<string[]>([]);
   const [quickViewSlug, setQuickViewSlug] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState("");
+  const [visibleLimit, setVisibleLimit] = useState(initialVisibleMaterials);
   const quickViewTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const lastLocationSearchRef = useRef("");
 
-  const typeParam = searchParams.get("tipas");
+  const typeParam = filterParams.get("tipas");
   const category: CategoryFilter = isMaterialCategory(typeParam) ? typeParam : "visi";
-  const sortParam = searchParams.get("rikiuoti");
+  const sortParam = filterParams.get("rikiuoti");
   const sortMode: SortMode = isSortMode(sortParam) ? sortParam : "az";
-  const savedOnly = searchParams.get("rodyti") === "issaugoti";
+  const savedOnly = filterParams.get("rodyti") === "issaugoti";
+
+  const syncFilterParams = useCallback((search: string) => {
+    if (lastLocationSearchRef.current === search) return;
+    lastLocationSearchRef.current = search;
+    setVisibleLimit(initialVisibleMaterials);
+    setFilterParams(new URLSearchParams(search));
+  }, []);
 
   useEffect(() => {
     const updateSaved = () => setSavedSlugs(readSavedMaterials());
@@ -108,24 +125,25 @@ export function MaterialExplorer() {
   }, []);
 
   const replaceParams = useCallback(
-    (changes: Readonly<Record<string, string | null>>, optimisticQuery?: string) => {
-      const next = new URLSearchParams(searchParams.toString());
-      Object.entries(changes).forEach(([key, value]) => {
-        if (value) next.set(key, value);
-        else next.delete(key);
-      });
-      const queryString = next.toString();
-
-      startTransition(() => {
-        if (optimisticQuery !== undefined) setOptimisticQuery(optimisticQuery);
-        router.replace(queryString ? `${pathname}?${queryString}` : pathname, { scroll: false });
+    (changes: Readonly<Record<string, string | null>>) => {
+      setVisibleLimit(initialVisibleMaterials);
+      setFilterParams((current) => {
+        const next = new URLSearchParams(current.toString());
+        Object.entries(changes).forEach(([key, value]) => {
+          if (value) next.set(key, value);
+          else next.delete(key);
+        });
+        const queryString = next.toString();
+        lastLocationSearchRef.current = queryString;
+        window.history.replaceState(null, "", queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname);
+        return next;
       });
     },
-    [pathname, router, searchParams, setOptimisticQuery],
+    [],
   );
 
   function handleSearch(value: string) {
-    replaceParams({ q: value.trim() ? value : null }, value);
+    replaceParams({ q: value.trim() ? value : null });
   }
 
   const savedSet = useMemo(() => new Set(savedSlugs), [savedSlugs]);
@@ -167,6 +185,7 @@ export function MaterialExplorer() {
     }),
     [compareSlugs],
   );
+  const displayedMaterials = visibleMaterials.slice(0, visibleLimit);
 
   const quickViewMaterial = quickViewSlug ? materialBySlug.get(quickViewSlug) ?? null : null;
   const filtersActive = Boolean(query || category !== "visi" || savedOnly || sortMode !== "az");
@@ -207,11 +226,14 @@ export function MaterialExplorer() {
   }
 
   function resetFilters() {
-    replaceParams({ q: null, tipas: null, rikiuoti: null, rodyti: null }, "");
+    replaceParams({ q: null, tipas: null, rikiuoti: null, rodyti: null });
   }
 
   return (
     <div className="materials-page">
+      <Suspense fallback={null}>
+        <MaterialSearchParamSync onChange={syncFilterParams} />
+      </Suspense>
       <section className="materials-hero" aria-labelledby="materials-title">
         <div className="materials-hero__media" aria-hidden="true">
           <Image
@@ -348,8 +370,9 @@ export function MaterialExplorer() {
           </header>
 
           {visibleMaterials.length > 0 ? (
-            <div className="material-gallery" data-count={visibleMaterials.length}>
-              {visibleMaterials.map((material, index) => (
+            <>
+              <div className="material-gallery" data-count={displayedMaterials.length}>
+              {displayedMaterials.map((material, index) => (
                 <MaterialPlate
                   compareLimitReached={compareSlugs.length >= 3}
                   compared={compareSet.has(material.slug)}
@@ -362,7 +385,25 @@ export function MaterialExplorer() {
                   saved={savedSet.has(material.slug)}
                 />
               ))}
-            </div>
+              </div>
+              {displayedMaterials.length < visibleMaterials.length ? (
+                <div className="material-gallery-progress">
+                  <p>
+                    Rodoma <strong>{displayedMaterials.length}</strong> iš {visibleMaterials.length}
+                  </p>
+                  <span aria-hidden="true">
+                    <i style={{ width: `${(displayedMaterials.length / visibleMaterials.length) * 100}%` }} />
+                  </span>
+                  <button
+                    className="button button--secondary"
+                    onClick={() => setVisibleLimit((current) => current + additionalVisibleMaterials)}
+                    type="button"
+                  >
+                    Rodyti daugiau <ArrowDown aria-hidden="true" size={17} />
+                  </button>
+                </div>
+              ) : null}
+            </>
           ) : (
             <div className="material-empty-state">
               <div>

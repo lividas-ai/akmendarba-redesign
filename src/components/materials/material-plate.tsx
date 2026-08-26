@@ -41,7 +41,7 @@ export function MaterialPlate({
             alt={`${material.name} akmens katalogo vaizdas`}
             fill
             loading={position < 4 ? "eager" : "lazy"}
-            sizes="(min-width: 80rem) 42vw, (min-width: 48rem) 50vw, 100vw"
+            sizes="(min-width: 80rem) 20vw, (min-width: 64rem) 33vw, (min-width: 44rem) 50vw, (min-width: 22rem) 46vw, 100vw"
             src={material.localPath}
           />
         </span>

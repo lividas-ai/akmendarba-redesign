@@ -3,19 +3,31 @@
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 
+type NetworkInformation = EventTarget & {
+  effectiveType?: string;
+  saveData?: boolean;
+};
+
 export function HomeHeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const userPausedRef = useRef(false);
   const resumeAfterVisibilityRef = useRef(false);
+  const resumeAfterIntersectionRef = useRef(false);
   const [motionAllowed, setMotionAllowed] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
 
     const syncMotionPreference = () => {
-      const allowed = !motionQuery.matches;
+      const constrainedConnection = Boolean(
+        connection?.saveData ||
+          connection?.effectiveType === "slow-2g" ||
+          connection?.effectiveType === "2g",
+      );
+      const allowed = !motionQuery.matches && !constrainedConnection;
       if (!allowed) {
         videoRef.current?.pause();
         setPlaying(false);
@@ -26,7 +38,11 @@ export function HomeHeroVideo() {
 
     syncMotionPreference();
     motionQuery.addEventListener("change", syncMotionPreference);
-    return () => motionQuery.removeEventListener("change", syncMotionPreference);
+    connection?.addEventListener("change", syncMotionPreference);
+    return () => {
+      motionQuery.removeEventListener("change", syncMotionPreference);
+      connection?.removeEventListener("change", syncMotionPreference);
+    };
   }, []);
 
   useEffect(() => {
@@ -50,6 +66,31 @@ export function HomeHeroVideo() {
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [motionAllowed]);
+
+  useEffect(() => {
+    if (!motionAllowed) return;
+    const video = videoRef.current;
+    if (!video || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) {
+          resumeAfterIntersectionRef.current = !video.paused && !userPausedRef.current;
+          video.pause();
+          return;
+        }
+
+        if (resumeAfterIntersectionRef.current && !userPausedRef.current && !document.hidden) {
+          void video.play().catch(() => setPlaying(false));
+        }
+        resumeAfterIntersectionRef.current = false;
+      },
+      { threshold: 0.12 },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
   }, [motionAllowed]);
 
   async function togglePlayback() {
@@ -88,17 +129,16 @@ export function HomeHeroVideo() {
           setPlaying(true);
         }}
         playsInline
-        poster="/assets/video/granit-decor-kitchen-orbit-poster.webp"
         preload="metadata"
         ref={videoRef}
         tabIndex={-1}
       >
         <source
           media="(max-width: 69.999rem)"
-          src="/assets/video/granit-decor-kitchen-orbit-v1-mobile.mp4"
+          src="/assets/video/granit-decor-kitchen-orbit-v1-mobile-optimized.mp4"
           type="video/mp4"
         />
-        <source src="/assets/video/granit-decor-kitchen-orbit-v1-landscape.mp4" type="video/mp4" />
+        <source src="/assets/video/granit-decor-kitchen-orbit-v1-landscape-optimized.mp4" type="video/mp4" />
       </video>
 
       <button

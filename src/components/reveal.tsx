@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+import { useLayoutEffect, useRef, type CSSProperties } from "react";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -17,34 +12,42 @@ type RevealProps = {
 export function Reveal({ children, className = "", delay = 0, y = 28 }: RevealProps) {
   const root = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      if (!root.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        return;
-      }
+  useLayoutEffect(() => {
+    const element = root.current;
+    if (!element) return;
 
-      gsap.fromTo(
-        root.current,
-        { autoAlpha: 0, y },
-        {
-          autoAlpha: 1,
-          y: 0,
-          delay,
-          duration: 0.85,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top 88%",
-            once: true,
-          },
-        },
-      );
-    },
-    { scope: root, dependencies: [delay, y] },
-  );
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      element.dataset.revealed = "true";
+      return;
+    }
+
+    element.dataset.revealReady = "true";
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+      element.dataset.revealed = "true";
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        element.dataset.revealed = "true";
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -12%", threshold: 0.01 },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const revealStyle = {
+    "--reveal-delay": `${delay}s`,
+    "--reveal-y": `${y}px`,
+  } as CSSProperties;
 
   return (
-    <div className={className} ref={root}>
+    <div className={className} data-reveal ref={root} style={revealStyle}>
       {children}
     </div>
   );

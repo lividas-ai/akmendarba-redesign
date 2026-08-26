@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Suspense } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { MaterialExplorer } from "@/components/materials/material-explorer";
 import { Reveal } from "@/components/reveal";
@@ -10,19 +9,6 @@ export const metadata: Metadata = {
   description:
     "Peržiūrėkite Granit Decor granito, marmuro, kvarcito, onikso ir travertino kolekciją. Išsaugokite pasirinktus variantus savo projektui.",
 };
-
-function ExplorerFallback() {
-  return (
-    <div className="material-explorer-fallback" aria-label="Kraunama akmens kolekcija">
-      <div className="material-explorer-fallback__title" />
-      <div className="material-explorer-fallback__grid">
-        <span />
-        <span />
-        <span />
-      </div>
-    </div>
-  );
-}
 
 const otherSurfaces = [
   {
@@ -46,9 +32,7 @@ const otherSurfaces = [
 export default function MaterialsPage() {
   return (
     <>
-      <Suspense fallback={<ExplorerFallback />}>
-        <MaterialExplorer />
-      </Suspense>
+      <MaterialExplorer />
 
       <section className="other-surfaces section" aria-labelledby="other-surfaces-title">
         <div className="content-shell other-surfaces__grid">

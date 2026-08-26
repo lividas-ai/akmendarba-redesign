@@ -408,8 +408,7 @@
 
 .material-plate {
   min-width: 0;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 42rem;
+  content-visibility: visible;
 }
 
 .material-plate__image-button {
@@ -522,6 +521,9 @@
 }
 
 .material-plate h2 a {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
   text-decoration: none;
 }
 
@@ -1990,5 +1992,163 @@
 
   .material-detail-hero__media {
     block-size: min(68svh, 40rem);
+  }
+}
+
+/* Compact, progressive mobile stone discovery. */
+
+.material-gallery-progress {
+  display: grid;
+  max-width: 28rem;
+  justify-items: center;
+  gap: var(--space-5);
+  margin: var(--space-8) auto 0;
+  text-align: center;
+}
+
+.material-gallery-progress p {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.material-gallery-progress > span {
+  display: block;
+  width: min(100%, 16rem);
+  height: 1px;
+  overflow: hidden;
+  background: var(--color-border-secondary);
+}
+
+.material-gallery-progress > span i {
+  display: block;
+  height: 100%;
+  background: var(--color-accent-primary);
+  transition: width var(--duration-slow) var(--easing-out);
+}
+
+@media (max-width: 63.999rem) {
+  .material-filter-bar {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .material-sort select {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 22rem) and (max-width: 43.999rem) {
+  .material-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7) var(--space-4);
+  }
+
+  .material-plate {
+    position: relative;
+  }
+
+  .material-plate__image,
+  .material-plate[data-format="portrait"] .material-plate__image,
+  .material-plate[data-format="square"] .material-plate__image {
+    aspect-ratio: 4 / 5;
+  }
+
+  .material-plate__caption {
+    display: block;
+    padding-top: var(--space-4);
+  }
+
+  .material-plate h2 {
+    padding-inline-end: var(--space-2);
+    font-size: clamp(0.94rem, 4vw, 1.05rem);
+    line-height: 1.16;
+  }
+
+  .material-plate__actions {
+    position: absolute;
+    z-index: 2;
+    top: var(--space-3);
+    right: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .material-icon-button {
+    background: color-mix(in srgb, var(--color-bg-elevated) 88%, transparent);
+    color: var(--color-text-primary);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .material-plate__quick-view {
+    display: none;
+  }
+}
+
+@media (max-width: 43.999rem) {
+  .material-dialog {
+    width: calc(100% - 1rem - env(safe-area-inset-left) - env(safe-area-inset-right));
+    max-height: calc(100dvh - 1rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+
+  .material-dialog::backdrop {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .material-quick-view__visual {
+    min-height: min(42dvh, 22rem);
+  }
+
+  .materials-explorer__intro {
+    padding-bottom: var(--space-8);
+  }
+
+  .material-results {
+    padding-top: var(--space-7);
+  }
+
+  .material-results__header {
+    margin-bottom: var(--space-7);
+  }
+
+  .material-detail-hero__media {
+    min-height: min(48dvh, 25rem);
+    max-block-size: min(48dvh, 25rem);
+  }
+
+  .material-detail-hero__content {
+    padding: var(--space-6) var(--space-gutter) var(--space-8);
+  }
+
+  .material-detail-hero__identity {
+    margin-block: var(--space-6);
+  }
+
+  .material-detail-hero__identity h1 {
+    max-width: 12ch;
+    margin-block: var(--space-3) var(--space-4);
+    font-size: clamp(2.65rem, 13vw, 3.45rem);
+    line-height: 0.94;
+  }
+
+  .material-detail-hero__character {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .material-detail-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .material-detail-actions .button {
+    min-width: 0;
+    padding-inline: var(--space-4);
+  }
+
+  .material-detail-hero__notice {
+    margin-top: var(--space-8);
   }
 }

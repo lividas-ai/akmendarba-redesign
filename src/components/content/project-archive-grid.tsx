@@ -56,7 +56,13 @@ export function ProjectArchiveGrid({ projects, compact = false, filterable = fal
                   src={project.image.src}
                   alt={project.image.alt}
                   fill
-                  sizes={compact ? "(min-width: 48rem) 32vw, 100vw" : "(min-width: 64rem) 42vw, 100vw"}
+                  sizes={
+                    compact
+                      ? "(min-width: 48rem) 32vw, (min-width: 22rem) 46vw, 100vw"
+                      : index === 0
+                        ? "(min-width: 64rem) 58vw, 100vw"
+                        : "(min-width: 64rem) 33vw, (min-width: 22rem) 46vw, 100vw"
+                  }
                 />
               </figure>
               <div className="archive-card__meta">

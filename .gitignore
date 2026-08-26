@@ -23,3 +23,4 @@ build/
 .design/**/screenshots/
 .design/**/*.png
 .design/**/*.jpg
+.vercel

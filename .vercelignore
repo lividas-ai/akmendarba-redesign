@@ -1,0 +1,12 @@
+.git/
+.next/
+node_modules/
+out/
+.asset-source/
+.design/
+.test-deps/
+tests/screenshots/
+
+# Unused high-bitrate masters; the site serves the optimized mobile and landscape files.
+public/assets/video/granit-decor-kitchen-orbit-v1-landscape.mp4
+public/assets/video/granit-decor-kitchen-orbit-v1-mobile.mp4
