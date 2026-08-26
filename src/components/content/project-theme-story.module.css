@@ -358,7 +358,7 @@
   .grid {
     width: auto;
     grid-template-columns: none;
-    grid-auto-columns: min(82vw, 21rem);
+    grid-auto-columns: min(68vw, 17rem);
     grid-auto-flow: column;
     gap: var(--space-4);
     margin-inline: calc(var(--space-gutter) * -1);
@@ -381,10 +381,12 @@
   [data-format="portrait"] .imageFrame {
     width: 100%;
     margin-inline: 0;
+    aspect-ratio: 4 / 3;
   }
 
   .imageFrame {
-    max-block-size: min(56dvh, 30rem);
+    max-block-size: min(42dvh, 22rem);
+    aspect-ratio: 4 / 3;
   }
 
   .dialog {

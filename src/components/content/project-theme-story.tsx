@@ -101,7 +101,7 @@ export function ProjectThemeStory({ story }: ProjectThemeStoryProps) {
                           alt={image.alt}
                           className={styles.image}
                           fill
-                          sizes="(min-width: 80rem) 52vw, (min-width: 48rem) 66vw, 82vw"
+                          sizes="(min-width: 80rem) 52vw, (min-width: 48rem) 66vw, 68vw"
                           src={image.localPath}
                         />
                       </span>

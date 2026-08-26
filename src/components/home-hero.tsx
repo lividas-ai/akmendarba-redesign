@@ -8,15 +8,22 @@ export function HomeHero() {
   return (
     <section className="home-hero home-hero--cinematic" aria-labelledby="home-hero-title">
       <figure className="home-hero__media">
-        <Image
-          className="home-hero__poster"
-          src="/assets/video/granit-decor-kitchen-orbit-poster.webp"
-          alt="Granit Decor virtuvė su lenkta natūralaus akmens sala, akmens sienų apdaila ir individualiai gamintais baldais"
-          fill
-          loading="eager"
-          priority
-          sizes="100vw"
-        />
+        <picture>
+          <source
+            media="(max-width: 69.999rem) and (orientation: portrait)"
+            srcSet="/assets/video/granit-decor-kitchen-orbit-v2-mobile-poster.webp"
+            type="image/webp"
+          />
+          <Image
+            className="home-hero__poster"
+            src="/assets/video/granit-decor-kitchen-orbit-poster.webp"
+            alt="Granit Decor virtuvė su lenkta natūralaus akmens sala, akmens sienų apdaila ir individualiai gamintais baldais"
+            fetchPriority="high"
+            fill
+            loading="eager"
+            sizes="100vw"
+          />
+        </picture>
         <HomeHeroVideo />
       </figure>
 

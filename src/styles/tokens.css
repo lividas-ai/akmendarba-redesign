@@ -100,7 +100,7 @@
   --max-width-wide: 86rem;
   --max-width-page: 112rem;
   --header-height: calc(4.75rem + env(safe-area-inset-top));
-  --mobile-dock-height: 4rem;
+  --mobile-dock-height: 0rem;
 
   --border-radius-xs: 0.125rem;
   --border-radius-sm: 0.25rem;

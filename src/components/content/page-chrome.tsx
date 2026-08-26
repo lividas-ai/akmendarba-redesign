@@ -81,7 +81,7 @@ export function EditorialHero({
             fill
             loading="eager"
             priority
-            sizes="(min-width: 64rem) 52vw, 100vw"
+            sizes="(min-width: 64rem) 52vw, 86vw"
             style={imagePosition ? { objectPosition: imagePosition } : undefined}
           />
         </figure>
@@ -146,12 +146,12 @@ export function ImageSpread({ primary, secondary }: ImageSpreadProps) {
     <div className="image-spread content-shell">
       <Reveal className="image-spread__primary">
         <figure>
-          <Image src={primary.src} alt={primary.alt} fill sizes="(min-width: 48rem) 65vw, 100vw" />
+          <Image src={primary.src} alt={primary.alt} fill sizes="(min-width: 48rem) 65vw, 74vw" />
         </figure>
       </Reveal>
       <Reveal className="image-spread__secondary" delay={0.12} y={18}>
         <figure>
-          <Image src={secondary.src} alt={secondary.alt} fill sizes="(min-width: 48rem) 32vw, 72vw" />
+          <Image src={secondary.src} alt={secondary.alt} fill sizes="(min-width: 48rem) 32vw, 74vw" />
         </figure>
       </Reveal>
     </div>

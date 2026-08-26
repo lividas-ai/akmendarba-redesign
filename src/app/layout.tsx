@@ -4,7 +4,6 @@ import "@/styles/tokens.css";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { MobileActionDock } from "@/components/mobile-action-dock";
 import { RouteScrollReset } from "@/components/route-scroll-reset";
 
 export const metadata: Metadata = {
@@ -64,7 +63,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         <main id="turinys">{children}</main>
         <SiteFooter />
-        <MobileActionDock />
       </body>
     </html>
   );

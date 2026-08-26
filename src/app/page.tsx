@@ -46,7 +46,7 @@ export default function HomePage() {
                     src={application.image.src}
                     alt={application.image.alt}
                     fill
-                    sizes={index === 0 ? "(min-width: 768px) 60vw, 100vw" : "(min-width: 768px) 36vw, 100vw"}
+                    sizes={index === 0 ? "(min-width: 768px) 60vw, 68vw" : "(min-width: 768px) 36vw, 68vw"}
                   />
                   <span className="application-card__content">
                     <strong>{application.shortTitle}</strong>
@@ -83,7 +83,7 @@ export default function HomePage() {
           {selectedMaterials.map((material, index) => (
             <Reveal className={`material-stage__item material-stage__item--${index + 1}`} delay={index * 0.055} key={material.slug} y={18}>
               <Link className="material-editorial-card" href={`/akmuo/${material.slug}`}>
-                <Image src={material.localPath} alt={`${material.name} akmens paviršius`} fill sizes="(min-width: 1024px) 28vw, 75vw" />
+                <Image src={material.localPath} alt={`${material.name} akmens paviršius`} fill sizes="(min-width: 1024px) 28vw, 62vw" />
                 <span className="material-editorial-card__meta">
                   <strong>{material.name}</strong>
                 </span>
@@ -122,7 +122,7 @@ export default function HomePage() {
                       src={project.image.src}
                       alt={project.image.alt}
                       fill
-                      sizes={index === 0 ? "(min-width: 768px) 62vw, 100vw" : "(min-width: 768px) 32vw, 100vw"}
+                      sizes={index === 0 ? "(min-width: 768px) 62vw, 74vw" : "(min-width: 768px) 32vw, 74vw"}
                     />
                   </figure>
                   <div>

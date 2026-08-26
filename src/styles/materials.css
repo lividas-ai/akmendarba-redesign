@@ -2113,8 +2113,8 @@
   }
 
   .material-detail-hero__media {
-    min-height: min(48dvh, 25rem);
-    max-block-size: min(48dvh, 25rem);
+    min-height: min(34dvh, 18rem);
+    max-block-size: min(34dvh, 18rem);
   }
 
   .material-detail-hero__content {

@@ -25,7 +25,8 @@ export function HomeHeroVideo() {
       const constrainedConnection = Boolean(
         connection?.saveData ||
           connection?.effectiveType === "slow-2g" ||
-          connection?.effectiveType === "2g",
+          connection?.effectiveType === "2g" ||
+          connection?.effectiveType === "3g",
       );
       const allowed = !motionQuery.matches && !constrainedConnection;
       if (!allowed) {
@@ -134,11 +135,11 @@ export function HomeHeroVideo() {
         tabIndex={-1}
       >
         <source
-          media="(max-width: 69.999rem)"
-          src="/assets/video/granit-decor-kitchen-orbit-v1-mobile-optimized.mp4"
+          media="(max-width: 69.999rem) and (orientation: portrait)"
+          src="/assets/video/granit-decor-kitchen-orbit-v2-mobile-portrait.mp4"
           type="video/mp4"
         />
-        <source src="/assets/video/granit-decor-kitchen-orbit-v1-landscape-optimized.mp4" type="video/mp4" />
+        <source src="/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4" type="video/mp4" />
       </video>
 
       <button

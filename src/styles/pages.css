@@ -1327,7 +1327,7 @@
 
 /* Mobile showroom rails preserve the editorial scale without creating a long stack. */
 
-@media (max-width: 41.999rem) {
+@media (max-width: 47.999rem) {
   .home-applications {
     overflow: hidden;
   }
@@ -1364,5 +1364,191 @@
   .home-hero__project {
     min-height: 2.75rem;
     align-items: center;
+  }
+}
+
+/* Premium mobile editorial rhythm.
+   Salvatori keeps one cinematic opening image, then uses compact horizontal
+   browsing and deliberate white space instead of a stack of screen-height cards. */
+
+@media (max-width: 47.999rem) {
+  .home-hero--cinematic {
+    block-size: calc(100svh - var(--header-height));
+  }
+
+  .home-hero--cinematic .home-hero__copy {
+    right: calc(var(--space-gutter) + 3.25rem);
+    bottom: calc(env(safe-area-inset-bottom) + var(--space-7));
+  }
+
+  .home-hero--cinematic .home-hero__title {
+    max-width: 12ch;
+    font-size: clamp(2.2rem, 9.8vw, 3rem);
+    line-height: 0.98;
+  }
+
+  .home-hero__playback {
+    bottom: calc(env(safe-area-inset-bottom) + var(--space-6));
+  }
+
+  .section-heading .display-title,
+  .home-process .display-title {
+    max-width: 15ch;
+    font-size: clamp(2rem, 8.8vw, 2.65rem);
+    line-height: 1.03;
+  }
+
+  .application-grid,
+  .project-editorial-grid,
+  .material-stage {
+    margin-top: var(--space-7);
+  }
+
+  .home-applications .application-grid {
+    grid-auto-columns: min(68vw, 16.5rem);
+    gap: var(--space-4);
+  }
+
+  .home-applications .application-card,
+  .home-applications .application-grid__item--1 .application-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .application-card__content {
+    right: var(--space-4);
+    bottom: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .application-card__content strong,
+  .material-editorial-card__meta strong,
+  .project-editorial-card h3 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .application-card__arrow {
+    right: var(--space-4);
+    bottom: var(--space-4);
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .material-stage {
+    grid-auto-columns: min(62vw, 15.5rem);
+    gap: var(--space-4);
+    scroll-padding-inline: var(--space-gutter);
+    scrollbar-width: none;
+  }
+
+  .material-stage::-webkit-scrollbar,
+  .project-editorial-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .material-stage__item {
+    scroll-snap-align: start;
+  }
+
+  .material-editorial-card {
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .material-editorial-card__meta {
+    right: var(--space-4);
+    bottom: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .home-materials__footer p {
+    max-width: 32rem;
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .project-editorial-grid {
+    width: auto;
+    grid-template-columns: none;
+    grid-auto-columns: min(74vw, 18rem);
+    grid-auto-flow: column;
+    gap: var(--space-4);
+    margin-inline: calc(var(--space-gutter) * -1);
+    padding: 0 var(--space-gutter) var(--space-3);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-gutter);
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+
+  .project-editorial-grid__item {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .project-editorial-card {
+    gap: var(--space-4);
+  }
+
+  .project-editorial-card figure,
+  .project-editorial-grid__item--1 .project-editorial-card figure,
+  .project-editorial-grid__item:not(:first-child) .project-editorial-card figure {
+    max-block-size: none;
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-editorial-card img {
+    object-fit: cover;
+  }
+
+  .project-editorial-card > div {
+    min-height: 3rem;
+    align-content: start;
+    padding-right: 2.25rem;
+  }
+
+  .home-process__layout {
+    gap: var(--space-8);
+  }
+
+  .home-process__visual figure {
+    max-block-size: 19rem;
+    aspect-ratio: 16 / 10;
+  }
+
+  .home-process__visual img {
+    object-fit: cover;
+  }
+
+  .process-list li {
+    padding-block: var(--space-4);
+  }
+
+  .process-list h3 {
+    font-size: 1.05rem;
+  }
+
+  .process-list p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .home-professionals,
+  .home-professionals__content {
+    min-height: min(22rem, 42svh);
+  }
+
+  .home-professionals__content {
+    padding-block: var(--space-8);
+  }
+
+  .home-professionals h2,
+  .home-final h2 {
+    font-size: clamp(2rem, 8.8vw, 2.65rem);
+  }
+
+  .home-final__layout {
+    gap: var(--space-7);
   }
 }

@@ -3228,3 +3228,149 @@
     aspect-ratio: 4 / 5 !important;
   }
 }
+
+/* Premium mobile media scale: preserve the desktop editorial hierarchy while
+   keeping every supporting image clearly smaller than the opening hero. */
+
+@media (max-width: 47.999rem) {
+  .content-hero__copy {
+    min-height: 0;
+    padding-block: var(--space-4) var(--space-8);
+  }
+
+  .content-hero__heading {
+    margin-block: var(--space-5) 0;
+    padding-block: var(--space-5) 0;
+  }
+
+  .content-hero__heading h1 {
+    max-width: 15ch;
+    font-size: clamp(2.15rem, 9.6vw, 2.85rem);
+    line-height: 1.02;
+  }
+
+  .content-hero__heading > p {
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .content-hero__media[data-ratio],
+  .project-record__image figure[data-ratio],
+  .journal-article__hero figure[data-ratio] {
+    width: min(calc(100% - (2 * var(--space-gutter))), 32rem);
+    height: auto !important;
+    min-height: 0;
+    max-height: min(40svh, 22rem);
+    margin-inline: auto;
+  }
+
+  .content-hero__media[data-ratio="portrait"],
+  .project-record__image figure[data-ratio="portrait"] {
+    width: min(72vw, 19rem, calc(40svh * 0.6667));
+    aspect-ratio: 2 / 3;
+  }
+
+  .content-hero__media[data-ratio="vertical"] {
+    width: min(74vw, 19rem, calc(40svh * 0.75));
+    aspect-ratio: 3 / 4;
+  }
+
+  .content-hero__media[data-ratio="square"] {
+    width: min(74vw, 20rem, 40svh);
+    aspect-ratio: 1;
+  }
+
+  .content-hero__media[data-ratio="classic"],
+  .journal-article__hero figure[data-ratio="classic"] {
+    width: min(84vw, 28rem, calc(40svh * 1.3333));
+    aspect-ratio: 4 / 3;
+  }
+
+  .content-hero__media[data-ratio="landscape"],
+  .project-record__image figure[data-ratio="landscape"] {
+    width: min(84vw, 30rem, calc(40svh * 1.5));
+    aspect-ratio: 3 / 2;
+  }
+
+  .content-hero__media[data-ratio="wide"],
+  .journal-article__hero figure[data-ratio="wide"] {
+    width: min(84vw, 32rem, calc(40svh * 1.7778));
+    aspect-ratio: 16 / 9;
+  }
+
+  .image-spread {
+    width: 100%;
+    grid-template-columns: none;
+    grid-auto-columns: min(74vw, 18rem);
+    grid-auto-flow: column;
+    gap: var(--space-4);
+    padding-inline: var(--space-gutter);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-gutter);
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+
+  .image-spread::-webkit-scrollbar {
+    display: none;
+  }
+
+  .image-spread > div {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .image-spread__secondary {
+    width: 100%;
+    margin-inline-start: 0;
+  }
+
+  .image-spread figure,
+  .image-spread__primary figure,
+  .image-spread__secondary figure {
+    max-block-size: none;
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .image-spread img {
+    object-fit: cover;
+  }
+
+  .application-materials__strip {
+    grid-auto-columns: min(62vw, 15.5rem);
+    gap: var(--space-4);
+  }
+
+  .application-materials__strip figure,
+  .application-materials__strip > div:nth-child(2) figure {
+    max-block-size: none;
+    aspect-ratio: 3 / 4;
+  }
+
+  .application-inputs__media figure,
+  .professional-handoff__image figure,
+  .process-interlude figure {
+    max-height: min(42svh, 22rem);
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-record__header {
+    padding-block-end: var(--space-7);
+  }
+
+  .project-record__title {
+    gap: var(--space-5);
+    padding-top: var(--space-6);
+  }
+
+  .project-record__title h1,
+  .journal-article__title h1 {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    line-height: 0.98;
+  }
+
+  .projects-index .archive-grid__item:not(:first-child) .archive-card figure {
+    aspect-ratio: 4 / 3 !important;
+  }
+}
