@@ -13,7 +13,7 @@ Do not assume the current working directory is the template or conclude that the
 
 1. Run `python3 scripts/locate_golden_master.py --start "$PWD" --require-clean` from this skill directory. Resolve the script relative to this `SKILL.md`, not relative to the user's current repository.
 2. Use the selected path returned by the helper only when it contains a clean Git repository, `template.lock.json`, `template.lock.snapshot.json`, the lock schema/checker, and the premium template package.
-3. Run `pnpm check:lock` in that selected golden-master path before copying anything. Stop if it fails. Never repair the golden master from an unrelated client draft.
+3. Run `CI=true pnpm check:lock` in that selected golden-master path before copying anything. `CI=true` prevents pnpm from requesting a non-interactive terminal confirmation; it does not relax the lock comparison. Stop if the lock command fails. Never repair the golden master from an unrelated client draft or regenerate its snapshot.
 4. Treat an explicit request to migrate a client website as authorization to create the required local derived repository. It does not authorize overwriting an existing directory, publishing a GitHub repository, deploying, changing DNS, or mutating the source website.
 5. Create a new local repository from the selected golden-master commit. Use a new non-existing sibling path derived from the client domain, preserve Git history, remove any local clone remote, and create a `codex/client-<slug>` branch. If the preferred path exists, choose a safe unused suffixed path; never reuse or overwrite a previous client attempt.
 6. Before editing client content, record the selected golden-master absolute path, commit, branch, lock-check result, creation time, and client destination in `.migration/template-source.json` inside the new client repository.
@@ -86,7 +86,7 @@ Maintain three linked matrices throughout the work:
 
 Use the repository's actual scripts rather than assuming command names. At minimum:
 
-1. Run `pnpm check:lock` against the persisted golden-master baseline and confirm the lock contract, checker, hero assets, playback component, and locked styling are unchanged. Never use `pnpm snapshot:lock` in a client migration.
+1. Run `CI=true pnpm check:lock` against the persisted golden-master baseline and confirm the lock contract, checker, hero assets, playback component, and locked styling are unchanged. Never use `pnpm snapshot:lock` in a client migration.
 2. Validate the client manifest in release mode and resolve every broken evidence or internal reference.
 3. Run formatting, lint, type checks, production build, and static export checks provided by the repository.
 4. Test every recreated function with evidence-backed success, validation, empty, error, and persistence cases where applicable.
