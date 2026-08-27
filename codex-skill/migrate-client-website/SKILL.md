@@ -1,11 +1,25 @@
 ---
 name: migrate-client-website
-description: Migrate an approved client website into the premium business template as a separate client repository, with evidence-backed content, preserved locked assets, recreated functions, and verified URL and responsive parity. Use for a new client migration or a migration-completeness audit; do not use for unrelated edits to an established site.
+description: Locate the registered premium golden master and migrate an approved client website into a separate client repository, with evidence-backed content, preserved locked assets, recreated functions, and verified URL and responsive parity. Use for a new client migration or a migration-completeness audit; do not use for unrelated edits to an established site.
 ---
 
 # Migrate Client Website
 
 Use the premium template as a golden master, not as a multi-client repository. A migration is complete only when every approved source URL, factual item, media asset, and user-visible function has a verified destination, approved omission, or explicit blocked status.
+
+## Bootstrap from the registered golden master
+
+Do not assume the current working directory is the template or conclude that the template is missing merely because the current repository lacks its lock files.
+
+1. Run `python3 scripts/locate_golden_master.py --start "$PWD" --require-clean` from this skill directory. Resolve the script relative to this `SKILL.md`, not relative to the user's current repository.
+2. Use the selected path returned by the helper only when it contains a clean Git repository, `template.lock.json`, `template.lock.snapshot.json`, the lock schema/checker, and the premium template package.
+3. Run `pnpm check:lock` in that selected golden-master path before copying anything. Stop if it fails. Never repair the golden master from an unrelated client draft.
+4. Treat an explicit request to migrate a client website as authorization to create the required local derived repository. It does not authorize overwriting an existing directory, publishing a GitHub repository, deploying, changing DNS, or mutating the source website.
+5. Create a new local repository from the selected golden-master commit. Use a new non-existing sibling path derived from the client domain, preserve Git history, remove any local clone remote, and create a `codex/client-<slug>` branch. If the preferred path exists, choose a safe unused suffixed path; never reuse or overwrite a previous client attempt.
+6. Before editing client content, record the selected golden-master absolute path, commit, branch, lock-check result, creation time, and client destination in `.migration/template-source.json` inside the new client repository.
+7. Leave unrelated repositories and incomplete earlier drafts untouched. Perform the migration only in the newly derived client repository.
+
+If the helper cannot find a valid clean golden master, report the paths it checked and the exact failed invariant. Do not recommend rebuilding the template from an older client repository while a registered golden master exists elsewhere.
 
 ## Non-negotiable invariants
 
@@ -22,7 +36,7 @@ Use the premium template as a golden master, not as a multi-client repository. A
 
 Before changing client content:
 
-1. Confirm the working repository is the intended client repository derived from the golden master. Creating or publishing a repository still requires the user's authorization.
+1. Confirm the working repository is the newly created intended client repository derived from the helper-selected golden master. Publishing a remote repository or deployment still requires the user's authorization.
 2. Record the template commit and verify `template.lock.snapshot.json` with `pnpm check:lock`. The baseline includes `template.lock.json`, its schema, and the lock checker itself. Stop if the contract, baseline, or any locked file is missing or changed. Do not regenerate the baseline during a client migration.
 3. Record the client's approved source scope and canonical production domain.
 4. Create the source inventory and the URL, content, and function parity matrices before implementation. Use [references/migration-artifacts.md](references/migration-artifacts.md).

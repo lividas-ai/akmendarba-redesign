@@ -28,7 +28,7 @@ The reference pack proves the template against a large real site. It is not rele
 
 ## Start a new client in Codex
 
-1. Create a new repository from this golden master; never overwrite the template or an existing client repository.
+1. Start the migration from any folder in this Codex project. The installed skill locates and validates this registered golden master before creating a new client repository; it never overwrites the template or an existing client repository.
 2. Provide the client's approved website URL, any additional approved files or URLs, and the intended domain.
 3. Ask Codex to use the `migrate-client-website` skill.
 4. Codex inventories every source URL, download, product, service, factual item, media asset, and user-visible function before editing the site.

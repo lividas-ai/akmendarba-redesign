@@ -1,6 +1,6 @@
 # Start a new client website
 
-Open a new Codex task in this project and send:
+Open a new Codex task anywhere in this project and send:
 
 ```text
 Use $migrate-client-website.
@@ -22,4 +22,6 @@ as blocked and asks for the exact missing input instead of simulating success.
 
 Do not attach the template folder to every task. The personal
 `migrate-client-website` skill is installed, and this repository remains the
-golden master. Each client receives a new repository and deployment.
+registered golden master. The skill locates it automatically, verifies its
+lock baseline, and creates a fresh local client repository without touching
+older drafts. Each client receives a separate repository and deployment.

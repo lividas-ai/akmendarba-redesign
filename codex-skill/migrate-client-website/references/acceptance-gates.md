@@ -5,6 +5,7 @@ A migration may ship only when all applicable gates pass. A blocked gate remains
 ## Repository and lock
 
 - The client has its own repository derived from a recorded golden-master commit.
+- `.migration/template-source.json` identifies the helper-selected golden master, exact commit, destination, and successful pre-copy lock check.
 - `template.lock.json` validates.
 - `pnpm check:lock` passes against the committed `template.lock.snapshot.json`; the baseline may not be regenerated during a client migration.
 - Every locked path, including the lock contract, lock schema, and checker, exists and matches its golden-master checksum.

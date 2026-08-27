@@ -2,6 +2,19 @@
 
 Keep these artifacts in a client repository under `.migration/` or another explicitly agreed audit directory. Machine-readable JSON or TypeScript records may supplement the tables, but the human-readable status must remain reviewable.
 
+## Template source record
+
+Create `.migration/template-source.json` before changing client content. Record:
+
+- the selected golden-master absolute path;
+- the exact source commit and branch;
+- the destination client repository path and branch;
+- the UTC creation timestamp;
+- the `pnpm check:lock` command result;
+- the lock contract and snapshot checksums.
+
+This record proves that the migration came from the registered protected template rather than an older client draft.
+
 ## Source inventory
 
 | Source ID | Approved URL or artifact | Type | Retrieved | Capture status | Checksum | Notes |
