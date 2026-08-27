@@ -162,6 +162,25 @@ def check_home_video(page, viewport_name: str) -> None:
         playback_button.get_attribute("aria-label") if playback_button.count() else None,
     )
 
+    primary_action = page.locator(".home-hero__text-action")
+    secondary_action = page.locator(".home-hero__project")
+    if primary_action.count() == 1 and secondary_action.count() == 1 and secondary_action.is_visible():
+        primary_box = element_box(page, ".home-hero__text-action")
+        secondary_box = element_box(page, ".home-hero__project")
+        overlaps = bool(
+            primary_box
+            and secondary_box
+            and primary_box["left"] < secondary_box["right"]
+            and primary_box["right"] > secondary_box["left"]
+            and primary_box["top"] < secondary_box["bottom"]
+            and primary_box["bottom"] > secondary_box["top"]
+        )
+        record(
+            f"{viewport_name}: hero actions do not overlap",
+            not overlaps,
+            {"primary": primary_box, "secondary": secondary_box},
+        )
+
 
 def check_desktop_navigation(page) -> None:
     nav = page.locator(".site-header__nav")

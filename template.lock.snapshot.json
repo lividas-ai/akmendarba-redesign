@@ -130,8 +130,8 @@
     },
     {
       "path": "src/styles/pages.css",
-      "bytes": 33066,
-      "sha256": "3471ea02686e0aad526c5373be24a8ce0169ef8890269ad7b846c61a4d287054"
+      "bytes": 33323,
+      "sha256": "62dfd4049be4bd06cb7138837eb2774a3fc2826c7350d96f4f92c3368238c0d1"
     },
     {
       "path": "src/styles/showroom.css",

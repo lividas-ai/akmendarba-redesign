@@ -1562,3 +1562,14 @@
     gap: var(--space-7);
   }
 }
+
+@media (max-width: 22rem) and (orientation: portrait) {
+  .home-hero--cinematic .home-hero__copy {
+    right: var(--space-gutter);
+    bottom: calc(env(safe-area-inset-bottom) + 6rem);
+  }
+
+  .home-hero__text-action {
+    margin-top: var(--space-4);
+  }
+}

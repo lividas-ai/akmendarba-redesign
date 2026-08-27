@@ -1,9 +1,9 @@
 {
   "baseUrl": "http://127.0.0.1:4173",
-  "timestamp": "2026-08-27T18:42:20Z",
+  "timestamp": "2026-08-27T18:47:22Z",
   "summary": {
-    "checks": 79,
-    "passed": 79,
+    "checks": 83,
+    "passed": 83,
     "failed": 0,
     "consoleMessages": 0,
     "requestFailures": 88
@@ -47,7 +47,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 3.220758,
+        "currentTime": 3.268783,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -65,7 +65,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 3.220758,
+        "currentTime": 3.268783,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -111,6 +111,32 @@
       "name": "desktop: playback control is visible and named",
       "passed": true,
       "detail": "Sustabdyti animaciją"
+    },
+    {
+      "name": "desktop: hero actions do not overlap",
+      "passed": true,
+      "detail": {
+        "primary": {
+          "x": 46.078125,
+          "y": 818.515625,
+          "width": 131.03125,
+          "height": 32.890625,
+          "top": 818.515625,
+          "right": 177.109375,
+          "bottom": 851.40625,
+          "left": 46.078125
+        },
+        "secondary": {
+          "x": 1179.890625,
+          "y": 817.875,
+          "width": 153.234375,
+          "height": 33.53125,
+          "top": 817.875,
+          "right": 1333.125,
+          "bottom": 851.40625,
+          "left": 1179.890625
+        }
+      }
     },
     {
       "name": "desktop: primary navigation visible",
@@ -222,7 +248,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 3.059469,
+        "currentTime": 3.21512,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -240,7 +266,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 3.059469,
+        "currentTime": 3.21512,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -286,6 +312,32 @@
       "name": "tablet: playback control is visible and named",
       "passed": true,
       "detail": "Sustabdyti animaciją"
+    },
+    {
+      "name": "tablet: hero actions do not overlap",
+      "passed": true,
+      "detail": {
+        "primary": {
+          "x": 19.1875,
+          "y": 939.921875,
+          "width": 131.03125,
+          "height": 32.890625,
+          "top": 939.921875,
+          "right": 150.21875,
+          "bottom": 972.8125,
+          "left": 19.1875
+        },
+        "secondary": {
+          "x": 534.765625,
+          "y": 939.28125,
+          "width": 153.234375,
+          "height": 33.53125,
+          "top": 939.28125,
+          "right": 688,
+          "bottom": 972.8125,
+          "left": 534.765625
+        }
+      }
     },
     {
       "name": "tablet: menu button visible",
@@ -363,7 +415,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 3.203043,
+        "currentTime": 3.379136,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -381,7 +433,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 3.203043,
+        "currentTime": 3.379136,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -427,6 +479,32 @@
       "name": "mobile: playback control is visible and named",
       "passed": true,
       "detail": "Sustabdyti animaciją"
+    },
+    {
+      "name": "mobile: hero actions do not overlap",
+      "passed": true,
+      "detail": {
+        "primary": {
+          "x": 16,
+          "y": 768,
+          "width": 131.03125,
+          "height": 44,
+          "top": 768,
+          "right": 147.03125,
+          "bottom": 812,
+          "left": 16
+        },
+        "secondary": {
+          "x": 188.25,
+          "y": 776,
+          "width": 128.953125,
+          "height": 44,
+          "top": 776,
+          "right": 317.203125,
+          "bottom": 820,
+          "left": 188.25
+        }
+      }
     },
     {
       "name": "mobile: menu button visible",
@@ -504,7 +582,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 2.891371,
+        "currentTime": 3.213894,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -522,7 +600,7 @@
         "loop": true,
         "playsInline": true,
         "paused": false,
-        "currentTime": 2.891371,
+        "currentTime": 3.213894,
         "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
         "readyState": 4,
         "networkState": 1,
@@ -568,6 +646,32 @@
       "name": "narrow: playback control is visible and named",
       "passed": true,
       "detail": "Sustabdyti animaciją"
+    },
+    {
+      "name": "narrow: hero actions do not overlap",
+      "passed": true,
+      "detail": {
+        "primary": {
+          "x": 16,
+          "y": 560,
+          "width": 131.03125,
+          "height": 44,
+          "top": 560,
+          "right": 147.03125,
+          "bottom": 604,
+          "left": 16
+        },
+        "secondary": {
+          "x": 118.25,
+          "y": 632,
+          "width": 128.953125,
+          "height": 44,
+          "top": 632,
+          "right": 247.203125,
+          "bottom": 676,
+          "left": 118.25
+        }
+      }
     },
     {
       "name": "narrow: menu button visible",
@@ -812,13 +916,13 @@
     {
       "scope": "desktop",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/gaminiai/vonios-stalvirsiai/",
+      "url": "http://127.0.0.1:4173/gaminiai/zidiniu-apdaila/",
       "failure": "net::ERR_ABORTED"
     },
     {
       "scope": "desktop",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/gaminiai/zidiniu-apdaila/",
+      "url": "http://127.0.0.1:4173/gaminiai/vonios-stalvirsiai/",
       "failure": "net::ERR_ABORTED"
     },
     {
@@ -872,13 +976,13 @@
     {
       "scope": "desktop",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/projektai/granit-decor-darbai-03/",
+      "url": "http://127.0.0.1:4173/projektai/granit-decor-darbai-30/",
       "failure": "net::ERR_ABORTED"
     },
     {
       "scope": "desktop",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/projektai/granit-decor-darbai-30/",
+      "url": "http://127.0.0.1:4173/projektai/granit-decor-darbai-03/",
       "failure": "net::ERR_ABORTED"
     },
     {
@@ -962,13 +1066,13 @@
     {
       "scope": "tablet",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/?tipas=travertinas",
+      "url": "http://127.0.0.1:4173/akmuo/?tipas=granitas",
       "failure": "net::ERR_ABORTED"
     },
     {
       "scope": "tablet",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/?tipas=granitas",
+      "url": "http://127.0.0.1:4173/akmuo/?tipas=travertinas",
       "failure": "net::ERR_ABORTED"
     },
     {
@@ -1016,6 +1120,12 @@
     {
       "scope": "mobile",
       "method": "HEAD",
+      "url": "http://127.0.0.1:4173/kontaktai/",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "scope": "mobile",
+      "method": "HEAD",
       "url": "http://127.0.0.1:4173/profesionalams/",
       "failure": "net::ERR_ABORTED"
     },
@@ -1023,12 +1133,6 @@
       "scope": "mobile",
       "method": "HEAD",
       "url": "http://127.0.0.1:4173/apie-mus/",
-      "failure": "net::ERR_ABORTED"
-    },
-    {
-      "scope": "mobile",
-      "method": "HEAD",
-      "url": "http://127.0.0.1:4173/kontaktai/",
       "failure": "net::ERR_ABORTED"
     },
     {
@@ -1052,13 +1156,13 @@
     {
       "scope": "mobile",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/?tipas=travertinas",
+      "url": "http://127.0.0.1:4173/akmuo/?tipas=kvarcitas",
       "failure": "net::ERR_ABORTED"
     },
     {
       "scope": "mobile",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/?tipas=kvarcitas",
+      "url": "http://127.0.0.1:4173/akmuo/?tipas=travertinas",
       "failure": "net::ERR_ABORTED"
     },
     {
@@ -1100,18 +1204,6 @@
     {
       "scope": "narrow",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/profesionalams/",
-      "failure": "net::ERR_ABORTED"
-    },
-    {
-      "scope": "narrow",
-      "method": "HEAD",
-      "url": "http://127.0.0.1:4173/apie-mus/",
-      "failure": "net::ERR_ABORTED"
-    },
-    {
-      "scope": "narrow",
-      "method": "HEAD",
       "url": "http://127.0.0.1:4173/kontaktai/",
       "failure": "net::ERR_ABORTED"
     },
@@ -1124,13 +1216,19 @@
     {
       "scope": "narrow",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/gaminiai/",
+      "url": "http://127.0.0.1:4173/apie-mus/",
       "failure": "net::ERR_ABORTED"
     },
     {
       "scope": "narrow",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/?tipas=granitas",
+      "url": "http://127.0.0.1:4173/profesionalams/",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "scope": "narrow",
+      "method": "HEAD",
+      "url": "http://127.0.0.1:4173/gaminiai/",
       "failure": "net::ERR_ABORTED"
     },
     {
@@ -1142,13 +1240,19 @@
     {
       "scope": "narrow",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/",
+      "url": "http://127.0.0.1:4173/akmuo/?tipas=travertinas",
       "failure": "net::ERR_ABORTED"
     },
     {
       "scope": "narrow",
       "method": "HEAD",
-      "url": "http://127.0.0.1:4173/akmuo/?tipas=travertinas",
+      "url": "http://127.0.0.1:4173/akmuo/?tipas=granitas",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "scope": "narrow",
+      "method": "HEAD",
+      "url": "http://127.0.0.1:4173/akmuo/",
       "failure": "net::ERR_ABORTED"
     },
     {
