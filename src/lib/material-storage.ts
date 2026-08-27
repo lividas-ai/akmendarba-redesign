@@ -1,5 +1,7 @@
-export const MATERIAL_SAVED_KEY = "granit-decor-saved-v1";
-export const MATERIAL_SAVED_EVENT = "granit:saved-change";
+import { activeBrandConfig } from "@/client/brand";
+
+export const MATERIAL_SAVED_KEY = `${activeBrandConfig.siteId}-saved-v1`;
+export const MATERIAL_SAVED_EVENT = `${activeBrandConfig.siteId}:saved-change`;
 
 function normalizeSavedValue(value: unknown): string[] {
   if (!Array.isArray(value)) return [];

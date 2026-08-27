@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { applications, materialCategories } from "@/data/content";
+import { applications, materialCategories } from "@/client/content";
 import { EditorialCta, EditorialHero, ImageSpread } from "@/components/content/page-chrome";
 import { Reveal } from "@/components/reveal";
 

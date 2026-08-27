@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Check, FileText, Layers3, Ruler, Workflow } from "lucide-react";
-import { professionalCollaboration } from "@/data/content";
+import { professionalCollaboration } from "@/client/content";
 import { EditorialCta, EditorialHero } from "@/components/content/page-chrome";
 import { Reveal } from "@/components/reveal";
 

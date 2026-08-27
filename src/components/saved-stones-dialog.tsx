@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Heart, X } from "lucide-react";
-import { materials } from "@/data/materials";
+import { materials } from "@/client/materials";
+import { activeContactConfig } from "@/client/contact";
 import {
   MATERIAL_SAVED_EVENT,
   readSavedMaterials,
@@ -151,11 +152,13 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
           </div>
         )}
 
-        <div className="saved-stones__help">
-          <p>Reikia pagalbos renkantis?</p>
-          <a href="tel:+37065023784">+370 650 23784</a>
-          <a href="mailto:stone@granitdecor.lt">stone@granitdecor.lt</a>
-        </div>
+        {activeContactConfig.phone || activeContactConfig.email ? (
+          <div className="saved-stones__help">
+            <p>Reikia pagalbos renkantis?</p>
+            {activeContactConfig.phone ? <a href={activeContactConfig.phone.href}>{activeContactConfig.phone.display}</a> : null}
+            {activeContactConfig.email ? <a href={activeContactConfig.email.href}>{activeContactConfig.email.display}</a> : null}
+          </div>
+        ) : null}
       </div>
     </dialog>
   );

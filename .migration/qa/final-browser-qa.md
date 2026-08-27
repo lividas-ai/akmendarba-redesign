@@ -1,0 +1,186 @@
+# Final browser QA
+
+- Base URL: `http://127.0.0.1:4173`
+- Checks: 79
+- Passed: 79
+- Failed: 0
+- Console warnings/errors captured: 0
+- Request failures captured: 88
+
+## Checks
+
+- **PASS** — GET / — 200
+- **PASS** — desktop home: no document horizontal overflow — {"viewportWidth": 1440, "viewportHeight": 900, "documentWidth": 1440, "bodyWidth": 1440, "overflow": false}
+- **PASS** — desktop home: visible H1 — {"count": 1, "text": "Akmens sprendimai\njūsų erdvei."}
+- **PASS** — desktop: hero video exists — 1
+- **PASS** — desktop: correct hero source selected — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 3.220758, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4", "readyState": 4, "networkState": 1, "videoWidth": 2560, "videoHeight": 1440, "error": null}
+- **PASS** — desktop: hero autoplay is active — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 3.220758, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4", "readyState": 4, "networkState": 1, "videoWidth": 2560, "videoHeight": 1440, "error": null}
+- **PASS** — desktop: hero media fills first viewport width — {"hero": {"x": 0, "y": 118, "width": 1440, "height": 782, "top": 118, "right": 1440, "bottom": 900, "left": 0}, "video": {"x": 0, "y": 118, "width": 1440, "height": 782, "top": 118, "right": 1440, "bottom": 900, "left": 0}, "viewport": {"viewportWidth": 1440, "viewportHeight": 900, "documentWidth": 1440, "bodyWidth": 1440, "overflow": false}}
+- **PASS** — desktop: playback control is visible and named — Sustabdyti animaciją
+- **PASS** — desktop: primary navigation visible — 1
+- **PASS** — desktop: Gaminiai dropdown pins and remains selectable — {"images": 8, "loadedImages": 8}
+- **PASS** — desktop: Gaminiai dropdown images loaded — {"images": 8, "loadedImages": 8}
+- **PASS** — desktop: Akmuo dropdown pins and remains selectable — {"images": 5, "loadedImages": 5}
+- **PASS** — desktop: Akmuo dropdown images loaded — {"images": 5, "loadedImages": 5}
+- **PASS** — desktop: Projektai dropdown pins and remains selectable — {"images": 5, "loadedImages": 5}
+- **PASS** — desktop: Projektai dropdown images loaded — {"images": 5, "loadedImages": 5}
+- **PASS** — desktop: Kaip dirbame dropdown pins and remains selectable — {"images": 0, "loadedImages": 0}
+- **PASS** — desktop: Professionals and About are direct links without dropdowns — {"directLinks": ["Profesionalams", "Apie mus"], "unexpectedTriggers": 0}
+- **PASS** — GET / — 200
+- **PASS** — tablet home: no document horizontal overflow — {"viewportWidth": 768, "viewportHeight": 1024, "documentWidth": 768, "bodyWidth": 768, "overflow": false}
+- **PASS** — tablet home: visible H1 — {"count": 1, "text": "Akmens sprendimai\njūsų erdvei."}
+- **PASS** — tablet: hero video exists — 1
+- **PASS** — tablet: correct hero source selected — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 3.059469, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4", "readyState": 4, "networkState": 1, "videoWidth": 810, "videoHeight": 1440, "error": null}
+- **PASS** — tablet: hero autoplay is active — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 3.059469, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4", "readyState": 4, "networkState": 1, "videoWidth": 810, "videoHeight": 1440, "error": null}
+- **PASS** — tablet: hero media fills first viewport width — {"hero": {"x": 0, "y": 76, "width": 768, "height": 948, "top": 76, "right": 768, "bottom": 1024, "left": 0}, "video": {"x": 0, "y": 76, "width": 768, "height": 948, "top": 76, "right": 768, "bottom": 1024, "left": 0}, "viewport": {"viewportWidth": 768, "viewportHeight": 1024, "documentWidth": 768, "bodyWidth": 768, "overflow": false}}
+- **PASS** — tablet: playback control is visible and named — Sustabdyti animaciją
+- **PASS** — tablet: menu button visible — 1
+- **PASS** — tablet: mobile menu opens — dialog.open
+- **PASS** — tablet: Gaminiai submenu has compact visual guidance — {"section": "Gaminiai", "tiles": 8, "images": 8, "loadedImages": 8}
+- **PASS** — tablet: Akmuo submenu has compact visual guidance — {"section": "Akmuo", "tiles": 5, "images": 5, "loadedImages": 5}
+- **PASS** — tablet: Professionals and About remain direct links — {"professionals": 1, "about": 1}
+- **PASS** — GET / — 200
+- **PASS** — mobile home: no document horizontal overflow — {"viewportWidth": 390, "viewportHeight": 844, "documentWidth": 390, "bodyWidth": 390, "overflow": false}
+- **PASS** — mobile home: visible H1 — {"count": 1, "text": "Akmens sprendimai\njūsų erdvei."}
+- **PASS** — mobile: hero video exists — 1
+- **PASS** — mobile: correct hero source selected — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 3.203043, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4", "readyState": 4, "networkState": 1, "videoWidth": 810, "videoHeight": 1440, "error": null}
+- **PASS** — mobile: hero autoplay is active — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 3.203043, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4", "readyState": 4, "networkState": 1, "videoWidth": 810, "videoHeight": 1440, "error": null}
+- **PASS** — mobile: hero media fills first viewport width — {"hero": {"x": 0, "y": 76, "width": 390, "height": 768, "top": 76, "right": 390, "bottom": 844, "left": 0}, "video": {"x": 0, "y": 76, "width": 390, "height": 768, "top": 76, "right": 390, "bottom": 844, "left": 0}, "viewport": {"viewportWidth": 390, "viewportHeight": 844, "documentWidth": 390, "bodyWidth": 390, "overflow": false}}
+- **PASS** — mobile: playback control is visible and named — Sustabdyti animaciją
+- **PASS** — mobile: menu button visible — 1
+- **PASS** — mobile: mobile menu opens — dialog.open
+- **PASS** — mobile: Gaminiai submenu has compact visual guidance — {"section": "Gaminiai", "tiles": 8, "images": 8, "loadedImages": 8}
+- **PASS** — mobile: Akmuo submenu has compact visual guidance — {"section": "Akmuo", "tiles": 5, "images": 5, "loadedImages": 5}
+- **PASS** — mobile: Professionals and About remain direct links — {"professionals": 1, "about": 1}
+- **PASS** — GET / — 200
+- **PASS** — narrow home: no document horizontal overflow — {"viewportWidth": 320, "viewportHeight": 700, "documentWidth": 320, "bodyWidth": 320, "overflow": false}
+- **PASS** — narrow home: visible H1 — {"count": 1, "text": "Akmens sprendimai\njūsų erdvei."}
+- **PASS** — narrow: hero video exists — 1
+- **PASS** — narrow: correct hero source selected — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 2.891371, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4", "readyState": 4, "networkState": 1, "videoWidth": 810, "videoHeight": 1440, "error": null}
+- **PASS** — narrow: hero autoplay is active — {"autoplay": true, "muted": true, "loop": true, "playsInline": true, "paused": false, "currentTime": 2.891371, "currentSrc": "http://127.0.0.1:4173/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4", "readyState": 4, "networkState": 1, "videoWidth": 810, "videoHeight": 1440, "error": null}
+- **PASS** — narrow: hero media fills first viewport width — {"hero": {"x": 0, "y": 76, "width": 320, "height": 624, "top": 76, "right": 320, "bottom": 700, "left": 0}, "video": {"x": 0, "y": 76, "width": 320, "height": 624, "top": 76, "right": 320, "bottom": 700, "left": 0}, "viewport": {"viewportWidth": 320, "viewportHeight": 700, "documentWidth": 320, "bodyWidth": 320, "overflow": false}}
+- **PASS** — narrow: playback control is visible and named — Sustabdyti animaciją
+- **PASS** — narrow: menu button visible — 1
+- **PASS** — narrow: mobile menu opens — dialog.open
+- **PASS** — narrow: Gaminiai submenu has compact visual guidance — {"section": "Gaminiai", "tiles": 8, "images": 8, "loadedImages": 8}
+- **PASS** — narrow: Akmuo submenu has compact visual guidance — {"section": "Akmuo", "tiles": 5, "images": 5, "loadedImages": 5}
+- **PASS** — narrow: Professionals and About remain direct links — {"professionals": 1, "about": 1}
+- **PASS** — GET /akmuo/calacatta-paonazzo/ — 200
+- **PASS** — material page: visible H1 — {"count": 1, "text": "Calacatta Paonazzo"}
+- **PASS** — material page: no document horizontal overflow — {"viewportWidth": 390, "viewportHeight": 844, "documentWidth": 390, "bodyWidth": 390, "overflow": false}
+- **PASS** — material page: direct refresh — 200
+- **PASS** — GET /gaminiai/virtuves-stalvirsiai/ — 200
+- **PASS** — product page: visible H1 — {"count": 1, "text": "Virtuvės stalviršiai, salos ir sienelės"}
+- **PASS** — product page: no document horizontal overflow — {"viewportWidth": 390, "viewportHeight": 844, "documentWidth": 390, "bodyWidth": 390, "overflow": false}
+- **PASS** — product page: direct refresh — 200
+- **PASS** — GET /projektai/granit-decor-darbai-03/ — 200
+- **PASS** — project page: visible H1 — {"count": 1, "text": "Atviro plano virtuvės"}
+- **PASS** — project page: no document horizontal overflow — {"viewportWidth": 390, "viewportHeight": 844, "documentWidth": 390, "bodyWidth": 390, "overflow": false}
+- **PASS** — project page: direct refresh — 200
+- **PASS** — project page: structured multi-image story — {"images": 9, "visibleInCurrentViewport": 9}
+- **PASS** — GET /projektas/ — 200
+- **PASS** — planner: visible H1 — {"count": 1, "text": "Aptarkime jūsų projektą."}
+- **PASS** — planner: no document horizontal overflow — {"viewportWidth": 390, "viewportHeight": 844, "documentWidth": 390, "bodyWidth": 390, "overflow": false}
+- **PASS** — planner: demo does not claim to send data or files — Duomenys ir failai šioje demonstracinėje versijoje nėra siunčiami.
+- **PASS** — planner: accepts project drawing/image formats — {"accept": ".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.webp,.heic", "multiple": ""}
+- **PASS** — planner: selected file appears locally — demo-project.pdf
+PDF · 1 KB
+- **PASS** — planner: file lifetime is disclosed — Failai laikomi tik šiame puslapyje iki jo perkrovimo.
+- **PASS** — planner: file is not falsely persisted after refresh — 0
+- **PASS** — no browser console errors — []
+- **PASS** — no meaningful request failures — []
+
+## Console messages
+
+- None
+
+## Request failures
+
+- `desktop` HEAD http://127.0.0.1:4173/kontaktai/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/profesionalams/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/apie-mus/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/projektai/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/gaminiai/virtuves-stalvirsiai/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/gaminiai/vonios-stalvirsiai/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/gaminiai/zidiniu-apdaila/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/gaminiai/sienu-apdaila/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/gaminiai/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/akmuo/?tipas=granitas — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/akmuo/?tipas=marmuras — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/akmuo/?tipas=kvarcitas — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/akmuo/?tipas=oniksas — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/akmuo/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/projektai/granit-decor-darbai-25/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/projektai/granit-decor-darbai-03/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/projektai/granit-decor-darbai-30/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/projektai/granit-decor-darbai-24/ — net::ERR_ABORTED
+- `desktop` HEAD http://127.0.0.1:4173/kaip-dirbame/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/projektai/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/gaminiai/virtuves-stalvirsiai/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/gaminiai/vonios-stalvirsiai/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/gaminiai/zidiniu-apdaila/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/profesionalams/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/apie-mus/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/kontaktai/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/memorialai/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/gaminiai/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/akmuo/?tipas=travertinas — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/akmuo/?tipas=granitas — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/akmuo/ — net::ERR_ABORTED
+- `tablet` HEAD http://127.0.0.1:4173/akmuo/?rodyti=issaugoti — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/projektai/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/gaminiai/virtuves-stalvirsiai/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/gaminiai/vonios-stalvirsiai/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/profesionalams/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/apie-mus/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/kontaktai/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/memorialai/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/gaminiai/ — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/akmuo/?tipas=granitas — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/akmuo/?tipas=travertinas — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/akmuo/?tipas=kvarcitas — net::ERR_ABORTED
+- `mobile` HEAD http://127.0.0.1:4173/akmuo/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/projektai/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/gaminiai/virtuves-stalvirsiai/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/gaminiai/vonios-stalvirsiai/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/profesionalams/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/apie-mus/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/kontaktai/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/memorialai/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/gaminiai/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/akmuo/?tipas=granitas — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/akmuo/?tipas=kvarcitas — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/akmuo/ — net::ERR_ABORTED
+- `narrow` HEAD http://127.0.0.1:4173/akmuo/?tipas=travertinas — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/akmuo/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/akmuo/?tipas=marmuras — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/?akmuo=calacatta-paonazzo — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/akmuo/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/akmuo/?tipas=marmuras — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/?akmuo=calacatta-paonazzo — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/gaminiai/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/?gaminys=virtuves-stalvirsiai — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/gaminiai/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/?gaminys=virtuves-stalvirsiai — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektas/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektai/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/projektai/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED
+- `routes-mobile` HEAD http://127.0.0.1:4173/ — net::ERR_ABORTED

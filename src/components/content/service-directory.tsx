@@ -8,7 +8,7 @@ import {
   applicationGroups,
   applications,
   type ApplicationGroupId,
-} from "@/data/content";
+} from "@/client/content";
 
 type GroupFilter = "visi" | ApplicationGroupId;
 

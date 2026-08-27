@@ -32,8 +32,8 @@ import {
   useRef,
   useState,
 } from "react";
-import { applications, materialCategories } from "@/data/content";
-import { materials } from "@/data/materials";
+import { applications, materialCategories } from "@/client/content";
+import { materials } from "@/client/materials";
 import {
   clearPlannerDraft,
   createEmptyPlannerData,

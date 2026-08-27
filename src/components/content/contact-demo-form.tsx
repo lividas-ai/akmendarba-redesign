@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { activeContactConfig } from "@/client/contact";
 
 type FormValues = {
   name: string;
@@ -62,7 +63,8 @@ export function ContactDemoForm() {
         <span className="eyebrow">Užklausa parengta</span>
         <h2>Šioje demonstracijoje duomenys nebuvo išsiųsti.</h2>
         <p>
-          Forma veikia vietoje, tačiau dar nėra prijungta prie el. pašto ar klientų valdymo sistemos. Galite nukopijuoti santrauką ir išsiųsti ją adresu <a href="mailto:stone@granitdecor.lt">stone@granitdecor.lt</a>.
+          Forma veikia vietoje, tačiau dar nėra prijungta prie el. pašto ar klientų valdymo sistemos. Galite nukopijuoti santrauką
+          {activeContactConfig.email ? <> ir išsiųsti ją adresu <a href={activeContactConfig.email.href}>{activeContactConfig.email.display}</a></> : null}.
         </p>
         <div className="demo-form__result-actions">
           <button className="button button--primary" type="button" onClick={copySummary}>

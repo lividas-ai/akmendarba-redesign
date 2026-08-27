@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { projects } from "@/data/content";
+import { projects } from "@/client/content";
 import { EditorialCta, EditorialHero } from "@/components/content/page-chrome";
 import { ProjectArchiveGrid } from "@/components/content/project-archive-grid";
 import { FullPortfolioGallery } from "@/components/content/full-portfolio-gallery";

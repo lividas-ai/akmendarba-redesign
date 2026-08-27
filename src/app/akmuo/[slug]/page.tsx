@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { materialCategories } from "@/data/content";
-import { materials } from "@/data/materials";
+import { materialCategories } from "@/client/content";
+import { materials } from "@/client/materials";
 import { MaterialDetailActions } from "@/components/materials/material-detail-actions";
 import { RelatedMaterials } from "@/components/materials/related-materials";
 

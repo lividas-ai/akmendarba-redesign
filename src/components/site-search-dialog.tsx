@@ -4,12 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Search, X } from "lucide-react";
-import { materialCategories } from "@/data/content";
+import { materialCategories } from "@/client/content";
 import {
   navigationSearchIndex,
   type NavigationSearchGroup,
   type NavigationSearchItem,
-} from "@/data/mega-navigation";
+} from "@/client/navigation";
 
 type SiteSearchDialogProps = {
   open: boolean;

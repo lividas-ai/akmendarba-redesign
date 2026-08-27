@@ -21,14 +21,16 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { utilityNavigation } from "@/data/content";
+import { utilityNavigation } from "@/client/content";
+import { activeSiteConfig } from "@/client";
+import { activeContactConfig } from "@/client/contact";
 import {
   megaNavigation,
   megaNavigationItems,
   type MegaMenuId,
   type MegaNavigationMenu,
   type MegaNavigationPanel,
-} from "@/data/mega-navigation";
+} from "@/client/navigation";
 import { MATERIAL_SAVED_EVENT, readSavedMaterials } from "@/lib/material-storage";
 import { LocationDialog } from "@/components/location-dialog";
 import { SavedStonesDialog } from "@/components/saved-stones-dialog";
@@ -76,7 +78,7 @@ function MegaMenuPanel({
             {menu.railLinks.map((link) => (
               <Link
                 aria-current={isNavigationActive(pathname, link.href) ? "page" : undefined}
-                data-project-action={link.href === "/projektas" || undefined}
+                data-project-action={link.href === activeSiteConfig.header.primaryAction?.href || undefined}
                 href={link.href}
                 key={`${menu.id}-${link.href}-${link.label}`}
                 onClick={onClose}
@@ -109,7 +111,7 @@ function MegaMenuPanel({
               {menu.railLinks.map((link, index) => (
                 <Link
                   data-overview={index === 0 || undefined}
-                  data-project-action={link.href === "/projektas" || undefined}
+                  data-project-action={link.href === activeSiteConfig.header.primaryAction?.href || undefined}
                   href={link.href}
                   key={`${menu.id}-${link.href}-${link.label}`}
                   onClick={onClose}
@@ -149,6 +151,7 @@ export function SiteHeader() {
   const [savedCount, setSavedCount] = useState(0);
 
   useEffect(() => {
+    if (!activeSiteConfig.header.savedItems) return;
     const updateSavedCount = () => setSavedCount(readSavedMaterials().length);
     updateSavedCount();
     window.addEventListener("storage", updateSavedCount);
@@ -329,15 +332,21 @@ export function SiteHeader() {
     <header className="site-header" data-scrolled={scrolled || undefined}>
       <div className="site-header__inner page-shell">
         <div className="site-header__utility-start">
-          <button type="button" onClick={() => setLocationOpen(true)}>
-            <MapPin aria-hidden="true" size={14} strokeWidth={1.45} />
-            Lentvaris
-          </button>
-          <Link href="/kontaktai">Kontaktai</Link>
+          {activeContactConfig.location ? (
+            <button type="button" onClick={() => setLocationOpen(true)}>
+              <MapPin aria-hidden="true" size={14} strokeWidth={1.45} />
+              {activeContactConfig.location.shortLabel}
+            </button>
+          ) : null}
+          {activeSiteConfig.header.contactLink ? (
+            <Link href={activeSiteConfig.header.contactLink.href}>
+              {activeSiteConfig.header.contactLink.label}
+            </Link>
+          ) : null}
         </div>
 
         <button
-          aria-label="Atverti meniu"
+          aria-label={activeSiteConfig.header.labels.openMenu}
           aria-expanded={mobileMenuOpen}
           aria-haspopup="dialog"
           className="site-header__menu-button"
@@ -348,14 +357,14 @@ export function SiteHeader() {
           }}
         >
           <Menu aria-hidden="true" size={20} strokeWidth={1.45} />
-          <span>Meniu</span>
+          <span>{activeSiteConfig.header.labels.menu}</span>
         </button>
 
         <Wordmark />
 
         <nav
           className="site-header__nav"
-          aria-label="Pagrindinis meniu"
+          aria-label={activeSiteConfig.header.labels.primaryNavigation}
           ref={desktopNavRef}
           onBlur={closeMegaMenuOnBlur}
           onKeyDown={closeMegaMenuOnEscape}
@@ -418,27 +427,33 @@ export function SiteHeader() {
         </nav>
 
         <div className="site-header__tools">
-          <button className="header-tool header-tool--search" type="button" onClick={openSearch} aria-label="Atverti paiešką">
-            <Search aria-hidden="true" size={17} strokeWidth={1.45} />
-            <span>Paieška</span>
-          </button>
-          <button className="header-tool header-tool--saved" type="button" onClick={openSaved} aria-label={`Išsaugoti akmenys: ${savedCount}`}>
-            <Heart aria-hidden="true" size={17} strokeWidth={1.45} />
-            <span>Išsaugota</span>
-            <small>{savedCount}</small>
-          </button>
-          <Link className="site-header__cta" href="/projektas">
-            Aptarkime projektą
-          </Link>
+          {activeSiteConfig.header.search ? (
+            <button className="header-tool header-tool--search" type="button" onClick={openSearch} aria-label={activeSiteConfig.header.search.openLabel}>
+              <Search aria-hidden="true" size={17} strokeWidth={1.45} />
+              <span>{activeSiteConfig.header.search.label}</span>
+            </button>
+          ) : null}
+          {activeSiteConfig.header.savedItems ? (
+            <button className="header-tool header-tool--saved" type="button" onClick={openSaved} aria-label={`${activeSiteConfig.header.savedItems.countLabel}: ${savedCount}`}>
+              <Heart aria-hidden="true" size={17} strokeWidth={1.45} />
+              <span>{activeSiteConfig.header.savedItems.label}</span>
+              <small>{savedCount}</small>
+            </button>
+          ) : null}
+          {activeSiteConfig.header.primaryAction ? (
+            <Link className="site-header__cta" href={activeSiteConfig.header.primaryAction.href}>
+              {activeSiteConfig.header.primaryAction.label}
+            </Link>
+          ) : null}
         </div>
       </div>
 
       {openMegaMenu ? (
-        <button aria-label="Uždaryti išskleistą meniu" className="site-header__scrim" type="button" onClick={closeMegaMenus} />
+        <button aria-label={activeSiteConfig.header.labels.closeExpandedMenu} className="site-header__scrim" type="button" onClick={closeMegaMenus} />
       ) : null}
 
       <dialog
-        aria-label="Svetainės meniu"
+        aria-label={activeSiteConfig.header.labels.menuDialog}
         className="mobile-menu"
         ref={mobileDialogRef}
         onClose={() => {
@@ -459,12 +474,12 @@ export function SiteHeader() {
             <div className="mobile-menu__top mobile-menu__top--root">
               <span aria-hidden="true" />
               <Wordmark onClick={closeMobileMenu} />
-              <button className="mobile-menu__close" type="button" onClick={closeMobileMenu} aria-label="Uždaryti meniu">
+              <button className="mobile-menu__close" type="button" onClick={closeMobileMenu} aria-label={activeSiteConfig.header.labels.closeMenu}>
                 <X aria-hidden="true" size={22} strokeWidth={1.4} />
               </button>
             </div>
 
-            <nav className="mobile-menu__primary" aria-label="Pagrindinės svetainės skiltys">
+            <nav className="mobile-menu__primary" aria-label={activeSiteConfig.header.labels.mobileSections}>
               {megaNavigationItems.map((menu) =>
                 menu.behavior === "direct" ? (
                   <Link
@@ -492,18 +507,23 @@ export function SiteHeader() {
             </nav>
 
             <div className="mobile-menu__root-actions">
-              <Link href="/projektas" onClick={closeMobileMenu}>
-                Aptarti projektą <ArrowRight aria-hidden="true" size={16} />
-              </Link>
-              <button
-                type="button"
-                onClick={() => {
-                  closeMobileMenu();
-                  window.requestAnimationFrame(() => setLocationOpen(true));
-                }}
-              >
-                <MapPin aria-hidden="true" size={15} /> Lentvaris
-              </button>
+              {activeSiteConfig.header.primaryAction ? (
+                <Link href={activeSiteConfig.header.primaryAction.href} onClick={closeMobileMenu}>
+                  {activeSiteConfig.header.primaryAction.mobileLabel ?? activeSiteConfig.header.primaryAction.label}
+                  <ArrowRight aria-hidden="true" size={16} />
+                </Link>
+              ) : null}
+              {activeContactConfig.location ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    closeMobileMenu();
+                    window.requestAnimationFrame(() => setLocationOpen(true));
+                  }}
+                >
+                  <MapPin aria-hidden="true" size={15} /> {activeContactConfig.location.shortLabel}
+                </button>
+              ) : null}
               {utilityNavigation.map((item) => (
                 <Link href={item.href} key={item.id} onClick={closeMobileMenu}>
                   {item.label}
@@ -512,8 +532,8 @@ export function SiteHeader() {
             </div>
 
             <div className="mobile-menu__contact">
-              <a href="tel:+37065023784">+370 650 23784</a>
-              <a href="mailto:stone@granitdecor.lt">stone@granitdecor.lt</a>
+              {activeContactConfig.phone ? <a href={activeContactConfig.phone.href}>{activeContactConfig.phone.display}</a> : null}
+              {activeContactConfig.email ? <a href={activeContactConfig.email.href}>{activeContactConfig.email.display}</a> : null}
             </div>
           </section>
 
@@ -527,12 +547,12 @@ export function SiteHeader() {
                 ref={mobileBackButtonRef}
                 type="button"
                 onClick={() => setMobileSection(null)}
-                aria-label="Grįžti į pagrindinį meniu"
+                aria-label={activeSiteConfig.header.labels.backToMainMenu}
               >
                 <ChevronLeft aria-hidden="true" size={20} strokeWidth={1.35} />
               </button>
-              <strong>{selectedMobileMenu?.label ?? "Skiltis"}</strong>
-              <button className="mobile-menu__close" type="button" onClick={closeMobileMenu} aria-label="Uždaryti meniu">
+              <strong>{selectedMobileMenu?.label ?? activeSiteConfig.header.labels.sectionFallback}</strong>
+              <button className="mobile-menu__close" type="button" onClick={closeMobileMenu} aria-label={activeSiteConfig.header.labels.closeMenu}>
                 <X aria-hidden="true" size={22} strokeWidth={1.4} />
               </button>
             </div>
@@ -548,7 +568,7 @@ export function SiteHeader() {
                     {selectedMobileMenu.railLinks.map((link) => (
                       <Link
                         aria-current={isNavigationActive(pathname, link.href) ? "page" : undefined}
-                        data-project-action={link.href === "/projektas" || undefined}
+                        data-project-action={link.href === activeSiteConfig.header.primaryAction?.href || undefined}
                         href={link.href}
                         key={`${selectedMobileMenu.id}-${link.href}-${link.label}`}
                         onClick={closeMobileMenu}
@@ -592,8 +612,8 @@ export function SiteHeader() {
         </div>
       </dialog>
 
-      <SiteSearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
-      <SavedStonesDialog open={savedOpen} onOpenChange={setSavedOpen} />
+      {activeSiteConfig.header.search ? <SiteSearchDialog open={searchOpen} onOpenChange={setSearchOpen} /> : null}
+      {activeSiteConfig.header.savedItems ? <SavedStonesDialog open={savedOpen} onOpenChange={setSavedOpen} /> : null}
       <LocationDialog open={locationOpen} onOpenChange={setLocationOpen} />
     </header>
   );

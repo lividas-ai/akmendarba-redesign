@@ -1,28 +1,72 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock3, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
 import { ContactDemoForm } from "@/components/content/contact-demo-form";
 import { EditorialHero } from "@/components/content/page-chrome";
 import { Reveal } from "@/components/reveal";
+import { activeBrandConfig } from "@/client/brand";
+import { activeContactConfig } from "@/client/contact";
+
+function isPresent<T>(value: T | null | undefined): value is T {
+  return value !== null && value !== undefined;
+}
+
+const contactDescription = [
+  activeContactConfig.phone?.display,
+  activeContactConfig.email?.display,
+  activeContactConfig.address?.label,
+  activeContactConfig.openingHours,
+].filter(isPresent).join(", ");
 
 export const metadata: Metadata = {
   title: "Kontaktai",
-  description:
-    "Susisiekite su Granit Decor: +370 650 23784, stone@granitdecor.lt, Kęstučio g. 1, Lentvaris. Darbo laikas I–V 8:00–16:00.",
+  description: `Susisiekite su ${activeBrandConfig.identity.name}${contactDescription ? `: ${contactDescription}` : ""}.`,
 };
 
-// VERIFY BEFORE LAUNCH: confirm phone, email, customer-facing address and opening hours with the client.
-const contactDetails = [
-  { label: "Telefonas", value: "+370 650 23784", href: "tel:+37065023784", Icon: Phone },
-  { label: "El. paštas", value: "stone@granitdecor.lt", href: "mailto:stone@granitdecor.lt", Icon: Mail },
-  {
+type ContactDetail = {
+  label: string;
+  value: string;
+  href: string | null;
+  Icon: LucideIcon;
+};
+
+const contactDetails: ContactDetail[] = [];
+
+if (activeContactConfig.phone) {
+  contactDetails.push({
+    label: "Telefonas",
+    value: activeContactConfig.phone.display,
+    href: activeContactConfig.phone.href,
+    Icon: Phone,
+  });
+}
+
+if (activeContactConfig.email) {
+  contactDetails.push({
+    label: "El. paštas",
+    value: activeContactConfig.email.display,
+    href: activeContactConfig.email.href,
+    Icon: Mail,
+  });
+}
+
+if (activeContactConfig.address) {
+  contactDetails.push({
     label: "Dirbtuvės",
-    value: "Kęstučio g. 1, Lentvaris",
-    href: "https://www.google.com/maps/search/?api=1&query=K%C4%99stu%C4%8Dio+g.+1%2C+Lentvaris",
+    value: activeContactConfig.address.label,
+    href: activeContactConfig.address.href,
     Icon: MapPin,
-  },
-  { label: "Darbo laikas", value: "I–V 8:00–16:00", href: null, Icon: Clock3 },
-] as const;
+  });
+}
+
+if (activeContactConfig.openingHours) {
+  contactDetails.push({
+    label: "Darbo laikas",
+    value: activeContactConfig.openingHours,
+    href: null,
+    Icon: Clock3,
+  });
+}
 
 export default function ContactPage() {
   return (
@@ -30,7 +74,7 @@ export default function ContactPage() {
       <EditorialHero
         breadcrumbs={[{ label: "Kontaktai" }]}
         eyebrow="Kontaktai"
-        folio="Lentvaris"
+        folio={activeContactConfig.location?.shortLabel}
         tone="clay"
         title="Susisiekite dėl savo projekto."
         body="Paskambinkite, parašykite arba atsiųskite trumpą užklausą su gaminio tipu, apytikriais matmenimis ir turima vaizdine medžiaga."

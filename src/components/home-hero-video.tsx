@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
+import { activeBrandConfig } from "@/client/brand";
 
 export function HomeHeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -123,7 +124,7 @@ export function HomeHeroVideo() {
       </video>
 
       <button
-        aria-label={playing ? "Sustabdyti animaciją" : "Paleisti animaciją"}
+        aria-label={playing ? activeBrandConfig.ui.pauseMotion : activeBrandConfig.ui.playMotion}
         className="home-hero__playback"
         data-state={playing ? "playing" : "paused"}
         onClick={togglePlayback}

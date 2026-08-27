@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { projects } from "@/data/content";
-import { getProjectThemeStory } from "@/data/project-themes";
+import { projects } from "@/client/content";
+import { getProjectThemeStory } from "@/client/project-stories";
 import { Breadcrumbs, EditorialCta } from "@/components/content/page-chrome";
 import { ProjectThemeStory } from "@/components/content/project-theme-story";
 import { Reveal } from "@/components/reveal";

@@ -1,29 +1,7 @@
 import type { NextConfig } from "next";
+import { activeRedirects } from "./src/client/redirects";
 
 const staticExport = process.env.STATIC_EXPORT === "true";
-
-const redirects = [
-  ["/naturalus-akmuo", "/akmuo"],
-  ["/granitas", "/akmuo?tipas=granitas"],
-  ["/marmuras", "/akmuo?tipas=marmuras"],
-  ["/oniksas", "/akmuo?tipas=oniksas"],
-  ["/travertinas", "/akmuo?tipas=travertinas"],
-  ["/kvarcitas", "/akmuo?tipas=kvarcitas"],
-  ["/naturalaus-akmens-gaminiai", "/gaminiai"],
-  ["/virtuves-stalvirsiai-gamyba", "/gaminiai/virtuves-stalvirsiai"],
-  ["/vonios-stalvirsiai-gamyba", "/gaminiai/vonios-stalvirsiai"],
-  ["/židinių-apdaila", "/gaminiai/zidiniu-apdaila"],
-  ["/laiptai-ir-laiptų-pakopos", "/gaminiai/laiptai-ir-laiptu-pakopos"],
-  ["/akmeninės-palangės", "/gaminiai/akmens-palanges"],
-  ["/grindų-danga", "/gaminiai/grindu-danga"],
-  ["/sienų-apdaila", "/gaminiai/sienu-apdaila"],
-  ["/vidaus-baldai", "/gaminiai/vidaus-baldai"],
-  ["/lauko-baldai", "/gaminiai/lauko-baldai"],
-  ["/fasadų-apdaila", "/gaminiai/fasadu-apdaila"],
-  ["/kolonos", "/gaminiai/kolonos"],
-  ["/antkapiai", "/gaminiai/antkapiai-ir-paminklai"],
-  ["/akmens-gaminiai", "/projektai"],
-] as const;
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
@@ -56,9 +34,9 @@ const nextConfig: NextConfig = {
           ];
         },
         async redirects() {
-          return redirects.map(([source, destination]) => ({
-            source,
-            destination,
+          return activeRedirects.map((redirect) => ({
+            source: redirect.source,
+            destination: redirect.destination,
             permanent: true,
           }));
         },

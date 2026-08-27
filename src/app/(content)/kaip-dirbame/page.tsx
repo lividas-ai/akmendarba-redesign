@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { processSteps } from "@/data/content";
+import { processSteps } from "@/client/content";
 import { EditorialCta, EditorialHero } from "@/components/content/page-chrome";
 import { Reveal } from "@/components/reveal";
 

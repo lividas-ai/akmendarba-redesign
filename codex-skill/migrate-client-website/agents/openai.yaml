@@ -1,0 +1,3 @@
+interface:
+  display_name: "Migrate Client Website"
+  short_description: "Migrate clients with verified source parity"

@@ -5,8 +5,8 @@ import { HomeHero } from "@/components/home-hero";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { ButtonLink } from "@/components/button-link";
-import { applications, processSteps, projects, siteCopy } from "@/data/content";
-import { materials } from "@/data/materials";
+import { applications, processSteps, projects, siteCopy } from "@/client/content";
+import { materials } from "@/client/materials";
 
 const materialSequence = [
   "patagonia",

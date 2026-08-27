@@ -1,5 +1,5 @@
 {
-  "name": "granit-decor-redesign",
+  "name": "premium-business-template",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -9,11 +9,19 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:static": "STATIC_EXPORT=true next build",
+    "build": "pnpm validate:client && next build",
+    "build:release": "pnpm validate:client:release && next build",
+    "build:static": "pnpm validate:client && STATIC_EXPORT=true next build",
+    "build:static:release": "pnpm validate:client:release && STATIC_EXPORT=true next build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "check": "tsc --noEmit && eslint . && next build"
+    "validate:client": "node --import ./scripts/register-ts-path-loader.mjs ./scripts/validate-site-manifest.mjs --mode draft",
+    "validate:client:release": "node --import ./scripts/register-ts-path-loader.mjs ./scripts/validate-site-manifest.mjs --mode release",
+    "check:lock": "node ./scripts/check-template-lock.mjs --snapshot ./template.lock.snapshot.json",
+    "snapshot:lock": "node ./scripts/check-template-lock.mjs --write-snapshot ./template.lock.snapshot.json",
+    "test:lock": "node --test ./tests/check-template-lock.test.mjs",
+    "test:manifest": "node --import ./scripts/register-ts-path-loader.mjs --test ./scripts/site-manifest-acceptance.test.mjs",
+    "check": "pnpm check:lock && pnpm typecheck && pnpm lint && pnpm test:lock && pnpm test:manifest && pnpm build && pnpm build:static"
   },
   "dependencies": {
     "@fontsource-variable/bodoni-moda": "^5.3.0",

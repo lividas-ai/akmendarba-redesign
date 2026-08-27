@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { applications, materialCategories } from "@/data/content";
 import { Wordmark } from "@/components/wordmark";
+import { activeSiteConfig } from "@/client";
+import type { ClientLink } from "@/template/client-config";
 
 type FooterGroupProps = {
   label: string;
@@ -27,67 +28,57 @@ function FooterGroup({ label, ariaLabel, children }: FooterGroupProps) {
   );
 }
 
+function FooterLink({ link }: { link: ClientLink }) {
+  if (link.external || link.href.startsWith("http") || link.href.startsWith("tel:") || link.href.startsWith("mailto:")) {
+    const opensNewWindow = link.external && link.href.startsWith("http");
+    return (
+      <a href={link.href} target={opensNewWindow ? "_blank" : undefined} rel={opensNewWindow ? "noreferrer" : undefined}>
+        {link.label}
+      </a>
+    );
+  }
+  return <Link href={link.href}>{link.label}</Link>;
+}
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner content-shell">
         <div className="site-footer__lead">
           <Wordmark inverse />
-          <p>Natūralaus akmens gaminiai pagal individualų projektą.</p>
-          <Link className="site-footer__project-link" href="/projektas">
-            Aptarkime projektą <ArrowUpRight aria-hidden="true" size={20} />
-          </Link>
+          {activeSiteConfig.footer.summary ? <p>{activeSiteConfig.footer.summary}</p> : null}
+          {activeSiteConfig.footer.primaryAction ? (
+            <Link className="site-footer__project-link" href={activeSiteConfig.footer.primaryAction.href}>
+              {activeSiteConfig.footer.primaryAction.label} <ArrowUpRight aria-hidden="true" size={20} />
+            </Link>
+          ) : null}
         </div>
 
         <div className="site-footer__directories">
-          <FooterGroup label="Gaminiai" ariaLabel="Gaminiai">
-            <Link href="/gaminiai">Visi gaminiai</Link>
-            {applications.map((application) => (
-              <Link href={application.href} key={application.id}>
-                {application.shortTitle}
-              </Link>
-            ))}
-          </FooterGroup>
+          {activeSiteConfig.footer.groups.map((group) => (
+            <FooterGroup label={group.label} ariaLabel={group.ariaLabel} key={group.id}>
+              {group.links.map((link) => <FooterLink link={link} key={`${group.id}-${link.href}`} />)}
+            </FooterGroup>
+          ))}
 
-          <FooterGroup label="Akmuo" ariaLabel="Akmens rūšys">
-            <Link href="/akmuo">Visa akmens kolekcija</Link>
-            {materialCategories.map((category) => (
-              <Link href={category.href} key={category.id}>
-                {category.name}
-              </Link>
-            ))}
-            <Link href="/akmuo?rodyti=issaugoti">Išsaugoti akmenys</Link>
-          </FooterGroup>
-
-          <FooterGroup label="Įmonė" ariaLabel="Apie įmonę ir darbą">
-            <Link href="/projektai">Projektai</Link>
-            <Link href="/kaip-dirbame">Kaip dirbame</Link>
-            <Link href="/profesionalams">Profesionalams</Link>
-            <Link href="/apie-mus">Apie mus</Link>
-            <Link href="/zurnalas">Žurnalas</Link>
-            <Link href="/memorialai">Memorialai</Link>
-            <Link href="/kontaktai">Kontaktai</Link>
-          </FooterGroup>
-
-          <FooterGroup label="Kontaktai" ariaLabel="Granit Decor kontaktai">
-            <a href="tel:+37065023784">+370 650 23784</a>
-            <a href="mailto:stone@granitdecor.lt">stone@granitdecor.lt</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=K%C4%99stu%C4%8Dio+g.+1%2C+Lentvaris" target="_blank" rel="noreferrer">
-              Kęstučio g. 1, Lentvaris
-            </a>
-            <span>I–V 8:00–16:00</span>
-          </FooterGroup>
+          {activeSiteConfig.contact.phone || activeSiteConfig.contact.email || activeSiteConfig.contact.address || activeSiteConfig.contact.openingHours ? (
+            <FooterGroup label="Kontaktai" ariaLabel={`${activeSiteConfig.identity.name} kontaktai`}>
+              {activeSiteConfig.contact.phone ? <a href={activeSiteConfig.contact.phone.href}>{activeSiteConfig.contact.phone.display}</a> : null}
+              {activeSiteConfig.contact.email ? <a href={activeSiteConfig.contact.email.href}>{activeSiteConfig.contact.email.display}</a> : null}
+              {activeSiteConfig.contact.address ? <FooterLink link={activeSiteConfig.contact.address} /> : null}
+              {activeSiteConfig.contact.openingHours ? <span>{activeSiteConfig.contact.openingHours}</span> : null}
+            </FooterGroup>
+          ) : null}
         </div>
       </div>
 
       <div className="site-footer__bottom content-shell">
-        <span>© {new Date().getFullYear()} Granit Decor, UAB</span>
+        <span>© {new Date().getFullYear()} {activeSiteConfig.identity.legalCopyrightName}</span>
         <div>
-          <Link href="/privatumas">Privatumas</Link>
-          <Link href="/naudojimo-salygos">Naudojimo sąlygos</Link>
+          {activeSiteConfig.footer.legalLinks.map((link) => <FooterLink link={link} key={link.href} />)}
         </div>
         <a className="site-footer__top" href="#turinys">
-          Į viršų ↑
+          {activeSiteConfig.ui.backToTop}
         </a>
       </div>
     </footer>

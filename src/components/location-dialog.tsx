@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { ArrowUpRight, MapPin, X } from "lucide-react";
+import { activeContactConfig } from "@/client/contact";
 
 type LocationDialogProps = {
   open: boolean;
@@ -10,6 +11,7 @@ type LocationDialogProps = {
 
 export function LocationDialog({ open, onOpenChange }: LocationDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const location = activeContactConfig.location;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -19,9 +21,11 @@ export function LocationDialog({ open, onOpenChange }: LocationDialogProps) {
     else if (!open && dialog.open) dialog.close();
   }, [open]);
 
+  if (!location || !activeContactConfig.address) return null;
+
   return (
     <dialog
-      aria-label="Granit Decor vieta"
+      aria-label={location.dialogAriaLabel}
       className="location-dialog"
       ref={dialogRef}
       onCancel={(event) => {
@@ -34,28 +38,31 @@ export function LocationDialog({ open, onOpenChange }: LocationDialogProps) {
       }}
     >
       <div className="location-dialog__panel">
-        <button aria-label="Uždaryti vietos informaciją" type="button" onClick={() => onOpenChange(false)}>
+        <button aria-label={location.closeAriaLabel} type="button" onClick={() => onOpenChange(false)}>
           <X aria-hidden="true" size={21} strokeWidth={1.4} />
         </button>
         <MapPin aria-hidden="true" size={24} strokeWidth={1.25} />
-        <p className="location-dialog__kicker">Dirbtuvės ir konsultacijos</p>
-        <h2>Lentvaris</h2>
+        {location.kicker ? <p className="location-dialog__kicker">{location.kicker}</p> : null}
+        <h2>{location.title}</h2>
         <address>
-          Kęstučio g. 1, Lentvaris
-          <br />
-          I–V 8:00–16:00
+          {location.addressLines.map((line, index) => (
+            <span key={line}>
+              {index > 0 ? <br /> : null}
+              {line}
+            </span>
+          ))}
         </address>
-        <p>Prieš atvykdami susisiekite — pasiruošime aptarti jūsų projektą ir medžiagos pasirinkimą.</p>
+        {location.note ? <p>{location.note}</p> : null}
         <a
           className="button button--primary"
-          href="https://www.google.com/maps/search/?api=1&query=K%C4%99stu%C4%8Dio+g.+1%2C+Lentvaris"
+          href={activeContactConfig.address.href}
           rel="noreferrer"
           target="_blank"
         >
-          Atidaryti žemėlapį <ArrowUpRight aria-hidden="true" size={16} />
+          {location.mapActionLabel} <ArrowUpRight aria-hidden="true" size={16} />
         </a>
         <button className="location-dialog__cancel" type="button" onClick={() => onOpenChange(false)}>
-          Uždaryti
+          {location.closeLabel}
         </button>
       </div>
     </dialog>

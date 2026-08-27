@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { Material } from "@/data/materials";
+import type { Material } from "@/client/materials";
 
 type RelatedMaterialsProps = {
   materials: readonly Material[];

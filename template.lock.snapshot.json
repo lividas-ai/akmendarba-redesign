@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "algorithm": "sha256",
+  "lockVersion": 1,
+  "records": [
+    {
+      "path": "next.config.ts",
+      "bytes": 1459,
+      "sha256": "89cc60c3de653f71f29864a8c9b0fc60106037713780a52ad8c2649379aad79c"
+    },
+    {
+      "path": "public/assets/video/granit-decor-kitchen-orbit-poster.webp",
+      "bytes": 118354,
+      "sha256": "cfb4af39bb2b61f21e9b997ea0ab1f05c87886fd7f7be39d078cf0cafd7b3e19"
+    },
+    {
+      "path": "public/assets/video/granit-decor-kitchen-orbit-v2-desktop-2560.mp4",
+      "bytes": 16447867,
+      "sha256": "dd1b0ecb81d38638ecf36719dfa0e9009a68cc902fd25470672113357ac25494"
+    },
+    {
+      "path": "public/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-810x1440.mp4",
+      "bytes": 10153259,
+      "sha256": "2f80b668a930a3b4b86c093c90eb1b51f7f7b76c13b51e8ec1e2954e4d04503e"
+    },
+    {
+      "path": "public/assets/video/granit-decor-kitchen-orbit-v3-mobile-parity-poster.webp",
+      "bytes": 84298,
+      "sha256": "b28ad35c496f53310e163b4764f4d9648e1b49ba7a40f640e271f1994c4957e7"
+    },
+    {
+      "path": "scripts/check-template-lock.mjs",
+      "bytes": 18807,
+      "sha256": "a473cf3a3f7a1f56935cd7e4da8d262dae5fe15fbf16639741795e9cc73a90e0"
+    },
+    {
+      "path": "src/app/globals.css",
+      "bytes": 4845,
+      "sha256": "1d5bdf52372a1a2c6db495902932665895b0e991bd8172a19c9fc7ae31e4d753"
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "bytes": 2243,
+      "sha256": "e2e7e04c6aaeab175e1ee535b704d9d761917d487ecc8be03453c75ebc5d29a8"
+    },
+    {
+      "path": "src/app/manifest.ts",
+      "bytes": 578,
+      "sha256": "207cfac6b3d3879ac8ed3617b16d7050a91f8222a181a453cb2c03e9be849806"
+    },
+    {
+      "path": "src/app/robots.ts",
+      "bytes": 329,
+      "sha256": "d57f022ee4b54153f6356f2b74ef0a9c647160010bdbb8ae688f401638dec032"
+    },
+    {
+      "path": "src/app/sitemap.ts",
+      "bytes": 836,
+      "sha256": "ca3168f8c3b0374ae23b0fa71e7a72dfec1811f446991d5d1828ad481cb61a36"
+    },
+    {
+      "path": "src/components/button-link.tsx",
+      "bytes": 621,
+      "sha256": "50a3dc206526975aa33fd20059b0942c9604a8523cc0f0d9ead9e6c1a0f9e3a0"
+    },
+    {
+      "path": "src/components/content/page-chrome.tsx",
+      "bytes": 4566,
+      "sha256": "ab1670dc529ab88147d37ca10a6539d3d54fa977fcca2eb2540460817feb65e9"
+    },
+    {
+      "path": "src/components/home-hero-video.tsx",
+      "bytes": 3923,
+      "sha256": "bc65a819e6735a7bd44c54841c279aec8f46b9efcd4152ad965ef01c8a1abe3a"
+    },
+    {
+      "path": "src/components/home-hero.tsx",
+      "bytes": 1910,
+      "sha256": "f69e0a1485f8fbae2ca0e37e35d811d16104646272903ebb98d4451030e7fe37"
+    },
+    {
+      "path": "src/components/location-dialog.tsx",
+      "bytes": 2238,
+      "sha256": "bfcfccea3612236628f2d4b24dbf89f531a70cbfc1665c2f0be2aa575264c17c"
+    },
+    {
+      "path": "src/components/reveal.tsx",
+      "bytes": 1378,
+      "sha256": "1bbbf41d9fa8376e7150e96645cb4553d9a95b560268f26823d79d7c50efb0fa"
+    },
+    {
+      "path": "src/components/route-scroll-reset.tsx",
+      "bytes": 1551,
+      "sha256": "7d8af16ac797f02a2bf28fd223e5b690d7c1d1dc457e38e7df7085e1f775df52"
+    },
+    {
+      "path": "src/components/section-heading.tsx",
+      "bytes": 507,
+      "sha256": "7318cf3ce41e804346cab7ca36068cc3766ed23c11d9c402f6522842cf0972f5"
+    },
+    {
+      "path": "src/components/site-footer.tsx",
+      "bytes": 3595,
+      "sha256": "533b0c6701f4df4b67eddfc552b91deb998e2d366aa7c7cd0879ba10df696531"
+    },
+    {
+      "path": "src/components/site-header.tsx",
+      "bytes": 22771,
+      "sha256": "5dfea7b7d3f6df7a5f02122905a9ded607e5ab88b9d4cf9a3f4c01cc144cc4a8"
+    },
+    {
+      "path": "src/components/wordmark.tsx",
+      "bytes": 863,
+      "sha256": "fc1b25ca932c628d7a0f3f5a9883b6c89f003023f547233ea2f3d382603effe2"
+    },
+    {
+      "path": "src/styles/components.css",
+      "bytes": 60282,
+      "sha256": "9acf5642da5e53e8ac9332a1df01294ec83acce6278ebc7ba9a7a4678af98b22"
+    },
+    {
+      "path": "src/styles/manifest-pages.css",
+      "bytes": 6304,
+      "sha256": "ceec249e66ecf32a509e380718d65e1a7c91272db073c8602f5e6c5ff3d50dad"
+    },
+    {
+      "path": "src/styles/mobile-parity.css",
+      "bytes": 4526,
+      "sha256": "964ae1fa883acb037e23b47f5146037c943b4743334311f4571fc98a6704beec"
+    },
+    {
+      "path": "src/styles/pages.css",
+      "bytes": 33066,
+      "sha256": "3471ea02686e0aad526c5373be24a8ce0169ef8890269ad7b846c61a4d287054"
+    },
+    {
+      "path": "src/styles/showroom.css",
+      "bytes": 1189,
+      "sha256": "0591ec2ba4512e2094f9f798a35214a034c905848e26d55d39bf9860658cf526"
+    },
+    {
+      "path": "src/styles/tokens.css",
+      "bytes": 5450,
+      "sha256": "53ff31c681c2a0eabd99c5d537034c501dea5794a247beda891da8deb63f2863"
+    },
+    {
+      "path": "src/template/client-config.ts",
+      "bytes": 2748,
+      "sha256": "e483601a7755e7b8bcb17bb971b7c45ab86c0436ed90dcb24a07407ace2e56be"
+    },
+    {
+      "path": "src/template/renderers/manifest-page.tsx",
+      "bytes": 11282,
+      "sha256": "6ac0906f2d3c5c75882b53330cb63a0a9e8c35c9a516dd6a212e1467260db5fa"
+    },
+    {
+      "path": "src/template/schema.ts",
+      "bytes": 9016,
+      "sha256": "79493474d5b514e98f41faad276b3cc696855c3e3b078fb68df73f80d9a01aa3"
+    },
+    {
+      "path": "src/template/validate-manifest.ts",
+      "bytes": 22323,
+      "sha256": "f32a92507f7fbea316bcbe47b2681ec949e36ec4b9fa44e8a14e0b9cb37f64a2"
+    },
+    {
+      "path": "template.lock.json",
+      "bytes": 2503,
+      "sha256": "243cf5bdd2ffba248f380577d096e0e5ce64f70d4b343f62cefc088cd069bb0f"
+    },
+    {
+      "path": "template.lock.schema.json",
+      "bytes": 886,
+      "sha256": "954bec2846db8b5688f342c15dd29754a70ac5562edbc926b36de7ce015d5c92"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useMemo, useState } from "react";
-import type { ProjectRecord } from "@/data/content";
+import type { ProjectRecord } from "@/client/content";
 import { Reveal } from "@/components/reveal";
 
 type ProjectArchiveGridProps = {

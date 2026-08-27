@@ -1,4 +1,4 @@
-/* Granit Decor — restrained material modernism. */
+/* Premium template tokens — client identity enters through --client-* values. */
 
 :root {
   color-scheme: light;
@@ -64,7 +64,7 @@
   --mineral-bronze: #9b7759;
 
   /* Semantic color */
-  --color-bg-primary: var(--mineral-chalk);
+  --color-bg-primary: var(--client-background, var(--mineral-chalk));
   --color-bg-secondary: var(--mineral-limestone);
   --color-bg-tertiary: #e2dbd0;
   --color-bg-elevated: #ffffff;
@@ -74,18 +74,18 @@
   --color-text-secondary: #56564f;
   --color-text-tertiary: #74736b;
   --color-text-inverse: #f3efe7;
-  --color-text-link: #6f2a21;
+  --color-text-link: var(--client-accent, #6f2a21);
 
   --color-border-primary: rgba(28, 29, 25, 0.25);
   --color-border-secondary: rgba(28, 29, 25, 0.12);
   --color-border-strong: rgba(28, 29, 25, 0.55);
-  --color-border-focus: #7b3025;
+  --color-border-focus: var(--client-accent, #7b3025);
 
-  --color-accent-primary: var(--mineral-burnished);
-  --color-accent-primary-hover: #68251d;
-  --color-accent-primary-active: #561d17;
+  --color-accent-primary: var(--client-accent, var(--mineral-burnished));
+  --color-accent-primary-hover: color-mix(in srgb, var(--color-accent-primary) 84%, black);
+  --color-accent-primary-active: color-mix(in srgb, var(--color-accent-primary) 72%, black);
   --color-accent-secondary: var(--mineral-bronze);
-  --color-accent-soft: rgba(123, 48, 37, 0.1);
+  --color-accent-soft: color-mix(in srgb, var(--color-accent-primary) 10%, transparent);
 
   --color-status-success: #35634a;
   --color-status-warning: #805d21;
@@ -112,7 +112,7 @@
   --shadow-sm: 0 1px 2px rgba(24, 25, 21, 0.08), 0 8px 24px rgba(24, 25, 21, 0.04);
   --shadow-md: 0 12px 40px rgba(24, 25, 21, 0.11);
   --shadow-lg: 0 28px 80px rgba(24, 25, 21, 0.18);
-  --shadow-focus: 0 0 0 3px rgba(123, 48, 37, 0.28);
+  --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--color-border-focus) 28%, transparent);
 
   /* Motion */
   --duration-instant: 60ms;

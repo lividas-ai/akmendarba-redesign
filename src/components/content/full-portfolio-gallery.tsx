@@ -8,7 +8,7 @@ import {
   portfolioCategories,
   type PortfolioCategorySlug,
   type PortfolioItem,
-} from "@/data/portfolio-gallery";
+} from "@/client/portfolio";
 import styles from "./full-portfolio-gallery.module.css";
 
 type GalleryFilter = PortfolioCategorySlug | "visi";

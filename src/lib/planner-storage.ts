@@ -1,5 +1,7 @@
-export const PLANNER_STORAGE_KEY = "granit-decor-project-plan-v1";
-export const SAVED_MATERIALS_STORAGE_KEY = "granit-decor-saved-v1";
+import { activeBrandConfig } from "@/client/brand";
+
+export const PLANNER_STORAGE_KEY = `${activeBrandConfig.siteId}-project-plan-v1`;
+export const SAVED_MATERIALS_STORAGE_KEY = `${activeBrandConfig.siteId}-saved-v1`;
 export const PLANNER_STORAGE_VERSION = 1 as const;
 
 export type PlannerMode = "editing" | "review";

@@ -20,12 +20,12 @@ import {
   useRef,
   useState,
 } from "react";
-import { materialCategories } from "@/data/content";
+import { materialCategories } from "@/client/content";
 import {
   materials,
   type Material,
   type MaterialCategory,
-} from "@/data/materials";
+} from "@/client/materials";
 import {
   MATERIAL_SAVED_EVENT,
   readSavedMaterials,

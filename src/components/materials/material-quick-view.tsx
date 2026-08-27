@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Columns3, Heart, X } from "lucide-react";
 import { useEffect, useRef } from "react";
-import type { Material } from "@/data/materials";
+import type { Material } from "@/client/materials";
 
 type MaterialQuickViewProps = {
   material: Material | null;

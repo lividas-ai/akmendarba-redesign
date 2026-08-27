@@ -1,17 +1,18 @@
 import type { MetadataRoute } from "next";
+import { activeSiteConfig } from "@/client";
 
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Granit Decor",
-    short_name: "Granit Decor",
-    description: "Individualūs natūralaus akmens gaminiai, projektavimas ir montavimas.",
+    name: activeSiteConfig.identity.name,
+    short_name: activeSiteConfig.pwa.shortName,
+    description: activeSiteConfig.pwa.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#f5f2eb",
-    theme_color: "#7b3025",
-    lang: "lt",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    background_color: activeSiteConfig.brand.background,
+    theme_color: activeSiteConfig.brand.accent,
+    lang: activeSiteConfig.htmlLang,
+    icons: [activeSiteConfig.pwa.icon],
   };
 }

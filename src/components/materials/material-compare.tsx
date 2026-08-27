@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Columns3, X } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
-import type { Material, MaterialCategory } from "@/data/materials";
+import type { Material, MaterialCategory } from "@/client/materials";
 
 type MaterialCompareProps = {
   materials: readonly Material[];

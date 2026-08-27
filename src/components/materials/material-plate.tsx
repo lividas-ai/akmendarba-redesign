@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Columns3, Expand, Heart } from "lucide-react";
-import type { Material } from "@/data/materials";
+import type { Material } from "@/client/materials";
 
 type MaterialPlateProps = {
   material: Material;

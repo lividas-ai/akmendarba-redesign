@@ -1,45 +1,41 @@
 import type { Metadata, Viewport } from "next";
+import type { CSSProperties } from "react";
 import "@fontsource-variable/instrument-sans";
 import "@/styles/tokens.css";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { RouteScrollReset } from "@/components/route-scroll-reset";
+import { activeSiteConfig } from "@/client";
+import { activeSiteManifest } from "@/client/manifest";
+
+void activeSiteManifest;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.granitdecor.lt"),
+  metadataBase: new URL(activeSiteConfig.seo.canonicalUrl),
   title: {
-    default: "Natūralaus akmens gaminiai | Granit Decor",
-    template: "%s | Granit Decor",
+    default: activeSiteConfig.seo.defaultTitle,
+    template: activeSiteConfig.seo.titleTemplate,
   },
-  description:
-    "Granito, marmuro, kvarcito, onikso ir travertino gaminiai pagal individualų projektą. Matavimas, gamyba, pristatymas ir montavimas Lietuvoje.",
-  applicationName: "Granit Decor",
-  category: "architecture",
-  keywords: [
-    "natūralus akmuo",
-    "granitas",
-    "marmuras",
-    "kvarcitas",
-    "akmens stalviršiai",
-    "Granit Decor",
-  ],
+  description: activeSiteConfig.seo.description,
+  applicationName: activeSiteConfig.identity.name,
+  category: activeSiteConfig.seo.category,
+  keywords: [...activeSiteConfig.seo.keywords],
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "Natūralaus akmens gaminiai | Granit Decor",
-    description:
-      "Nuo akmens pasirinkimo ir matavimo iki gamybos, pristatymo bei montavimo.",
-    locale: "lt_LT",
+    title: activeSiteConfig.seo.openGraph.title,
+    description: activeSiteConfig.seo.openGraph.description,
+    locale: activeSiteConfig.seo.openGraph.locale,
     type: "website",
     images: [
       {
-        url: "/assets/portfolio/granit-decor-darbai-dvidesimt-keturi.webp",
-        width: 1920,
-        height: 1280,
-        alt: "Individualiai įrengta virtuvė su akmens sala ir akmens sienos apdaila",
+        url: activeSiteConfig.seo.openGraph.image.src,
+        width: activeSiteConfig.seo.openGraph.image.width,
+        height: activeSiteConfig.seo.openGraph.image.height,
+        alt: activeSiteConfig.seo.openGraph.image.alt,
       },
     ],
   },
@@ -49,16 +45,21 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#f5f2eb",
+  themeColor: activeSiteConfig.brand.background,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const clientTheme = {
+    "--client-accent": activeSiteConfig.brand.accent,
+    "--client-background": activeSiteConfig.brand.background,
+  } as CSSProperties;
+
   return (
-    <html lang="lt" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang={activeSiteConfig.htmlLang} data-scroll-behavior="smooth" style={clientTheme} suppressHydrationWarning>
       <body>
         <RouteScrollReset />
         <a className="skip-link" href="#turinys">
-          Pereiti prie turinio
+          {activeSiteConfig.ui.skipToContent}
         </a>
         <SiteHeader />
         <main id="turinys">{children}</main>
