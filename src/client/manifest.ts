@@ -1,1 +1,1 @@
-export { granitDecorSiteManifest as activeSiteManifest } from "@/client/granit-decor/site-manifest";
+export { akmendarbaSiteManifest as activeSiteManifest } from "@/client/akmendarba/site-manifest";

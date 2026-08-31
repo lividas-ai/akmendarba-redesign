@@ -1,1 +1,2 @@
-export { granitDecorContactConfig as activeContactConfig } from "@/client/granit-decor/contact-config";
+export { akmendarbaContactConfig as activeContactConfig } from "@/client/akmendarba/contact-config";
+export { akmendarbaPublicContacts } from "@/client/akmendarba/contact-config";

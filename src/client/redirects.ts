@@ -1,1 +1,1 @@
-export { granitDecorRedirects as activeRedirects } from "./granit-decor/redirects";
+export { akmendarbaRedirects as activeRedirects } from "./akmendarba/redirects";

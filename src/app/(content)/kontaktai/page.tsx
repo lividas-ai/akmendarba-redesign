@@ -1,136 +1,90 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Clock3, Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
-import { ContactDemoForm } from "@/components/content/contact-demo-form";
-import { EditorialHero } from "@/components/content/page-chrome";
+import { ArrowLeft, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { activeBrandConfig } from "@/client/brand";
-import { activeContactConfig } from "@/client/contact";
-
-function isPresent<T>(value: T | null | undefined): value is T {
-  return value !== null && value !== undefined;
-}
-
-const contactDescription = [
-  activeContactConfig.phone?.display,
-  activeContactConfig.email?.display,
-  activeContactConfig.address?.label,
-  activeContactConfig.openingHours,
-].filter(isPresent).join(", ");
 
 export const metadata: Metadata = {
   title: "Kontaktai",
-  description: `Susisiekite su ${activeBrandConfig.identity.name}${contactDescription ? `: ${contactDescription}` : ""}.`,
+  description: "Akmendarba kontaktai, gamybos adresas Einoraičiuose ir paminklų pardavimo aikštelė Šiauliuose.",
 };
-
-type ContactDetail = {
-  label: string;
-  value: string;
-  href: string | null;
-  Icon: LucideIcon;
-};
-
-const contactDetails: ContactDetail[] = [];
-
-if (activeContactConfig.phone) {
-  contactDetails.push({
-    label: "Telefonas",
-    value: activeContactConfig.phone.display,
-    href: activeContactConfig.phone.href,
-    Icon: Phone,
-  });
-}
-
-if (activeContactConfig.email) {
-  contactDetails.push({
-    label: "El. paštas",
-    value: activeContactConfig.email.display,
-    href: activeContactConfig.email.href,
-    Icon: Mail,
-  });
-}
-
-if (activeContactConfig.address) {
-  contactDetails.push({
-    label: "Dirbtuvės",
-    value: activeContactConfig.address.label,
-    href: activeContactConfig.address.href,
-    Icon: MapPin,
-  });
-}
-
-if (activeContactConfig.openingHours) {
-  contactDetails.push({
-    label: "Darbo laikas",
-    value: activeContactConfig.openingHours,
-    href: null,
-    Icon: Clock3,
-  });
-}
 
 export default function ContactPage() {
   return (
     <>
-      <EditorialHero
-        breadcrumbs={[{ label: "Kontaktai" }]}
-        eyebrow="Kontaktai"
-        folio={activeContactConfig.location?.shortLabel}
-        tone="clay"
-        title="Susisiekite dėl savo projekto."
-        body="Paskambinkite, parašykite arba atsiųskite trumpą užklausą su gaminio tipu, apytikriais matmenimis ir turima vaizdine medžiaga."
-      />
-
-      <section className="contact-details section" aria-labelledby="contact-details-title">
-        <div className="content-shell contact-details__grid">
-          <Reveal className="contact-details__heading">
-            <h2 id="contact-details-title">Telefonas, el. paštas ir dirbtuvės.</h2>
-            <p>
-              Prieš atvykdami susisiekite, kad galėtume skirti laiko jūsų projektui.
-            </p>
-          </Reveal>
-          <address className="contact-details__list">
-            {contactDetails.map(({ label, value, href, Icon }, index) => (
-              <Reveal delay={index * 0.055} key={label}>
-                {href ? (
-                  <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>
-                    <Icon aria-hidden="true" size={21} strokeWidth={1.45} />
-                    <span>
-                      <small>{label}</small>
-                      <strong>{value}</strong>
-                    </span>
-                    <ArrowUpRight aria-hidden="true" size={19} strokeWidth={1.45} />
-                  </a>
-                ) : (
-                  <div>
-                    <Icon aria-hidden="true" size={21} strokeWidth={1.45} />
-                    <span>
-                      <small>{label}</small>
-                      <strong>{value}</strong>
-                    </span>
-                  </div>
-                )}
-              </Reveal>
-            ))}
-          </address>
-        </div>
-      </section>
-
-      <section className="contact-form-section section section--inverse" aria-label="Užklausos forma">
-        <div className="content-shell">
-          <ContactDemoForm />
-        </div>
-      </section>
-
-      <section className="contact-note section" aria-labelledby="contact-note-title">
-        <div className="reading-shell">
+      <section className="ak-index-hero ak-index-hero--contact" aria-labelledby="ak-contact-page-title">
+        <div className="content-shell ak-index-hero__inner">
+          <Link className="ak-back-link" href="/"><ArrowLeft aria-hidden="true" size={15} strokeWidth={1.4} /> Pradžia</Link>
           <Reveal>
-            <h2 id="contact-note-title">Pradėkite nuo gaminio, ne nuo akmens pavadinimo.</h2>
-            <p>
-              Parašykite, ką norite pagaminti, ir pridėkite turimą eskizą, brėžinį ar nuotraukas. Patikusius akmens variantus galite išsaugoti projekto plane.
-            </p>
-            <Link className="text-link" href="/akmuo">
-              Peržiūrėti akmens kolekciją <ArrowUpRight aria-hidden="true" size={16} />
-            </Link>
+            <p className="ak-kicker">Susisiekite</p>
+            <h1 id="ak-contact-page-title">Kontaktai.</h1>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="ak-contact-page ak-section" aria-label="Akmendarba kontaktinė informacija">
+        <div className="content-shell ak-contact-page__grid">
+          <div className="ak-contact-page__primary">
+            <Reveal className="ak-contact-block">
+              <p className="ak-kicker">Informacija ir užsakymai</p>
+              <a className="ak-contact-block__lead" href="tel:+37067716667">+370 677 16667 <Phone aria-hidden="true" size={22} strokeWidth={1.3} /></a>
+              <a className="ak-contact-block__lead" href="mailto:info@akmendarba.lt">info@akmendarba.lt <Mail aria-hidden="true" size={22} strokeWidth={1.3} /></a>
+            </Reveal>
+
+            <Reveal className="ak-contact-block" delay={0.07}>
+              <p className="ak-kicker">Atsakingi asmenys</p>
+              <div className="ak-person">
+                <div><strong>Sigitas Karlinskas</strong><span>Direktorius</span></div>
+                <a href="tel:+37069877919">+370 698 77919</a>
+              </div>
+              <div className="ak-person">
+                <div><strong>Laura Bendikaitė</strong><span>Gamybos vadovas</span></div>
+                <a href="tel:+37067716667">+370 677 16667</a>
+              </div>
+              <a className="ak-text-link" href="mailto:jonas@akmendarba.lt">jonas@akmendarba.lt <ArrowUpRight aria-hidden="true" size={16} /></a>
+            </Reveal>
+          </div>
+
+          <div className="ak-contact-page__secondary">
+            <Reveal className="ak-address-card">
+              <MapPin aria-hidden="true" size={21} strokeWidth={1.35} />
+              <div><p className="ak-kicker">Gamyba</p><h2>Saulėtekio g. 47</h2><p>Einoraičių kaimas, Šiaulių rajonas<br />LT-80141</p></div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Saul%C4%97tekio+g.+47,+Einorai%C4%8Diai" target="_blank" rel="noreferrer">Atverti žemėlapį <ArrowUpRight aria-hidden="true" size={16} /></a>
+            </Reveal>
+            <Reveal className="ak-address-card" delay={0.08}>
+              <MapPin aria-hidden="true" size={21} strokeWidth={1.35} />
+              <div><p className="ak-kicker">Paminklų pardavimo aikštelė</p><h2>Tilžės g. 234</h2><p>Šiauliai</p></div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Til%C5%BE%C4%97s+g.+234,+%C5%A0iauliai" target="_blank" rel="noreferrer">Atverti žemėlapį <ArrowUpRight aria-hidden="true" size={16} /></a>
+            </Reveal>
+          </div>
+        </div>
+
+        <div className="content-shell ak-map">
+          <iframe
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Saul%C4%97tekio%20g.%2047%2C%20Einorai%C4%8Diai%2C%20%C5%A0iauli%C5%B3%20r.&output=embed"
+            title="Akmendarba gamybos vieta Einoraičiuose"
+          />
+        </div>
+      </section>
+
+      <section className="ak-company-details ak-section ak-section--dark" aria-labelledby="ak-company-title">
+        <div className="content-shell ak-company-details__grid">
+          <Reveal><p className="ak-kicker">Rekvizitai</p><h2 id="ak-company-title">Akmendarba, UAB</h2></Reveal>
+          <Reveal className="ak-company-details__list" delay={0.08}>
+            <dl>
+              <div><dt>Įmonės kodas</dt><dd>300526494</dd></div>
+              <div><dt>PVM mokėtojo kodas</dt><dd>100002337416</dd></div>
+              <div><dt>Atsiskaitomoji sąskaita</dt><dd>LT 597300010093304943</dd></div>
+              <div><dt>Bankas</dt><dd>Swedbank</dd></div>
+              <div><dt>Banko kodas</dt><dd>7300</dd></div>
+              <div><dt>S.W.I.F.T.</dt><dd>HABALT 22</dd></div>
+            </dl>
+            <div className="ak-social-links">
+              <a href="https://www.facebook.com/akmendarba.granitas/" target="_blank" rel="noreferrer">Facebook <ArrowUpRight aria-hidden="true" size={16} /></a>
+              <a href="https://www.instagram.com/akmendarba/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight aria-hidden="true" size={16} /></a>
+            </div>
           </Reveal>
         </div>
       </section>

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "goldenMaster": {
+    "absolutePath": "/Users/linas/.codex/.chatgpt-projects/g-p-6a7d9b2bc5f08191833a1f25a2d3d195/premium-business-template",
+    "commit": "ee78a1688b198e2438be37b95ee62fcb32fb643b",
+    "branch": "codex/reusable-template",
+    "lockCheck": {
+      "command": "CI=true pnpm check:lock",
+      "status": "passed"
+    },
+    "lockChecksums": {
+      "template.lock.json": "243cf5bdd2ffba248f380577d096e0e5ce64f70d4b343f62cefc088cd069bb0f",
+      "template.lock.snapshot.json": "36b0a72346ee813368da7bd7a14cf372351e58e98f774da5b212a1070ada5390"
+    }
+  },
+  "destination": {
+    "absolutePath": "/Users/linas/.codex/.chatgpt-projects/g-p-6a7d9b2bc5f08191833a1f25a2d3d195/akmendarba-lt",
+    "branch": "codex/client-akmendarba-lt"
+  },
+  "createdAt": "2026-08-31T11:41:00Z"
+}

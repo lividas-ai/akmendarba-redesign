@@ -1,222 +1,139 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { HomeHero } from "@/components/home-hero";
+import "@/styles/content-pages.css";
+import { CookieNotice } from "@/components/content/akmendarba/cookie-notice";
+import { AkmendarbaHeroFilm } from "@/components/content/akmendarba/hero-film";
 import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
-import { ButtonLink } from "@/components/button-link";
-import { applications, processSteps, projects, siteCopy } from "@/client/content";
-import { materials } from "@/client/materials";
-
-const materialSequence = [
-  "patagonia",
-  "calacatta-paonazzo",
-  "portoro-oro",
-  "via-lattea",
-  "orange-onyx",
-];
+import {
+  akmendarbaServices,
+  homeGalleryPreview,
+  homeIntroduction,
+  manufacturingParagraphs,
+} from "@/content/akmendarba";
 
 export default function HomePage() {
-  const selectedMaterials = materialSequence
-    .map((slug) => materials.find((material) => material.slug === slug))
-    .filter((material) => material !== undefined);
-  const featuredApplications = applications.filter((application) => application.featured);
-  const featuredProjects = projects.filter((project) => project.featured);
-
   return (
     <>
-      <HomeHero />
+      <AkmendarbaHeroFilm />
 
-      <section className="home-applications section" aria-labelledby="applications-title">
-        <div className="content-shell">
+      <section className="ak-intro ak-section" aria-labelledby="ak-intro-title">
+        <div className="content-shell ak-intro__grid">
           <Reveal>
-            <SectionHeading
-              align="split"
-              eyebrow="Gaminiai"
-              id="applications-title"
-              title="Gaminiai pagal erdvę ir paskirtį."
-            />
+            <p className="ak-kicker">Natūralus akmuo</p>
+            <h2 id="ak-intro-title">Medžiaga, kuri išlieka.</h2>
           </Reveal>
-
-          <div className="application-grid">
-            {featuredApplications.map((application, index) => (
-              <Reveal className={`application-grid__item application-grid__item--${index + 1}`} delay={(index % 3) * 0.08} key={application.id}>
-                <Link className="application-card" href={application.href}>
-                  <Image
-                    src={application.image.src}
-                    alt={application.image.alt}
-                    fill
-                    sizes={index === 0 ? "(min-width: 768px) 60vw, 68vw" : "(min-width: 768px) 36vw, 68vw"}
-                  />
-                  <span className="application-card__content">
-                    <strong>{application.shortTitle}</strong>
-                  </span>
-                  <span className="application-card__arrow" aria-hidden="true">
-                    <ArrowUpRight size={20} strokeWidth={1.5} />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="home-applications__footer">
-            <ButtonLink href="/gaminiai" variant="secondary">
-              Visi gaminiai
-            </ButtonLink>
-          </div>
+          <Reveal className="ak-intro__body" delay={0.08}>
+            <p>{homeIntroduction}</p>
+            <Link className="ak-text-link" href="/apie-mus">
+              Apie Akmendarba <ArrowRight aria-hidden="true" size={16} strokeWidth={1.4} />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
-      <section className="home-materials section section--inverse" aria-labelledby="materials-title">
+      <section className="ak-services ak-section" id="paslaugos" aria-labelledby="ak-services-title">
         <div className="content-shell">
-          <Reveal>
-            <SectionHeading
-              align="split"
-              eyebrow="Akmuo"
-              id="materials-title"
-              title="Natūralaus akmens rūšys ir raštai."
-            />
-          </Reveal>
-        </div>
-
-        <div className="material-stage page-shell">
-          {selectedMaterials.map((material, index) => (
-            <Reveal className={`material-stage__item material-stage__item--${index + 1}`} delay={index * 0.055} key={material.slug} y={18}>
-              <Link className="material-editorial-card" href={`/akmuo/${material.slug}`}>
-                <Image src={material.localPath} alt={`${material.name} akmens paviršius`} fill sizes="(min-width: 1024px) 28vw, 62vw" />
-                <span className="material-editorial-card__meta">
-                  <strong>{material.name}</strong>
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="content-shell home-materials__footer">
-          <p>
-            Natūralaus akmens raštas ir tonas gali skirtis nuo katalogo nuotraukos. Galutinį pasirinkimą derinkite pagal konkrečią plokštę ir projektą.
-          </p>
-          <ButtonLink href="/akmuo" variant="inverse">
-            Visa akmens kolekcija
-          </ButtonLink>
-        </div>
-      </section>
-
-      <section className="home-projects section" aria-labelledby="projects-title">
-        <div className="content-shell">
-          <Reveal>
-            <SectionHeading
-              align="split"
-              eyebrow="Projektai"
-              id="projects-title"
-              title="Atlikti darbai realiose erdvėse."
-            />
+          <Reveal className="ak-section-heading">
+            <div>
+              <p className="ak-kicker">Produkcija</p>
+              <h2 id="ak-services-title">Ką gaminame.</h2>
+            </div>
+            <Link className="ak-text-link" href="/galerija">
+              Visa galerija <ArrowRight aria-hidden="true" size={16} strokeWidth={1.4} />
+            </Link>
           </Reveal>
 
-          <div className="project-editorial-grid">
-            {featuredProjects.map((project, index) => (
-              <Reveal className={`project-editorial-grid__item project-editorial-grid__item--${index + 1}`} key={project.id} delay={index * 0.09}>
-                <Link className="project-editorial-card" href={`/projektai/${project.slug}`}>
+          <div className="ak-service-grid">
+            {akmendarbaServices.map((service, index) => (
+              <Reveal className="ak-service-grid__item" delay={(index % 2) * 0.08} key={service.slug}>
+                <Link className="ak-service-card" href={`/${service.slug}`}>
                   <figure>
                     <Image
-                      src={project.image.src}
-                      alt={project.image.alt}
+                      alt={service.heroAlt}
                       fill
-                      sizes={index === 0 ? "(min-width: 768px) 62vw, 74vw" : "(min-width: 768px) 32vw, 74vw"}
+                      sizes="(min-width: 64rem) 50vw, 100vw"
+                      src={service.cardImage}
                     />
                   </figure>
                   <div>
-                    <h3>{project.displayLabel}</h3>
-                    <ArrowUpRight aria-hidden="true" size={20} strokeWidth={1.5} />
+                    <h3>{service.shortTitle}</h3>
+                    <ArrowUpRight aria-hidden="true" size={21} strokeWidth={1.35} />
                   </div>
                 </Link>
               </Reveal>
             ))}
           </div>
-
-          <div className="home-projects__link-row">
-            <ButtonLink href="/projektai" variant="secondary">
-              Peržiūrėti projektus
-            </ButtonLink>
-          </div>
         </div>
       </section>
 
-      <section className="home-process section" aria-labelledby="process-title">
-        <div className="content-shell home-process__layout">
-          <div className="home-process__visual">
-            <Reveal>
-              <figure>
-                <Image
-                  src="/assets/portfolio/granit-decor-darbai-septyniolika.webp"
-                  alt="Tamsaus natūralaus akmens virtuvės stalviršio detalė"
-                  fill
-                  sizes="(min-width: 1024px) 38vw, 100vw"
-                />
-              </figure>
-            </Reveal>
-          </div>
-
-          <div className="home-process__content">
-            <Reveal>
-              <h2 className="display-title" id="process-title">
-                Nuo projekto iki montavimo.
-              </h2>
-            </Reveal>
-            <ol className="process-list">
-              {processSteps.map((step, index) => (
-                <Reveal delay={index * 0.045} key={step.id}>
-                  <li>
-                    <div>
-                      <h3>{step.title}</h3>
-                      <p>{step.description}</p>
-                    </div>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
-            <ButtonLink href="/kaip-dirbame" variant="secondary">
-              Kaip dirbame
-            </ButtonLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-professionals page-shell" aria-labelledby="professionals-title">
-        <figure className="home-professionals__media">
-          <Image
-            src="/assets/portfolio/granit-decor-darbai-devyni.webp"
-            alt="Atviro plano interjeras su Granit Decor akmens paviršiais"
-            fill
-            sizes="100vw"
-          />
-        </figure>
-        <div className="home-professionals__overlay" />
-        <div className="home-professionals__content content-shell">
+      <section className="ak-making ak-section ak-section--dark" aria-labelledby="ak-making-title">
+        <div className="page-shell ak-making__media">
           <Reveal>
-            <h2 id="professionals-title">{siteCopy.professionals.title}</h2>
-            <p>{siteCopy.professionals.body}</p>
-            <ButtonLink href="/profesionalams" variant="inverse">
-              Aptarti bendradarbiavimą
-            </ButtonLink>
+            <figure>
+              <Image
+                alt="Granito plokštės pjovimas Akmendarba gamyboje"
+                fill
+                sizes="(min-width: 64rem) 52vw, 100vw"
+                src="/client/akmendarba/source/10.jpg"
+              />
+            </figure>
           </Reveal>
         </div>
+        <div className="content-shell ak-making__content">
+          <Reveal>
+            <p className="ak-kicker">Gaminame patys</p>
+            <h2 id="ak-making-title">Nuo granito bloko iki sumontuoto gaminio.</h2>
+          </Reveal>
+          <div className="ak-making__copy">
+            {manufacturingParagraphs.map((paragraph, index) => (
+              <Reveal delay={index * 0.07} key={paragraph}>
+                <p>{paragraph}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="home-final section" aria-labelledby="final-title">
-        <div className="content-shell home-final__layout">
-          <Reveal>
-            <h2 id="final-title">Aptarkime jūsų projektą.</h2>
+      <section className="ak-work ak-section" aria-labelledby="ak-work-title">
+        <div className="content-shell">
+          <Reveal className="ak-section-heading">
+            <div>
+              <p className="ak-kicker">Atlikti darbai</p>
+              <h2 id="ak-work-title">Darbų galerija.</h2>
+            </div>
+            <Link className="ak-button ak-button--outline" href="/galerija">
+              Peržiūrėti galeriją <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.4} />
+            </Link>
           </Reveal>
-          <Reveal className="home-final__action" delay={0.12}>
-            <p>{siteCopy.finalCallToAction.body}</p>
-            <Link className="home-final__circle" href="/projektas" aria-label="Pradėti projekto planą">
-              <span>Pradėti projektą</span>
-              <ArrowRight aria-hidden="true" size={18} strokeWidth={1.5} />
+        </div>
+
+        <div className="page-shell ak-work__rail">
+          {homeGalleryPreview.map((item, index) => (
+            <Reveal className="ak-work__item" delay={index * 0.06} key={item.src}>
+              <Link href="/galerija" aria-label="Atverti darbų galeriją">
+                <Image alt={item.alt} fill sizes="(min-width: 64rem) 28vw, 76vw" src={item.src} />
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="ak-contact-cta ak-section" aria-labelledby="ak-contact-title">
+        <div className="content-shell ak-contact-cta__grid">
+          <Reveal>
+            <p className="ak-kicker">Šiauliai · Visa Lietuva</p>
+            <h2 id="ak-contact-title">Aptarkime jūsų darbą.</h2>
+          </Reveal>
+          <Reveal className="ak-contact-cta__action" delay={0.1}>
+            <p>Susisiekite dėl paminklo, kapo dengimo, akmens aksesuarų ar apdailos.</p>
+            <Link className="ak-button ak-button--light" href="/kontaktai">
+              Kontaktai <ArrowRight aria-hidden="true" size={17} strokeWidth={1.4} />
             </Link>
           </Reveal>
         </div>
       </section>
+      <CookieNotice />
     </>
   );
 }

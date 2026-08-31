@@ -1,1 +1,1 @@
-export * from "@/client/granit-decor/data/materials";
+export * from "@/client/akmendarba/data/materials";

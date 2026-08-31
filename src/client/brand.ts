@@ -1,1 +1,1 @@
-export { granitDecorBrandConfig as activeBrandConfig } from "@/client/granit-decor/brand-config";
+export { akmendarbaBrandConfig as activeBrandConfig } from "@/client/akmendarba/brand-config";

@@ -1,1 +1,1 @@
-export * from "@/client/granit-decor/data/mega-navigation";
+export * from "@/client/akmendarba/data/navigation";

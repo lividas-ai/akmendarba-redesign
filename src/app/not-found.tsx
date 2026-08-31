@@ -13,8 +13,8 @@ export default function NotFound() {
         <Link className="button button--primary" href="/">
           Grįžti į pradžią <ArrowUpRight aria-hidden="true" size={17} />
         </Link>
-        <Link className="button button--ghost" href="/akmuo">
-          Akmens kolekcija
+        <Link className="button button--ghost" href="/galerija">
+          Darbų galerija
         </Link>
       </div>
     </section>

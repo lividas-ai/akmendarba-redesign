@@ -1,110 +1,69 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { applications, materialCategories } from "@/client/content";
-import { EditorialCta, EditorialHero, ImageSpread } from "@/components/content/page-chrome";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { aboutParagraphs } from "@/content/akmendarba";
 
 export const metadata: Metadata = {
-  title: "Natūralaus akmens dirbtuvės",
-  description:
-    "Granit Decor natūralaus akmens dirbtuvės Lentvaryje. Individualių akmens gaminių projektavimas, gamyba, pristatymas ir montavimas.",
+  title: "Apie mus",
+  description: "Akmendarba akmens apdirbimo gamyba Einoraičių kaime, netoli Šiaulių.",
 };
-
-const principles = [
-  {
-    title: "Vertinti visą plokštę",
-    body: "Mažas pavyzdys parodo atspalvį, bet ne visą raštą. Gaminio kompoziciją planuojame pagal didesnį plokštės vaizdą.",
-  },
-  {
-    title: "Tikslinti prieš gamybą",
-    body: "Matmenis, išpjovas, kraštus ir jungtis suderiname prieš pjaunant medžiagą.",
-  },
-  {
-    title: "Kalbėti apie priežiūrą atvirai",
-    body: "Naudojimą ir priežiūrą aptariame pagal pasirinktą akmenį, apdailą ir vietą.",
-  },
-] as const;
 
 export default function AboutPage() {
   return (
     <>
-      <EditorialHero
-        breadcrumbs={[{ label: "Apie mus" }]}
-        eyebrow="Granit Decor"
-        folio="Lentvaris"
-        title="Natūralaus akmens gamyba Lentvaryje."
-        body="Projektuojame ir gaminame individualius akmens gaminius, atliekame matavimą, pristatymą ir montavimą."
-        image="/assets/portfolio/granit-decor-darbai-dvidesimt-vienas.webp"
-        imageAlt="Granit Decor pagamintas natūralaus akmens sprendimas interjere."
-        imageRatio="landscape"
-        caption="Granit Decor darbų archyvas · individuali akmens detalė"
-      />
-
-      <section className="about-intro section" aria-labelledby="about-intro-title">
-        <div className="content-shell about-intro__grid">
-          <Reveal>
-            <h2 id="about-intro-title">Sprendimą deriname pagal erdvę, matmenis ir naudojimą.</h2>
+      <section className="ak-page-hero ak-page-hero--split ak-about-hero" aria-labelledby="ak-about-title">
+        <div className="content-shell ak-page-hero__breadcrumbs">
+          <Link href="/"><ArrowLeft aria-hidden="true" size={15} strokeWidth={1.4} /> Pradžia</Link>
+        </div>
+        <div className="page-shell ak-page-hero__grid">
+          <Reveal className="ak-page-hero__copy">
+            <p className="ak-kicker">Apie Akmendarba</p>
+            <h1 id="ak-about-title">Akmenį apdirbame netoli Šiaulių.</h1>
+            <p>Einoraičių kaime įsikūrusioje gamyboje dirbame su granito blokais, plokštėmis ir marmuro gaminiais.</p>
           </Reveal>
-          <Reveal className="about-intro__copy" delay={0.08}>
-            <p>
-              Dirbame su {materialCategories.map((category) => category.name.toLocaleLowerCase("lt-LT")).join(", ")}. Kiekvieną plokštę vertiname atskirai, nes jos raštas ir tonas gali skirtis.
-            </p>
+          <Reveal className="ak-page-hero__media" delay={0.08}>
+            <figure>
+              <Image
+                alt="Akmendarba gamybinis pastatas Einoraičių kaime"
+                fill
+                priority
+                sizes="(min-width: 64rem) 56vw, 100vw"
+                src="/client/akmendarba/source/pastatas-2.jpg"
+              />
+            </figure>
           </Reveal>
         </div>
       </section>
 
-      <ImageSpread
-        primary={{
-          src: "/assets/portfolio/granit-decor-darbai-dvidesimt-astuoni.webp",
-          alt: "Interjeras su didelio formato natūralaus akmens sienos apdaila.",
-          caption: "Akmuo erdvėje · darbų archyvas",
-        }}
-        secondary={{
-          src: "/assets/portfolio/granit-decor-darbai-trisdesimt-vienas.webp",
-          alt: "Granit Decor natūralaus akmens sprendimas vonios erdvėje.",
-          caption: "Detalės mastelis · darbų archyvas",
-        }}
-      />
-
-      <section className="about-principles section section--inverse" aria-labelledby="about-principles-title">
-        <div className="content-shell about-principles__heading">
+      <section className="ak-about-copy ak-section" aria-labelledby="ak-about-copy-title">
+        <div className="content-shell ak-about-copy__grid">
           <Reveal>
-            <h2 id="about-principles-title">Kaip priimame gamybos sprendimus.</h2>
+            <p className="ak-kicker">Patirtis ir gamyba</p>
+            <h2 id="ak-about-copy-title">Akmuo, technologijos ir meistrystė.</h2>
           </Reveal>
-        </div>
-        <div className="content-shell about-principles__grid">
-          {principles.map((principle, index) => (
-            <Reveal delay={index * 0.07} key={principle.title}>
-              <article>
-                <h3>{principle.title}</h3>
-                <p>{principle.body}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="about-scope section" aria-labelledby="about-scope-title">
-        <div className="content-shell about-scope__grid">
-          <Reveal>
-            <h2 id="about-scope-title">Ką gaminame.</h2>
-          </Reveal>
-          <ol>
-            {applications.map((application, index) => (
-              <Reveal delay={index * 0.045} key={application.id}>
-                <li>
-                  <Link href={application.href}>{application.title}</Link>
-                </li>
-              </Reveal>
+          <div className="ak-about-copy__body">
+            {aboutParagraphs.map((paragraph, index) => (
+              <Reveal delay={index * 0.07} key={paragraph}><p>{paragraph}</p></Reveal>
             ))}
-          </ol>
+          </div>
+        </div>
+        <div className="content-shell ak-about-facts" aria-label="Akmendarba faktai">
+          <Reveal><strong>Daugiau kaip 20</strong><span>akmens apdirbimo staklių</span></Reveal>
+          <Reveal delay={0.08}><strong>3 km</strong><span>nuo Šiaulių</span></Reveal>
         </div>
       </section>
 
-      <EditorialCta
-        title="Aptarkite savo projektą."
-        body="Atsiųskite erdvės nuotrauką, eskizą ar brėžinį ir nurodykite, kokį gaminį planuojate."
-      />
+      <section className="ak-contact-cta ak-section" aria-labelledby="ak-about-contact-title">
+        <div className="content-shell ak-contact-cta__grid">
+          <Reveal><p className="ak-kicker">Kontaktai</p><h2 id="ak-about-contact-title">Raskite mus Einoraičiuose.</h2></Reveal>
+          <Reveal className="ak-contact-cta__action" delay={0.1}>
+            <p>Saulėtekio g. 47, Einoraičių kaimas, Šiaulių rajonas.</p>
+            <Link className="ak-button ak-button--light" href="/kontaktai">Visi kontaktai <ArrowRight aria-hidden="true" size={17} strokeWidth={1.4} /></Link>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }
