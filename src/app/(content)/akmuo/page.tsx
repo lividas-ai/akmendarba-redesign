@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { MaterialExplorer } from "@/components/materials/material-explorer";
 
 export const metadata: Metadata = {
-  title: "Granito ir marmuro pasirinkimas",
+  title: "Akmens ir atliktų darbų pasirinkimas",
   description:
-    "Peržiūrėkite Akmendarba viešai pristatomas granito ir marmuro kryptis, išsaugokite pasirinkimą ir palyginkite abu šaltinio vaizdus.",
+    "Peržiūrėkite visus Akmendarba viešai rodomus akmens, gamybos ir atliktų darbų pavyzdžius, išsaugokite pasirinkimus ir palyginkite iki trijų.",
 };
 
 export default function MaterialsPage() {

@@ -62,6 +62,13 @@ const sources = [
     title: "Client request: contact form, saved stones and stone comparison",
     receivedAt: "2026-09-02T10:00:00+03:00",
   },
+  {
+    id: "source-client-complete-stone-selection-2026-09-02",
+    kind: "client-input" as const,
+    artifactId: "codex-thread-2026-09-02-complete-akmendarba-stone-selector",
+    title: "Client request: include every publicly visible Akmendarba stone and finished-work reference",
+    receivedAt: "2026-09-02",
+  },
 ] satisfies readonly SourceRecord[];
 
 const numberedFiles = (prefix: string, count: number) =>
@@ -452,9 +459,9 @@ const pages: readonly PageRecord[] = [
     ],
     seo: {
       title: clientText("Akmens pasirinkimas | Akmendarba", evidence("source-client-enhancements-2026-09-02")),
-      description: sourceText(
-        "Granito ir marmuro pasirinkimas Akmendarba gaminiams.",
-        evidence("source-about", "Apie mus"),
+      description: clientText(
+        "Akmendarba viešai skelbiamų akmens ir atliktų darbų pavyzdžių pasirinkimas.",
+        evidence("source-client-complete-stone-selection-2026-09-02"),
       ),
     },
     parity: pendingParity(),
@@ -588,13 +595,30 @@ const functions = [
     type: "selector" as const,
     implementationKey: "akmendarba.material-selector",
     config: {
-      experience: "Source-backed stone selection",
-      sourceBackedCategories: ["Granitas", "Marmuras"],
+      experience: "Source-backed stone and finished-work reference selection",
+      sourceBackedCollections: [
+        { id: "home-stone-production", label: "Medžiagos ir gamybos vaizdai", count: 6 },
+        { id: "one-piece-monuments", label: "Vienos dalies paminklų pavyzdžiai", count: 16 },
+        { id: "multi-piece-monuments", label: "Kelių dalių paminklų pavyzdžiai", count: 64 },
+        { id: "grave-coverings", label: "Kapo dengimų pavyzdžiai", count: 27 },
+        { id: "accessories", label: "Akmens aksesuarų pavyzdžiai", count: 19 },
+        { id: "finishing", label: "Akmens apdailos pavyzdžiai", count: 5 },
+      ],
+      publishedReferenceCount: 137,
       capabilities: ["saved-items", "comparison"],
       persistence: "Browser localStorage only",
-      comparisonMaximum: 2,
+      comparisonMaximum: 3,
+      catalogueBoundary: "These are source-visible visual references and finished-work examples, not named stock items. Exact stone and availability must be confirmed directly with Akmendarba.",
     },
-    evidence: evidence("source-client-enhancements-2026-09-02"),
+    evidence: [
+      { sourceId: "source-client-complete-stone-selection-2026-09-02" },
+      { sourceId: "source-home", locator: "active homepage stone and production visuals" },
+      { sourceId: "source-gallery-monuments", locator: "publicly rendered gallery images" },
+      { sourceId: "source-grave-coverings", locator: "publicly rendered representative image" },
+      { sourceId: "source-gallery-grave-coverings", locator: "publicly rendered page and gallery images" },
+      { sourceId: "source-gallery-accessories", locator: "publicly rendered gallery images" },
+      { sourceId: "source-gallery-finishing", locator: "publicly rendered gallery images" },
+    ],
     publication: "published" as const,
     testFixtureIds: ["fixture-material-save", "fixture-material-compare"] as const,
     parity: pendingParity(),
@@ -604,8 +628,8 @@ const functions = [
       capabilityId: "capability-material-selection",
       kind: "selection" as const,
       execution: "local" as const,
-      label: clientText("Akmens išsaugojimas ir palyginimas", evidence("source-client-enhancements-2026-09-02")),
-      evidence: evidence("source-client-enhancements-2026-09-02"),
+      label: clientText("Akmens išsaugojimas ir palyginimas", evidence("source-client-complete-stone-selection-2026-09-02")),
+      evidence: evidence("source-client-complete-stone-selection-2026-09-02"),
     },
   },
   {
@@ -640,6 +664,7 @@ const pageBySourceId = new Map<string, string>([
   ["source-cookies-lt", "page-cookies-lt"],
   ["source-cookie-policy", "page-cookie-policy"],
   ["source-client-enhancements-2026-09-02", "page-materials"],
+  ["source-client-complete-stone-selection-2026-09-02", "page-materials"],
 ]);
 
 export const akmendarbaSiteManifest = {
@@ -664,6 +689,11 @@ export const akmendarbaSiteManifest = {
           { kind: "function" as const, id: "function-contact-enquiry" },
           { kind: "function" as const, id: "function-material-selector" },
         ]
+      : source.id === "source-client-complete-stone-selection-2026-09-02"
+        ? [
+            { kind: "page" as const, id: "page-materials" },
+            { kind: "function" as const, id: "function-material-selector" },
+          ]
       : [{ kind: "page" as const, id: pageBySourceId.get(source.id)! }],
     reviewedAt,
     note: source.id === "source-home"

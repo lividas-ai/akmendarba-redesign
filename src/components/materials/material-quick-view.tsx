@@ -69,7 +69,7 @@ export function MaterialQuickView({
 
           <figure className="material-quick-view__visual">
             <Image
-              alt={`Akmendarba pristatomo akmens vaizdas: ${material.name}`}
+              alt={material.alt}
               fill
               sizes="(min-width: 64rem) 62vw, 100vw"
               src={material.localPath}
@@ -107,12 +107,12 @@ export function MaterialQuickView({
 
             <div className="material-quick-view__links">
               <Link href={`/kontaktai?akmenys=${material.slug}`}>
-                Klausti apie šią medžiagos kryptį <ArrowRight aria-hidden="true" size={16} />
+                Klausti apie šį pavyzdį <ArrowRight aria-hidden="true" size={16} />
               </Link>
             </div>
 
             <aside className="material-variation-note">
-              <strong>Pasirinkimą reikia patvirtinti.</strong>
+              <strong>Vaizdinė nuoroda užklausai.</strong>
               <span>{material.notes}</span>
             </aside>
           </div>

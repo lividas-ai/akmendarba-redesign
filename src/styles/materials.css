@@ -258,6 +258,10 @@
   gap: var(--space-3);
 }
 
+.material-filter-tools--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .material-sort,
 .saved-only-toggle {
   display: grid;
@@ -1583,7 +1587,7 @@
 
   .material-category-filters {
     grid-column: 1 / -1;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     justify-content: stretch;
   }
 

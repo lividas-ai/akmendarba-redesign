@@ -38,9 +38,9 @@ try {
   await page.getByRole("button", { name: "Uždaryti meniu" }).first().click();
 
   await page.goto(`${baseUrl}/akmuo/`, { waitUntil: "networkidle" });
-  await page.locator(".materials-hero__index a").filter({ hasText: "Marmuras" }).click();
-  await page.waitForFunction(() => document.querySelector(".material-category-filters button[aria-pressed='true']")?.textContent?.includes("Marmuras"));
-  assert(new URL(page.url()).searchParams.get("tipas") === "marmuras", "Same-page material query navigation did not update the catalogue");
+  await page.locator(".materials-hero__index a").filter({ hasText: "Apdaila" }).click();
+  await page.waitForFunction(() => document.querySelector(".material-category-filters button[aria-pressed='true']")?.textContent?.includes("Apdaila"));
+  assert(new URL(page.url()).searchParams.get("tipas") === "apdaila", "Same-page material query navigation did not update the catalogue");
   await page.locator(".material-category-filters button").filter({ hasText: /^Visi/ }).click();
   const initialMaterials = await page.locator(".material-plate").count();
   assert(initialMaterials === 24, `Expected 24 initial materials, received ${initialMaterials}`);

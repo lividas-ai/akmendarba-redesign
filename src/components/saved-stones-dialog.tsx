@@ -79,7 +79,7 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
 
   return (
     <dialog
-      aria-label="Išsaugotos medžiagų kryptys"
+      aria-label="Išsaugoti akmens ir darbų pavyzdžiai"
       className="saved-stones"
       ref={dialogRef}
       onCancel={(event) => {
@@ -98,7 +98,7 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
         <div className="saved-stones__top">
           <div>
             <Heart aria-hidden="true" size={20} strokeWidth={1.4} />
-            <p>Išsaugotos kryptys</p>
+            <p>Išsaugoti pavyzdžiai</p>
             <span>{savedMaterials.length}</span>
           </div>
           <button aria-label="Uždaryti išsaugotus akmenis" type="button" onClick={() => onOpenChange(false)}>
@@ -121,7 +121,7 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
                     </span>
                     <span>
                       <strong>{material.name}</strong>
-                      <small>Medžiagos kryptis</small>
+                      <small>{material.categoryName}</small>
                     </span>
                   </Link>
                   <button
@@ -150,9 +150,9 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
         ) : (
           <div className="saved-stones__empty">
             <h2>Jūsų atranka tuščia.</h2>
-            <p>Išsaugokite granitą arba marmurą, kad pasirinkimą rastumėte vienoje vietoje.</p>
+            <p>Širdelės mygtuku pažymėkite patikusius pavyzdžius ir raskite juos vienoje vietoje.</p>
             <Link ref={emptyActionRef} className="button button--primary" href="/akmuo#pasirinkimas" onClick={() => onOpenChange(false)}>
-              Rinktis medžiagą <ArrowRight aria-hidden="true" size={16} />
+              Rinktis pavyzdžius <ArrowRight aria-hidden="true" size={16} />
             </Link>
             <button type="button" onClick={() => onOpenChange(false)}>
               Tęsti naršymą

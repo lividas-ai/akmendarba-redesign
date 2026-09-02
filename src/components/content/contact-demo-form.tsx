@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { ArrowUpRight, Check, Copy, FileText, ShieldCheck } from "lucide-react";
 import { activeContactConfig } from "@/client/contact";
 import { applications } from "@/client/content";
+import { materials } from "@/client/materials";
 import styles from "./contact-demo-form.module.css";
 
 type FormValues = {
@@ -29,10 +30,12 @@ const initialValues: FormValues = {
   consent: false,
 };
 
-const supportedMaterialLabels = new Map([
-  ["granitas", "Granitas"],
-  ["marmuras", "Marmuras"],
-]);
+const supportedMaterialLabels = new Map(
+  materials.map((material) => [
+    material.slug,
+    `${material.name} (${material.sourceAssetName})`,
+  ]),
+);
 
 function parseSelectedMaterials(value: string | null): string[] {
   if (!value) return [];
@@ -53,7 +56,7 @@ function createSummary(values: FormValues, selectedMaterials: readonly string[])
     values.email.trim() ? `El. paštas: ${values.email.trim()}` : null,
     values.phone.trim() ? `Telefonas: ${values.phone.trim()}` : null,
     `Darbų kategorija: ${values.projectType}`,
-    selectedMaterials.length > 0 ? `Pasirinktos medžiagos: ${selectedMaterials.join(", ")}` : null,
+    selectedMaterials.length > 0 ? `Pasirinkti pavyzdžiai: ${selectedMaterials.join(", ")}` : null,
     `Užklausa: ${values.message.trim()}`,
   ]
     .filter((line): line is string => Boolean(line))
@@ -190,7 +193,7 @@ export function ContactDemoForm() {
           {values.phone.trim() ? <div><dt>Telefonas</dt><dd>{values.phone.trim()}</dd></div> : null}
           <div><dt>Darbų kategorija</dt><dd>{values.projectType}</dd></div>
           {selectedMaterials.length > 0 ? (
-            <div><dt>Pasirinktos medžiagos</dt><dd>{selectedMaterials.join(", ")}</dd></div>
+            <div><dt>Pasirinkti pavyzdžiai</dt><dd>{selectedMaterials.join(", ")}</dd></div>
           ) : null}
           <div className={styles.summaryWide}><dt>Užklausa</dt><dd>{values.message.trim()}</dd></div>
         </dl>
@@ -243,7 +246,7 @@ export function ContactDemoForm() {
         {selectedMaterials.length > 0 ? (
           <div className={styles.materialSelection}>
             <span>Prie užklausos pridėta</span>
-            <ul aria-label="Pasirinktos medžiagos">
+            <ul aria-label="Pasirinkti pavyzdžiai">
               {selectedMaterials.map((material) => <li key={material}>{material}</li>)}
             </ul>
           </div>

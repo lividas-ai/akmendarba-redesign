@@ -5,7 +5,7 @@ export const MATERIAL_SAVED_EVENT = `${activeBrandConfig.siteId}:saved-change`;
 export const MATERIAL_COMPARE_KEY = `${activeBrandConfig.siteId}-compare-v1`;
 export const MATERIAL_COMPARE_EVENT = `${activeBrandConfig.siteId}:compare-change`;
 
-export const MAXIMUM_COMPARED_MATERIALS = 2;
+export const MAXIMUM_COMPARED_MATERIALS = 3;
 
 function normalizeSavedValue(value: unknown): string[] {
   if (!Array.isArray(value)) return [];

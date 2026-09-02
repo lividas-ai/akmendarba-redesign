@@ -64,7 +64,7 @@ export function MaterialCompare({
 
   return (
     <>
-      <aside className="compare-drawer" aria-label="Akmenų palyginimas">
+      <aside className="compare-drawer" aria-label="Pavyzdžių palyginimas">
         <div className="compare-drawer__heading">
           <Columns3 aria-hidden="true" size={18} strokeWidth={1.5} />
           <div>
@@ -73,7 +73,7 @@ export function MaterialCompare({
           </div>
         </div>
 
-        <div className="compare-drawer__selection" aria-label="Pasirinkti akmenys">
+        <div className="compare-drawer__selection" aria-label="Pasirinkti pavyzdžiai">
           {materials.map((material) => (
             <span className="compare-drawer__item" key={material.slug}>
               <span>{material.name}</span>
@@ -125,9 +125,9 @@ export function MaterialCompare({
           <header className="compare-dialog__header">
             <div>
               <span className="eyebrow">Atranka</span>
-              <h2 id="compare-dialog-title">Medžiagų palyginimas</h2>
+              <h2 id="compare-dialog-title">Pavyzdžių palyginimas</h2>
               <p id="compare-dialog-description">
-                Rodoma tik tai, ką Akmendarba viešai pristato: granito ir marmuro kryptys bei jų šaltinio vaizdai.
+                Gretinami tik Akmendarba viešai paskelbti medžiagos, gamybos ir atliktų darbų vaizdai.
               </p>
             </div>
             <button
@@ -166,15 +166,21 @@ export function MaterialCompare({
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">Akmens rūšis</th>
+                  <th scope="row">Kategorija</th>
                   {materials.map((material) => (
-                    <td key={material.slug}>{material.name}</td>
+                    <td key={material.slug}>{material.categoryName}</td>
                   ))}
                 </tr>
                 <tr>
-                  <th scope="row">Šaltinio vaizdas</th>
+                  <th scope="row">Šaltinio kontekstas</th>
                   {materials.map((material) => (
                     <td key={material.slug}>{material.sourceContext}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <th scope="row">Nuotraukos nuoroda</th>
+                  {materials.map((material) => (
+                    <td key={material.slug}>{material.sourceAssetName}</td>
                   ))}
                 </tr>
               </tbody>
@@ -183,7 +189,7 @@ export function MaterialCompare({
 
           <footer className="compare-dialog__footer">
             <p>
-              Konkrečių akmens pavadinimų, likučių ar techninių savybių viešame šaltinyje nepateikta. Juos patvirtinkite tiesiogiai su įmone.
+              Konkrečių akmens pavadinimų, likučių ir techninių savybių šaltinyje nepateikta. Galutinį pasirinkimą patvirtinkite tiesiogiai su įmone.
             </p>
             <Link className="button button--primary" href={contactHref}>
               Aptarti pasirinkimą

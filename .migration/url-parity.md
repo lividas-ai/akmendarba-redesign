@@ -18,6 +18,6 @@ All fourteen published source page paths are retained exactly; the visual hierar
 | `/kontaktai/` | `source-contact` | `/kontaktai/` | adapted | 17 | 6 | WordPress page 6 plus client-approved frontend-only enquiry form |
 | `/slapukai/` | `source-cookies-lt` | `/slapukai/` | adapted | 8 | 0 | WordPress page 280 |
 | `/cookie-policy/` | `source-cookie-policy` | `/cookie-policy/` | adapted | 1 | 0 | WordPress page 23 |
-| — | `source-client-enhancements-2026-09-02` | `/akmuo/` | client-approved addition | 2 source-supported material families | 1 | Explicit request for stone favourites and comparison; no named product catalogue is inferred |
+| — | `source-client-enhancements-2026-09-02`, `source-client-complete-stone-selection-2026-09-02` | `/akmuo/` | client-approved addition | 137 source-visible references | 1 | Explicit request for favourites and comparison across 131 unique gallery references plus 6 distinct homepage stone/production/service-card visuals; no named stock catalogue is inferred |
 
-The contact page keeps its source URL and gains one client-approved, frontend-only enquiry form. No source URL was removed by this enhancement.
+The contact page keeps its source URL and gains one client-approved, frontend-only enquiry form. The `/akmuo/` selector compares up to 3 visual references and does not claim that the pictured work is a named or available stock item. No source URL was removed by this enhancement.

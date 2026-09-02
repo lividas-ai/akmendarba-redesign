@@ -54,13 +54,13 @@ async function verifyContactForm(viewport, screenshotName) {
   });
 
   try {
-    await page.goto(`${baseUrl}/kontaktai/?akmenys=granitas,marmuras`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}/kontaktai/?akmenys=paminklu-gamyba-karjeras,granito-blokai-ir-plokstes`, { waitUntil: "networkidle" });
     const cookieButton = page.getByRole("button", { name: "Supratau" });
     if ((await cookieButton.count()) > 0 && await cookieButton.isVisible()) await cookieButton.click();
     const form = page.locator("form.demo-form");
     assert(await form.isVisible(), `Contact form is not visible at ${viewport.width}px`);
-    assert(await form.getByText("Granitas", { exact: true }).isVisible(), "Granite selection is missing from form context");
-    assert(await form.getByText("Marmuras", { exact: true }).isVisible(), "Marble selection is missing from form context");
+    assert(await form.getByText("Paminklų gamyba (Karjeras-s.jpg)", { exact: true }).isVisible(), "Quarry reference is missing from form context");
+    assert(await form.getByText("Granito blokai ir plokštės (cava_bianco_carrara_2.jpg)", { exact: true }).isVisible(), "Stone-block reference is missing from form context");
 
     const categoryLabels = await form.locator("#contact-project-type option").allTextContents();
     assert(
@@ -92,15 +92,15 @@ async function verifyContactForm(viewport, screenshotName) {
     await page.waitForFunction(() => document.activeElement?.classList.contains("demo-form__result"));
     assert(await result.evaluate((element) => element === document.activeElement), "Result did not receive focus after form preparation");
     assert(await result.getByText("Duomenys nebuvo išsiųsti.", { exact: true }).isVisible(), "No-delivery disclosure is missing");
-    assert(await result.getByText("Granitas, Marmuras", { exact: true }).isVisible(), "Selected materials are missing from summary");
+    assert(await result.getByText(/Paminklų gamyba \(Karjeras-s\.jpg\).*Granito blokai ir plokštės/, { exact: false }).isVisible(), "Selected references are missing from summary");
     const mailtoHref = await result.getByRole("link", { name: /Atidaryti el. laišką/ }).getAttribute("href");
     assert(mailtoHref?.startsWith("mailto:info@akmendarba.lt?"), "Mail draft does not use the verified Akmendarba address");
-    assert(mailtoHref?.includes("Granitas%2C%20Marmuras"), "Mail draft does not carry the selected materials");
+    assert(mailtoHref?.includes("Karjeras-s.jpg") && mailtoHref?.includes("cava_bianco_carrara_2.jpg"), "Mail draft does not carry the selected references");
 
     await result.getByRole("button", { name: "Kopijuoti juodraštį" }).click();
     assert(await result.getByRole("button", { name: "Juodraštis nukopijuotas" }).isVisible(), "Copy action did not report success");
     const copiedDraft = await page.evaluate(() => window.__copiedContactDraft ?? "");
-    assert(copiedDraft.includes("Pasirinktos medžiagos: Granitas, Marmuras"), "Copied draft is missing selected materials");
+    assert(copiedDraft.includes("Pasirinkti pavyzdžiai: Paminklų gamyba (Karjeras-s.jpg)"), "Copied draft is missing selected references");
 
     await result.getByRole("button", { name: "Taisyti duomenis" }).click();
     await page.waitForFunction(() => document.activeElement?.id === "contact-name");

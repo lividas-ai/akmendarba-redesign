@@ -37,7 +37,7 @@ export function MaterialPlate({
       >
         <span className="material-plate__image">
           <Image
-            alt={`Akmendarba pristatomo akmens vaizdas: ${material.name}`}
+            alt={material.alt}
             fill
             loading={position < 4 ? "eager" : "lazy"}
             sizes="(min-width: 80rem) 20vw, (min-width: 64rem) 33vw, (min-width: 44rem) 50vw, (min-width: 22rem) 46vw, 100vw"
@@ -52,7 +52,7 @@ export function MaterialPlate({
 
       <div className="material-plate__caption">
         <div className="material-plate__identity">
-          <span className="material-plate__category">Medžiagos kryptis</span>
+          <span className="material-plate__category">{material.categoryName}</span>
           <h2>{material.name}</h2>
         </div>
 
@@ -66,7 +66,6 @@ export function MaterialPlate({
             aria-pressed={saved}
           >
             <Heart aria-hidden="true" fill={saved ? "currentColor" : "none"} size={18} strokeWidth={1.5} />
-            <span className="material-icon-button__label">{saved ? "Išsaugota" : "Išsaugoti"}</span>
           </button>
           <button
             className="material-icon-button"
@@ -76,10 +75,9 @@ export function MaterialPlate({
             onClick={() => onToggleCompare(material.slug)}
             aria-label={compared ? `Pašalinti „${material.name}“ iš palyginimo` : `Pridėti „${material.name}“ į palyginimą`}
             aria-pressed={compared}
-            title={compareDisabled ? "Vienu metu galima palyginti abi viešai pristatomas kryptis" : undefined}
+            title={compareDisabled ? "Vienu metu galima palyginti iki trijų pavyzdžių" : undefined}
           >
             <Columns3 aria-hidden="true" size={18} strokeWidth={1.5} />
-            <span className="material-icon-button__label">{compared ? "Palyginime" : "Palyginti"}</span>
           </button>
         </div>
       </div>
