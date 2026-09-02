@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { ArrowLeft, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ContactDemoForm } from "@/components/content/contact-demo-form";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
@@ -66,6 +68,14 @@ export default function ContactPage() {
             src="https://www.google.com/maps?q=Saul%C4%97tekio%20g.%2047%2C%20Einorai%C4%8Diai%2C%20%C5%A0iauli%C5%B3%20r.&output=embed"
             title="Akmendarba gamybos vieta Einoraičiuose"
           />
+        </div>
+      </section>
+
+      <section className="contact-form-section section section--inverse" aria-label="Užklausos forma">
+        <div className="content-shell">
+          <Suspense fallback={<p role="status">Kraunama užklausos forma…</p>}>
+            <ContactDemoForm />
+          </Suspense>
         </div>
       </section>
 

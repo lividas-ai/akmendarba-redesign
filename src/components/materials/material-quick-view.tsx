@@ -69,7 +69,7 @@ export function MaterialQuickView({
 
           <figure className="material-quick-view__visual">
             <Image
-              alt={`${material.name} akmens katalogo vaizdas`}
+              alt={`Akmendarba pristatomo akmens vaizdas: ${material.name}`}
               fill
               sizes="(min-width: 64rem) 62vw, 100vw"
               src={material.localPath}
@@ -79,9 +79,7 @@ export function MaterialQuickView({
           <div className="material-quick-view__content">
             <span className="eyebrow">{categoryName}</span>
             <h2 id="quick-view-title">{material.name}</h2>
-            <p id="quick-view-description">
-              Katalogo vaizdas padeda pažinti akmens spalvą ir rašto charakterį. Natūralus akmuo kinta, todėl konkrečią plokštę verta įvertinti visame formate.
-            </p>
+            <p id="quick-view-description">{material.sourceContext}</p>
 
             <div className="material-quick-view__actions">
               <button
@@ -108,17 +106,14 @@ export function MaterialQuickView({
             </div>
 
             <div className="material-quick-view__links">
-              <Link href={`/akmuo/${material.slug}`}>
-                Atverti akmens puslapį <ArrowRight aria-hidden="true" size={16} />
-              </Link>
-              <Link href={`/projektas?akmuo=${encodeURIComponent(material.slug)}`}>
-                Pridėti prie projekto <ArrowRight aria-hidden="true" size={16} />
+              <Link href={`/kontaktai?akmenys=${material.slug}`}>
+                Klausti apie šią medžiagos kryptį <ArrowRight aria-hidden="true" size={16} />
               </Link>
             </div>
 
             <aside className="material-variation-note">
-              <strong>Kiekviena plokštė yra unikali.</strong>
-              <span>Atspalvis, gyslos ir rašto mastelis gali skirtis nuo katalogo vaizdo.</span>
+              <strong>Pasirinkimą reikia patvirtinti.</strong>
+              <span>{material.notes}</span>
             </aside>
           </div>
         </div>

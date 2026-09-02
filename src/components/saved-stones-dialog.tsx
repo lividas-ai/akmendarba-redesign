@@ -19,6 +19,7 @@ type SavedStonesDialogProps = {
 
 export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
   const emptyActionRef = useRef<HTMLAnchorElement>(null);
   const removeButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const [savedSlugs, setSavedSlugs] = useState<string[]>([]);
@@ -40,7 +41,10 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    if (open && !dialog.open) dialog.showModal();
+    if (open && !dialog.open) {
+      returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      dialog.showModal();
+    }
     else if (!open && dialog.open) dialog.close();
   }, [open]);
 
@@ -48,6 +52,7 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
     () => savedSlugs.map((slug) => materials.find((material) => material.slug === slug)).filter((material) => material !== undefined),
     [savedSlugs],
   );
+  const contactHref = `/kontaktai?akmenys=${savedMaterials.map((material) => material.slug).join(",")}`;
 
   useEffect(() => {
     if (!focusAfterRemoval) return;
@@ -74,14 +79,17 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
 
   return (
     <dialog
-      aria-label="Išsaugoti akmenys"
+      aria-label="Išsaugotos medžiagų kryptys"
       className="saved-stones"
       ref={dialogRef}
       onCancel={(event) => {
         event.preventDefault();
         onOpenChange(false);
       }}
-      onClose={() => onOpenChange(false)}
+      onClose={() => {
+        onOpenChange(false);
+        window.requestAnimationFrame(() => returnFocusRef.current?.focus());
+      }}
       onClick={(event) => {
         if (event.target === dialogRef.current) onOpenChange(false);
       }}
@@ -90,7 +98,7 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
         <div className="saved-stones__top">
           <div>
             <Heart aria-hidden="true" size={20} strokeWidth={1.4} />
-            <p>Išsaugoti akmenys</p>
+            <p>Išsaugotos kryptys</p>
             <span>{savedMaterials.length}</span>
           </div>
           <button aria-label="Uždaryti išsaugotus akmenis" type="button" onClick={() => onOpenChange(false)}>
@@ -107,13 +115,13 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
             <div className="saved-stones__list">
               {savedMaterials.map((material) => (
                 <article key={material.slug}>
-                  <Link href={`/akmuo/${material.slug}`} onClick={() => onOpenChange(false)}>
+                  <Link href={`/akmuo#medziaga-${material.slug}`} onClick={() => onOpenChange(false)}>
                     <span className="saved-stones__image">
                       <Image alt="" fill sizes="88px" src={material.localPath} />
                     </span>
                     <span>
                       <strong>{material.name}</strong>
-                      <small>{material.category}</small>
+                      <small>Medžiagos kryptis</small>
                     </span>
                   </Link>
                   <button
@@ -131,20 +139,20 @@ export function SavedStonesDialog({ open, onOpenChange }: SavedStonesDialogProps
             </div>
 
             <div className="saved-stones__actions">
-              <Link className="button button--primary" href="/projektas" onClick={() => onOpenChange(false)}>
-                Aptarti šiuos akmenis <ArrowRight aria-hidden="true" size={16} />
+              <Link className="button button--primary" href={contactHref} onClick={() => onOpenChange(false)}>
+                Aptarti pasirinkimą <ArrowRight aria-hidden="true" size={16} />
               </Link>
-              <Link className="button button--secondary" href="/akmuo?rodyti=issaugoti" onClick={() => onOpenChange(false)}>
-                Peržiūrėti kolekcijoje
+              <Link className="button button--secondary" href="/akmuo#pasirinkimas" onClick={() => onOpenChange(false)}>
+                Peržiūrėti pasirinkime
               </Link>
             </div>
           </>
         ) : (
           <div className="saved-stones__empty">
-            <h2>Jūsų kolekcija tuščia.</h2>
-            <p>Išsaugokite patikusius akmenis, kad galėtumėte juos palyginti ir aptarti vienoje vietoje.</p>
-            <Link ref={emptyActionRef} className="button button--primary" href="/akmuo" onClick={() => onOpenChange(false)}>
-              Rinktis akmenį <ArrowRight aria-hidden="true" size={16} />
+            <h2>Jūsų atranka tuščia.</h2>
+            <p>Išsaugokite granitą arba marmurą, kad pasirinkimą rastumėte vienoje vietoje.</p>
+            <Link ref={emptyActionRef} className="button button--primary" href="/akmuo#pasirinkimas" onClick={() => onOpenChange(false)}>
+              Rinktis medžiagą <ArrowRight aria-hidden="true" size={16} />
             </Link>
             <button type="button" onClick={() => onOpenChange(false)}>
               Tęsti naršymą

@@ -15,6 +15,9 @@ All fourteen published source page paths are retained exactly; the visual hierar
 | `/galerija/kapo-dengimu-galerija/` | `source-gallery-grave-coverings` | `/galerija/kapo-dengimu-galerija/` | adapted | 25 | 1 | WordPress page 167; 25 page images, with all 27 related media files retained in evidence |
 | `/galerija/aksesuaru-galerija/` | `source-gallery-accessories` | `/galerija/aksesuaru-galerija/` | adapted | 19 | 1 | WordPress page 199 and Media API |
 | `/galerija/apdailos-galerija/` | `source-gallery-finishing` | `/galerija/apdailos-galerija/` | adapted | 5 | 1 | WordPress page 225 and Media API |
-| `/kontaktai/` | `source-contact` | `/kontaktai/` | adapted | 17 | 5 | WordPress page 6 |
+| `/kontaktai/` | `source-contact` | `/kontaktai/` | adapted | 17 | 6 | WordPress page 6 plus client-approved frontend-only enquiry form |
 | `/slapukai/` | `source-cookies-lt` | `/slapukai/` | adapted | 8 | 0 | WordPress page 280 |
 | `/cookie-policy/` | `source-cookie-policy` | `/cookie-policy/` | adapted | 1 | 0 | WordPress page 23 |
+| — | `source-client-enhancements-2026-09-02` | `/akmuo/` | client-approved addition | 2 source-supported material families | 1 | Explicit request for stone favourites and comparison; no named product catalogue is inferred |
+
+The contact page keeps its source URL and gains one client-approved, frontend-only enquiry form. No source URL was removed by this enhancement.

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Columns3, Expand, Heart } from "lucide-react";
 import type { Material } from "@/client/materials";
 
@@ -29,7 +28,7 @@ export function MaterialPlate({
   const compareDisabled = compareLimitReached && !compared;
 
   return (
-    <article className="material-plate">
+    <article className="material-plate" id={`medziaga-${material.slug}`}>
       <button
         className="material-plate__image-button"
         type="button"
@@ -38,7 +37,7 @@ export function MaterialPlate({
       >
         <span className="material-plate__image">
           <Image
-            alt={`${material.name} akmens katalogo vaizdas`}
+            alt={`Akmendarba pristatomo akmens vaizdas: ${material.name}`}
             fill
             loading={position < 4 ? "eager" : "lazy"}
             sizes="(min-width: 80rem) 20vw, (min-width: 64rem) 33vw, (min-width: 44rem) 50vw, (min-width: 22rem) 46vw, 100vw"
@@ -53,9 +52,8 @@ export function MaterialPlate({
 
       <div className="material-plate__caption">
         <div className="material-plate__identity">
-          <h2>
-            <Link href={`/akmuo/${material.slug}`}>{material.name}</Link>
-          </h2>
+          <span className="material-plate__category">Medžiagos kryptis</span>
+          <h2>{material.name}</h2>
         </div>
 
         <div className="material-plate__actions" aria-label={`${material.name} veiksmai`}>
@@ -68,6 +66,7 @@ export function MaterialPlate({
             aria-pressed={saved}
           >
             <Heart aria-hidden="true" fill={saved ? "currentColor" : "none"} size={18} strokeWidth={1.5} />
+            <span className="material-icon-button__label">{saved ? "Išsaugota" : "Išsaugoti"}</span>
           </button>
           <button
             className="material-icon-button"
@@ -77,9 +76,10 @@ export function MaterialPlate({
             onClick={() => onToggleCompare(material.slug)}
             aria-label={compared ? `Pašalinti „${material.name}“ iš palyginimo` : `Pridėti „${material.name}“ į palyginimą`}
             aria-pressed={compared}
-            title={compareDisabled ? "Vienu metu galima palyginti iki 3 akmenų" : undefined}
+            title={compareDisabled ? "Vienu metu galima palyginti abi viešai pristatomas kryptis" : undefined}
           >
             <Columns3 aria-hidden="true" size={18} strokeWidth={1.5} />
+            <span className="material-icon-button__label">{compared ? "Palyginime" : "Palyginti"}</span>
           </button>
         </div>
       </div>

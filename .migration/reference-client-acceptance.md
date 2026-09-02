@@ -1,6 +1,6 @@
 # Site manifest acceptance report
 
-- Site ID: `granit-decor`
+- Site ID: `akmendarba`
 - Schema version: `1.0.0`
 - Validation mode: `draft`
 - Current-mode acceptance: **PASS**
@@ -10,54 +10,96 @@
 
 | Entity | Count |
 | --- | --- |
-| Pages | 170 |
-| Media assets | 253 |
-| Media variants | 254 |
-| Functions | 2 |
-| Sources | 272 |
-| Source coverage records | 272 |
-| Evidence references | 1197 |
+| Pages | 15 |
+| Media assets | 150 |
+| Media variants | 150 |
+| Functions | 3 |
+| Sources | 15 |
+| Source coverage records | 15 |
+| Evidence references | 298 |
 
-- Pages by publication: published: 170
-- Pages by kind: contact: 1, custom: 4, detail: 157, home: 1, index: 4, legal: 2, utility: 1
-- Media by kind: image: 251, logo: 1, video: 1
-- Media rights: unknown: 253
-- Functions by type: form: 1, selector: 1
-- Functions by integration: complete: 1, frontend-only: 1
-- Sources by kind: client-input: 1, url: 271
-- URL source status: captured: 256, partial: 15
-- Coverage status: adapted: 272
-- Coverage destinations: 428
-- Unique evidence sources referenced: 268
+- Pages by publication: published: 15
+- Pages by kind: contact: 1, custom: 1, detail: 4, home: 1, index: 6, legal: 2
+- Media by kind: image: 148, logo: 2
+- Media rights: unknown: 150
+- Functions by type: custom: 1, form: 1, selector: 1
+- Functions by integration: complete: 2, frontend-only: 1
+- Sources by kind: client-input: 1, url: 14
+- URL source status: captured: 14
+- Coverage status: migrated: 15
+- Coverage destinations: 17
+- Unique evidence sources referenced: 15
 
 ## Parity
 
 | Entity | Device | Total | Equivalent | Adapted | Intentional omit | Pending | Failed | Blocked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| page | desktop | 170 | 170 | 0 | 0 | 0 | 0 | 0 |
-| page | tablet | 170 | 0 | 170 | 0 | 0 | 0 | 0 |
-| page | mobile | 170 | 0 | 170 | 0 | 0 | 0 | 0 |
-| media | desktop | 253 | 253 | 0 | 0 | 0 | 0 | 0 |
-| media | tablet | 253 | 0 | 253 | 0 | 0 | 0 | 0 |
-| media | mobile | 253 | 0 | 253 | 0 | 0 | 0 | 0 |
-| function | desktop | 2 | 2 | 0 | 0 | 0 | 0 | 0 |
-| function | tablet | 2 | 0 | 2 | 0 | 0 | 0 | 0 |
-| function | mobile | 2 | 0 | 2 | 0 | 0 | 0 | 0 |
-| block | desktop | 172 | 172 | 0 | 0 | 0 | 0 | 0 |
-| block | tablet | 172 | 0 | 172 | 0 | 0 | 0 | 0 |
-| block | mobile | 172 | 0 | 172 | 0 | 0 | 0 | 0 |
+| page | desktop | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| page | tablet | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| page | mobile | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| media | desktop | 150 | 0 | 0 | 0 | 150 | 0 | 0 |
+| media | tablet | 150 | 0 | 0 | 0 | 150 | 0 | 0 |
+| media | mobile | 150 | 0 | 0 | 0 | 150 | 0 | 0 |
+| function | desktop | 3 | 0 | 0 | 0 | 3 | 0 | 0 |
+| function | tablet | 3 | 0 | 0 | 0 | 3 | 0 | 0 |
+| function | mobile | 3 | 0 | 0 | 0 | 3 | 0 | 0 |
+| block | desktop | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
+| block | tablet | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
+| block | mobile | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
 
-Release-active unresolved parity checks: **0**
+Release-active unresolved parity checks: **606**
+
+- page `page-home` · desktop: `pending`
+- page `page-home` · tablet: `pending`
+- page `page-home` · mobile: `pending`
+- page `page-about` · desktop: `pending`
+- page `page-about` · tablet: `pending`
+- page `page-about` · mobile: `pending`
+- page `page-monuments` · desktop: `pending`
+- page `page-monuments` · tablet: `pending`
+- page `page-monuments` · mobile: `pending`
+- page `page-grave-coverings` · desktop: `pending`
+- page `page-grave-coverings` · tablet: `pending`
+- page `page-grave-coverings` · mobile: `pending`
+- page `page-accessories` · desktop: `pending`
+- page `page-accessories` · tablet: `pending`
+- page `page-accessories` · mobile: `pending`
+- page `page-finishing` · desktop: `pending`
+- page `page-finishing` · tablet: `pending`
+- page `page-finishing` · mobile: `pending`
+- page `page-gallery` · desktop: `pending`
+- page `page-gallery` · tablet: `pending`
+- page `page-gallery` · mobile: `pending`
+- page `page-gallery-monuments` · desktop: `pending`
+- page `page-gallery-monuments` · tablet: `pending`
+- page `page-gallery-monuments` · mobile: `pending`
+- page `page-gallery-grave-coverings` · desktop: `pending`
+- page `page-gallery-grave-coverings` · tablet: `pending`
+- page `page-gallery-grave-coverings` · mobile: `pending`
+- page `page-gallery-accessories` · desktop: `pending`
+- page `page-gallery-accessories` · tablet: `pending`
+- page `page-gallery-accessories` · mobile: `pending`
+- page `page-gallery-finishing` · desktop: `pending`
+- page `page-gallery-finishing` · tablet: `pending`
+- page `page-gallery-finishing` · mobile: `pending`
+- page `page-materials` · desktop: `pending`
+- page `page-materials` · tablet: `pending`
+- page `page-materials` · mobile: `pending`
+- page `page-contact` · desktop: `pending`
+- page `page-contact` · tablet: `pending`
+- page `page-contact` · mobile: `pending`
+- page `page-cookies-lt` · desktop: `pending`
+- **566 additional parity issues are not expanded here; the total remains exact.**
 
 ## Local media
 
-- Local variants: 254
+- Local variants: 150
 - External variants: 0
 - Invalid variants: 0
-- Existing local variants: 254
+- Existing local variants: 150
 - Missing local variants: 0
-- Unique existing local files: 254
-- Unique local file bytes: 55868844 (53.28 MiB)
+- Unique existing local files: 150
+- Unique local file bytes: 10646587 (10.15 MiB)
 
 ## Current-mode validation
 
@@ -66,52 +108,52 @@ Release-active unresolved parity checks: **0**
 - By category: function: 1
 - By code: incomplete-published-function: 1
 
-- **WARNING · incomplete-published-function** — functions[1] (function-project-planner) — Published function function-project-planner is frontend-only.
+- **WARNING · incomplete-published-function** — functions[0] (function-contact-enquiry) — Published function function-contact-enquiry is frontend-only.
 
 ## Release blockers
 
-- Total: 254
-- By category: function: 1, rights: 253
-- By code: incomplete-published-function: 1, unknown-media-rights: 253
+- Total: 757
+- By category: function: 1, parity: 606, rights: 150
+- By code: incomplete-published-function: 1, release-parity-incomplete: 606, unknown-media-rights: 150
 
-- **ERROR · unknown-media-rights** — media[0] (media-logo) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[1] (media-hero-film) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[2] (media-material-verde-guatemala) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[3] (media-material-thassos-white) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[4] (media-material-statuario) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[5] (media-material-statuario-extra) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[6] (media-material-spider-black) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[7] (media-material-sivec) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[8] (media-material-silver-waterfall) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[9] (media-material-rosa-portogallo) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[10] (media-material-serres-white) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[11] (media-material-rosso-verona) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[12] (media-material-rain-forest-yellow) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[13] (media-material-rojo-alicante) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[14] (media-material-rain-forest-green) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[15] (media-material-rain-forest-brown) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[16] (media-material-portoro-oro) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[17] (media-material-calacatta-berrini) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[18] (media-material-grigio-piemonte) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[19] (media-material-pietra-grey) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[20] (media-material-nero-tunezi) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[21] (media-material-nero-marquina) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[22] (media-material-grigio-verace) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[23] (media-material-emperador-light) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[24] (media-material-diamond-oniciata) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[25] (media-material-crema-veneziana) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[26] (media-material-emperador-dark) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[27] (media-material-diamond-venatino) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[28] (media-material-calacatta-paonazzo) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[29] (media-material-crema-marfil) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[30] (media-material-breccia-sarda-nuvolato) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[31] (media-material-calacatta) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[32] (media-material-calacatta-extra) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[33] (media-material-caffee-latte) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[34] (media-material-breccia-sarda-venato) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[35] (media-material-gris-parga-marmuras-source-conflict) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[36] (media-material-gris-iberico-marmuras-source-conflict) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[37] (media-material-bianco-statuarietto) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[38] (media-material-botticino-semiclassico) — Published media rights are unknown.
-- **ERROR · unknown-media-rights** — media[39] (media-material-blue-shadow) — Published media rights are unknown.
-- **214 additional issues are not expanded here; the totals above remain exact.**
+- **ERROR · unknown-media-rights** — media[0] (media-paminklas-paprastas-1) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[0].parity.desktop (media-paminklas-paprastas-1) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[0].parity.tablet (media-paminklas-paprastas-1) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[0].parity.mobile (media-paminklas-paprastas-1) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[1] (media-paminklas-paprastas-2) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[1].parity.desktop (media-paminklas-paprastas-2) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[1].parity.tablet (media-paminklas-paprastas-2) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[1].parity.mobile (media-paminklas-paprastas-2) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[2] (media-paminklas-paprastas-3) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[2].parity.desktop (media-paminklas-paprastas-3) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[2].parity.tablet (media-paminklas-paprastas-3) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[2].parity.mobile (media-paminklas-paprastas-3) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[3] (media-paminklas-paprastas-4) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[3].parity.desktop (media-paminklas-paprastas-4) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[3].parity.tablet (media-paminklas-paprastas-4) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[3].parity.mobile (media-paminklas-paprastas-4) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[4] (media-paminklas-paprastas-5) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[4].parity.desktop (media-paminklas-paprastas-5) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[4].parity.tablet (media-paminklas-paprastas-5) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[4].parity.mobile (media-paminklas-paprastas-5) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[5] (media-paminklas-paprastas-6) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[5].parity.desktop (media-paminklas-paprastas-6) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[5].parity.tablet (media-paminklas-paprastas-6) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[5].parity.mobile (media-paminklas-paprastas-6) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[6] (media-paminklas-paprastas-7) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[6].parity.desktop (media-paminklas-paprastas-7) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[6].parity.tablet (media-paminklas-paprastas-7) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[6].parity.mobile (media-paminklas-paprastas-7) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[7] (media-paminklas-paprastas-8) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[7].parity.desktop (media-paminklas-paprastas-8) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[7].parity.tablet (media-paminklas-paprastas-8) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[7].parity.mobile (media-paminklas-paprastas-8) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[8] (media-paminklas-paprastas-9) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[8].parity.desktop (media-paminklas-paprastas-9) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[8].parity.tablet (media-paminklas-paprastas-9) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[8].parity.mobile (media-paminklas-paprastas-9) — mobile parity is pending; production requires equivalent or adapted.
+- **ERROR · unknown-media-rights** — media[9] (media-paminklas-paprastas-10) — Published media rights are unknown.
+- **ERROR · release-parity-incomplete** — media[9].parity.desktop (media-paminklas-paprastas-10) — desktop parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[9].parity.tablet (media-paminklas-paprastas-10) — tablet parity is pending; production requires equivalent or adapted.
+- **ERROR · release-parity-incomplete** — media[9].parity.mobile (media-paminklas-paprastas-10) — mobile parity is pending; production requires equivalent or adapted.
+- **717 additional issues are not expanded here; the totals above remain exact.**

@@ -72,6 +72,12 @@ export const megaNavigation = {
     tiles: productionTiles,
     railLinks: [],
   },
+  akmuo: {
+    id: "akmuo",
+    label: "Akmuo",
+    href: "/akmuo",
+    behavior: "direct",
+  },
   galerija: {
     id: "galerija",
     label: "Galerija",

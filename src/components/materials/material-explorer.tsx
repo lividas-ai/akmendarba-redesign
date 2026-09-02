@@ -2,217 +2,96 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { ArrowDown, Heart, RotateCcw } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { materials } from "@/client/materials";
 import {
-  ArrowDown,
-  Heart,
-  RotateCcw,
-  Search,
-  SlidersHorizontal,
-  X,
-} from "lucide-react";
-import {
-  Suspense,
-  useCallback,
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { materialCategories } from "@/client/content";
-import {
-  materials,
-  type Material,
-  type MaterialCategory,
-} from "@/client/materials";
-import {
+  MATERIAL_COMPARE_EVENT,
   MATERIAL_SAVED_EVENT,
+  MAXIMUM_COMPARED_MATERIALS,
+  readComparedMaterials,
   readSavedMaterials,
+  toggleComparedMaterial,
   toggleSavedMaterial,
+  writeComparedMaterials,
 } from "@/lib/material-storage";
 import { MaterialCompare } from "@/components/materials/material-compare";
 import { MaterialPlate } from "@/components/materials/material-plate";
 import { MaterialQuickView } from "@/components/materials/material-quick-view";
 
-type CategoryFilter = "visi" | MaterialCategory;
-type SortMode = "az" | "za" | "saved";
-
-const initialVisibleMaterials = 24;
-const additionalVisibleMaterials = 24;
-
-const categoryNames = Object.fromEntries(
-  materialCategories.map((category) => [category.id, category.name]),
-) as Record<MaterialCategory, string>;
-
-const categoryIds = new Set<MaterialCategory>(
-  materialCategories.map((category) => category.id),
-);
-
 const materialBySlug = new Map(materials.map((material) => [material.slug, material]));
+const materialSlugs = new Set(materialBySlug.keys());
+const heroMaterial = materials[0];
 
-const categoryCounts = materials.reduce<Record<MaterialCategory, number>>(
-  (counts, material) => {
-    counts[material.category] += 1;
-    return counts;
-  },
-  { granitas: 0, marmuras: 0, kvarcitas: 0, oniksas: 0, travertinas: 0 },
-);
-
-const heroMaterial = materialBySlug.get("patagonia") ?? materials[0];
-
-function MaterialSearchParamSync({ onChange }: { onChange: (search: string) => void }) {
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    onChange(searchParams.toString());
-  }, [onChange, searchParams]);
-
-  return null;
-}
-
-function normalizeSearch(value: string) {
-  return value
-    .trim()
-    .toLocaleLowerCase("lt-LT")
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "");
-}
-
-function isMaterialCategory(value: string | null): value is MaterialCategory {
-  return Boolean(value && categoryIds.has(value as MaterialCategory));
-}
-
-function isSortMode(value: string | null): value is SortMode {
-  return value === "az" || value === "za" || value === "saved";
+function retainPublishedMaterials(slugs: readonly string[]) {
+  return slugs.filter((slug) => materialSlugs.has(slug));
 }
 
 export function MaterialExplorer() {
-  const [filterParams, setFilterParams] = useState(() => new URLSearchParams());
-  const query = filterParams.get("q") ?? "";
-  const deferredQuery = useDeferredValue(query);
   const [savedSlugs, setSavedSlugs] = useState<string[]>([]);
   const [compareSlugs, setCompareSlugs] = useState<string[]>([]);
+  const [savedOnly, setSavedOnly] = useState(false);
   const [quickViewSlug, setQuickViewSlug] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState("");
-  const [visibleLimit, setVisibleLimit] = useState(initialVisibleMaterials);
   const quickViewTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const lastLocationSearchRef = useRef("");
-
-  const typeParam = filterParams.get("tipas");
-  const category: CategoryFilter = isMaterialCategory(typeParam) ? typeParam : "visi";
-  const sortParam = filterParams.get("rikiuoti");
-  const sortMode: SortMode = isSortMode(sortParam) ? sortParam : "az";
-  const savedOnly = filterParams.get("rodyti") === "issaugoti";
-
-  const syncFilterParams = useCallback((search: string) => {
-    if (lastLocationSearchRef.current === search) return;
-    lastLocationSearchRef.current = search;
-    setVisibleLimit(initialVisibleMaterials);
-    setFilterParams(new URLSearchParams(search));
-  }, []);
 
   useEffect(() => {
-    const updateSaved = () => setSavedSlugs(readSavedMaterials());
-    updateSaved();
-    window.addEventListener("storage", updateSaved);
+    const updateSaved = () => setSavedSlugs(retainPublishedMaterials(readSavedMaterials()));
+    const updateCompared = () => setCompareSlugs(retainPublishedMaterials(readComparedMaterials()));
+    const updateCollections = () => {
+      updateSaved();
+      updateCompared();
+    };
+
+    updateCollections();
+    window.addEventListener("storage", updateCollections);
     window.addEventListener(MATERIAL_SAVED_EVENT, updateSaved);
+    window.addEventListener(MATERIAL_COMPARE_EVENT, updateCompared);
 
     return () => {
-      window.removeEventListener("storage", updateSaved);
+      window.removeEventListener("storage", updateCollections);
       window.removeEventListener(MATERIAL_SAVED_EVENT, updateSaved);
+      window.removeEventListener(MATERIAL_COMPARE_EVENT, updateCompared);
     };
   }, []);
 
-  const replaceParams = useCallback(
-    (changes: Readonly<Record<string, string | null>>) => {
-      setVisibleLimit(initialVisibleMaterials);
-      setFilterParams((current) => {
-        const next = new URLSearchParams(current.toString());
-        Object.entries(changes).forEach(([key, value]) => {
-          if (value) next.set(key, value);
-          else next.delete(key);
-        });
-        const queryString = next.toString();
-        lastLocationSearchRef.current = queryString;
-        window.history.replaceState(null, "", queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname);
-        return next;
-      });
-    },
-    [],
-  );
-
-  function handleSearch(value: string) {
-    replaceParams({ q: value.trim() ? value : null });
-  }
-
   const savedSet = useMemo(() => new Set(savedSlugs), [savedSlugs]);
   const compareSet = useMemo(() => new Set(compareSlugs), [compareSlugs]);
-
-  const visibleMaterials = useMemo(() => {
-    const normalizedQuery = normalizeSearch(deferredQuery);
-    const result: Material[] = [];
-
-    for (const material of materials) {
-      if (category !== "visi" && material.category !== category) continue;
-      if (savedOnly && !savedSet.has(material.slug)) continue;
-
-      if (normalizedQuery) {
-        const searchable = normalizeSearch(`${material.name} ${categoryNames[material.category]}`);
-        if (!searchable.includes(normalizedQuery)) continue;
-      }
-
-      result.push(material);
-    }
-
-    result.sort((left, right) => {
-      if (sortMode === "saved") {
-        const savedDifference = Number(savedSet.has(right.slug)) - Number(savedSet.has(left.slug));
-        if (savedDifference !== 0) return savedDifference;
-      }
-
-      const direction = sortMode === "za" ? -1 : 1;
-      return direction * left.name.localeCompare(right.name, "lt-LT", { sensitivity: "base" });
-    });
-
-    return result;
-  }, [category, deferredQuery, savedOnly, savedSet, sortMode]);
-
-  const compareMaterials = useMemo(
-    () => compareSlugs.flatMap((slug) => {
-      const material = materialBySlug.get(slug);
-      return material ? [material] : [];
-    }),
-    [compareSlugs],
-  );
-  const displayedMaterials = visibleMaterials.slice(0, visibleLimit);
-
+  const visibleMaterials = savedOnly
+    ? materials.filter((material) => savedSet.has(material.slug))
+    : materials;
+  const compareMaterials = compareSlugs.flatMap((slug) => {
+    const material = materialBySlug.get(slug);
+    return material ? [material] : [];
+  });
   const quickViewMaterial = quickViewSlug ? materialBySlug.get(quickViewSlug) ?? null : null;
-  const filtersActive = Boolean(query || category !== "visi" || savedOnly || sortMode !== "az");
 
   function toggleSaved(slug: string) {
     const result = toggleSavedMaterial(slug);
     const materialName = materialBySlug.get(slug)?.name ?? slug;
-    setSavedSlugs(result.slugs);
-    setAnnouncement(result.saved ? `„${materialName}“ išsaugotas.` : `„${materialName}“ pašalintas iš išsaugotų.`);
+    setSavedSlugs(retainPublishedMaterials(result.slugs));
+    setAnnouncement(
+      result.saved
+        ? `„${materialName}“ išsaugotas atrankoje.`
+        : `„${materialName}“ pašalintas iš atrankos.`,
+    );
   }
 
   function toggleCompare(slug: string) {
+    const result = toggleComparedMaterial(slug);
     const materialName = materialBySlug.get(slug)?.name ?? slug;
-    setCompareSlugs((current) => {
-      if (current.includes(slug)) {
-        setAnnouncement(`„${materialName}“ pašalintas iš palyginimo.`);
-        return current.filter((item) => item !== slug);
-      }
+    setCompareSlugs(retainPublishedMaterials(result.slugs));
 
-      if (current.length >= 3) {
-        setAnnouncement("Vienu metu galima palyginti iki 3 akmenų.");
-        return current;
-      }
+    if (result.limitReached) {
+      setAnnouncement("Vienu metu galima palyginti abi viešai pristatomas medžiagų kryptis.");
+      return;
+    }
 
-      setAnnouncement(`„${materialName}“ pridėtas į palyginimą.`);
-      return [...current, slug];
-    });
+    setAnnouncement(
+      result.compared
+        ? `„${materialName}“ pridėtas į palyginimą.`
+        : `„${materialName}“ pašalintas iš palyginimo.`,
+    );
   }
 
   function openQuickView(slug: string, trigger: HTMLButtonElement) {
@@ -225,156 +104,78 @@ export function MaterialExplorer() {
     window.requestAnimationFrame(() => quickViewTriggerRef.current?.focus());
   }
 
-  function resetFilters() {
-    replaceParams({ q: null, tipas: null, rikiuoti: null, rodyti: null });
-  }
-
   return (
     <div className="materials-page">
-      <Suspense fallback={null}>
-        <MaterialSearchParamSync onChange={syncFilterParams} />
-      </Suspense>
       <section className="materials-hero" aria-labelledby="materials-title">
         <div className="materials-hero__media" aria-hidden="true">
-          <Image
-            alt=""
-            fill
-            loading="eager"
-            priority
-            sizes="100vw"
-            src={heroMaterial.localPath}
-          />
+          <Image alt="" fill loading="eager" priority sizes="100vw" src={heroMaterial.localPath} />
         </div>
         <div className="materials-hero__scrim" />
 
         <div className="materials-hero__content content-shell">
           <div className="materials-hero__copy">
-            <p className="eyebrow">Natūralaus akmens katalogas</p>
-            <h1 id="materials-title">Akmens atlasas.</h1>
+            <p className="eyebrow">Akmendarba medžiagos</p>
+            <h1 id="materials-title">Akmens pasirinkimas.</h1>
             <p>
-              Tyrinėkite raštą, spalvą ir vizualų charakterį. Išsaugokite patikusius variantus arba palyginkite iki trijų akmenų vienoje vietoje.
+              Akmendarba viešai pristato granitą ir marmurą. Išsaugokite dominančią medžiagos kryptį arba palyginkite abi vienoje vietoje.
             </p>
           </div>
 
-          <nav className="materials-hero__index" aria-label="Akmens rūšys">
-            {materialCategories.map((item) => (
-              <Link href={`${item.href}#kolekcija`} key={item.id}>
-                <strong>{item.name}</strong>
-              </Link>
+          <nav className="materials-hero__index" aria-label="Viešai pristatomos medžiagos">
+            {materials.map((material) => (
+              <a href={`#medziaga-${material.slug}`} key={material.slug}>
+                <strong>{material.name}</strong>
+              </a>
             ))}
           </nav>
 
-          <a className="materials-hero__scroll" href="#kolekcija">
-            Tyrinėti kolekciją <ArrowDown aria-hidden="true" size={17} />
+          <a className="materials-hero__scroll" href="#pasirinkimas">
+            Peržiūrėti pasirinkimą <ArrowDown aria-hidden="true" size={17} />
           </a>
         </div>
       </section>
 
-      <section className="materials-explorer" id="kolekcija" aria-labelledby="collection-title">
+      <section className="materials-explorer" id="pasirinkimas" aria-labelledby="collection-title">
         <div className="materials-explorer__intro content-shell">
           <div>
-            <span className="eyebrow">Kolekcija</span>
-            <h2 id="collection-title">Raskite savo projekto pradžią.</h2>
+            <span className="eyebrow">Pradinė atranka</span>
+            <h2 id="collection-title" tabIndex={-1}>Dvi viešai pristatomos kryptys.</h2>
           </div>
           <p>
-            Mažas vaizdas neperteikia visos natūralaus akmens plokštės. Ši kolekcija skirta pradinei atrankai — konkretų raštą ir atspalvį patvirtinkite projekto aptarimo metu.
+            Tai nėra sandėlio likučių ar konkrečių akmens pavadinimų katalogas. Tikslų variantą, jo vaizdą ir prieinamumą patvirtinkite tiesiogiai su Akmendarba.
           </p>
         </div>
 
-        <div className="material-filter-bar">
-          <div className="material-filter-bar__inner content-shell">
-            <form className="material-search" role="search" onSubmit={(event) => event.preventDefault()}>
-              <Search aria-hidden="true" size={18} strokeWidth={1.5} />
-              <label className="sr-only" htmlFor="material-search-input">
-                Ieškoti pagal akmens pavadinimą
-              </label>
-              <input
-                id="material-search-input"
-                type="search"
-                inputMode="search"
-                autoComplete="off"
-                value={query}
-                onChange={(event) => handleSearch(event.target.value)}
-                placeholder="Ieškoti pavadinimo…"
-              />
-              {query ? (
-                <button type="button" onClick={() => handleSearch("")} aria-label="Išvalyti paiešką">
-                  <X aria-hidden="true" size={17} strokeWidth={1.6} />
-                </button>
-              ) : null}
-            </form>
-
-            <div className="material-filter-tools">
-              <label className="material-sort">
-                <SlidersHorizontal aria-hidden="true" size={17} strokeWidth={1.5} />
-                <span className="sr-only">Rikiavimas</span>
-                <select
-                  value={sortMode}
-                  onChange={(event) => replaceParams({ rikiuoti: event.target.value === "az" ? null : event.target.value })}
-                >
-                  <option value="az">Pavadinimas A–Ž</option>
-                  <option value="za">Pavadinimas Ž–A</option>
-                  <option value="saved">Išsaugoti pirmiausia</option>
-                </select>
-              </label>
-              <button
-                className="saved-only-toggle"
-                type="button"
-                data-active={savedOnly || undefined}
-                onClick={() => replaceParams({ rodyti: savedOnly ? null : "issaugoti" })}
-                aria-pressed={savedOnly}
-              >
-                <Heart aria-hidden="true" fill={savedOnly ? "currentColor" : "none"} size={17} strokeWidth={1.5} />
-                <span>Išsaugoti</span>
-                <small>{savedSlugs.length}</small>
-              </button>
-            </div>
-
-            <div className="material-category-filters" aria-label="Filtruoti pagal akmens rūšį">
-              <button
-                type="button"
-                data-active={category === "visi" || undefined}
-                onClick={() => replaceParams({ tipas: null })}
-                aria-pressed={category === "visi"}
-              >
-                Visi <span>{materials.length}</span>
-              </button>
-              {materialCategories.map((item) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  data-active={category === item.id || undefined}
-                  onClick={() => replaceParams({ tipas: category === item.id ? null : item.id })}
-                  aria-pressed={category === item.id}
-                >
-                  {item.name} <span>{categoryCounts[item.id]}</span>
-                </button>
-              ))}
-            </div>
+        <div className="material-selection-toolbar">
+          <div className="material-selection-toolbar__inner content-shell">
+            <p aria-live="polite" aria-atomic="true">
+              Rodoma <strong>{visibleMaterials.length}</strong> iš {materials.length}
+            </p>
+            <button
+              className="saved-only-toggle"
+              type="button"
+              data-active={savedOnly || undefined}
+              onClick={() => setSavedOnly((current) => !current)}
+              aria-pressed={savedOnly}
+            >
+              <Heart aria-hidden="true" fill={savedOnly ? "currentColor" : "none"} size={17} strokeWidth={1.5} />
+              <span>{savedOnly ? "Rodomos išsaugotos" : "Rodyti išsaugotas"}</span>
+              <small>{savedSlugs.length}</small>
+            </button>
           </div>
         </div>
 
         <div className="material-results content-shell">
           <header className="material-results__header">
-            <p aria-live="polite" aria-atomic="true">
-              Rodoma <strong>{visibleMaterials.length}</strong> iš {materials.length}
-            </p>
-            {filtersActive ? (
-              <button type="button" onClick={resetFilters}>
-                <RotateCcw aria-hidden="true" size={15} strokeWidth={1.7} />
-                Atkurti visą kolekciją
-              </button>
-            ) : (
-              <span>Pasirinkite akmenį detalesnei peržiūrai</span>
-            )}
+            <span>Pasirinkite širdelę, kad išsaugotumėte</span>
+            <span>Pasirinkite palyginimo ženklą, kad sugretintumėte</span>
           </header>
 
           {visibleMaterials.length > 0 ? (
-            <>
-              <div className="material-gallery" data-count={displayedMaterials.length}>
-              {displayedMaterials.map((material, index) => (
+            <div className="material-gallery material-gallery--directions" data-count={visibleMaterials.length}>
+              {visibleMaterials.map((material, index) => (
                 <MaterialPlate
-                  compareLimitReached={compareSlugs.length >= 3}
+                  compareLimitReached={compareSlugs.length >= MAXIMUM_COMPARED_MATERIALS}
                   compared={compareSet.has(material.slug)}
                   key={material.slug}
                   material={material}
@@ -385,35 +186,15 @@ export function MaterialExplorer() {
                   saved={savedSet.has(material.slug)}
                 />
               ))}
-              </div>
-              {displayedMaterials.length < visibleMaterials.length ? (
-                <div className="material-gallery-progress">
-                  <p>
-                    Rodoma <strong>{displayedMaterials.length}</strong> iš {visibleMaterials.length}
-                  </p>
-                  <span aria-hidden="true">
-                    <i style={{ width: `${(displayedMaterials.length / visibleMaterials.length) * 100}%` }} />
-                  </span>
-                  <button
-                    className="button button--secondary"
-                    onClick={() => setVisibleLimit((current) => current + additionalVisibleMaterials)}
-                    type="button"
-                  >
-                    Rodyti daugiau <ArrowDown aria-hidden="true" size={17} />
-                  </button>
-                </div>
-              ) : null}
-            </>
+            </div>
           ) : (
             <div className="material-empty-state">
               <div>
-                <h3>Nerasta nė vieno akmens.</h3>
-                <p>
-                  Pakeiskite paieškos žodį arba grįžkite į visą kolekciją. Jei įjungtas išsaugotų filtras, pirmiausia išsaugokite bent vieną variantą.
-                </p>
-                <button className="button button--primary" type="button" onClick={resetFilters}>
+                <h3>Dar neišsaugojote nė vienos krypties.</h3>
+                <p>Grįžkite į abi medžiagas ir širdelės mygtuku pažymėkite granitą arba marmurą.</p>
+                <button className="button button--primary" type="button" onClick={() => setSavedOnly(false)}>
                   <RotateCcw aria-hidden="true" size={17} />
-                  Rodyti visus akmenis
+                  Rodyti abi medžiagas
                 </button>
               </div>
             </div>
@@ -423,17 +204,17 @@ export function MaterialExplorer() {
 
       <aside className="materials-closing-note section--inverse">
         <div className="content-shell">
-          <span className="eyebrow">Svarbu renkantis</span>
-          <p>Nuotrauka yra pradžia. Sprendimas priimamas pamačius visą plokštę.</p>
-          <Link className="button button--inverse" href="/projektas">
-            Aptarti akmens pasirinkimą
+          <span className="eyebrow">Prieš užsakymą</span>
+          <p>Konkrečią akmens rūšį ir jos prieinamumą patvirtinkite su Akmendarba.</p>
+          <Link className="button button--inverse" href="/kontaktai">
+            Susisiekti dėl pasirinkimo
           </Link>
         </div>
       </aside>
 
       <MaterialQuickView
-        categoryName={quickViewMaterial ? categoryNames[quickViewMaterial.category] : ""}
-        compareLimitReached={compareSlugs.length >= 3}
+        categoryName="Medžiagos kryptis"
+        compareLimitReached={compareSlugs.length >= MAXIMUM_COMPARED_MATERIALS}
         compared={Boolean(quickViewMaterial && compareSet.has(quickViewMaterial.slug))}
         material={quickViewMaterial}
         onDismiss={closeQuickView}
@@ -443,9 +224,9 @@ export function MaterialExplorer() {
       />
 
       <MaterialCompare
-        categoryNames={categoryNames}
         materials={compareMaterials}
-        onClear={() => setCompareSlugs([])}
+        maximum={MAXIMUM_COMPARED_MATERIALS}
+        onClear={() => setCompareSlugs(writeComparedMaterials([]))}
         onRemove={toggleCompare}
       />
 

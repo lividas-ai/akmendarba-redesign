@@ -12,10 +12,11 @@ Destination repository: `akmendarba-lt`
 - Self-host all 150 images returned by the public WordPress media API and keep them grouped by their source gallery.
 - Preserve verified public contact, legal, company, map and social-link data.
 - Do not add services, products, named stone catalogues, prices, testimonials, case-study facts or business capabilities that are absent from the source.
+- Per the client's 2026-09-02 instruction, add a contact-enquiry interface and a restrained stone-selection interface with local favourites and comparison. These are explicitly requested enhancements, not claims that the source site provided them.
 
-## Explicitly absent
+## Source-absent capabilities and approved additions
 
-The approved source does not expose a public enquiry form, project planner, calculator, product selector, named material catalogue, site search, saved-items feature, booking flow, CRM integration or published price list. Those template features are removed or disabled; empty stable exports exist only to satisfy the protected presentation boundary.
+The approved source does not expose a public enquiry form, project planner, calculator, product selector, named material catalogue, site search, saved-items feature, booking flow, CRM integration or published price list. On 2026-09-02, the client explicitly requested that the redesign restore a contact form plus the template's save-and-compare stone workflow. The stone interface is limited to the only two material families supported by source evidence—granite and marble—and makes no claim about named products, stock, prices or availability. Project planning, calculators, booking, search, CRM delivery and price lists remain disabled.
 
 ## Hero authorization and status
 
@@ -29,9 +30,11 @@ The user instructed the migration of media from the client's public website for 
 
 - Direct telephone, email, map, Facebook and Instagram links are in scope.
 - Public gallery navigation is in scope.
+- Contact enquiry preparation is in scope as a browser-only demo. Until an email or CRM endpoint is provided, it performs no network submission and confirms that nothing was sent.
+- Saving and comparing the source-supported granite and marble options is in scope. Selections persist only in the visitor's browser.
 - The cookie notice persists only the visitor's local acknowledgement. No analytics, advertising or third-party tracking is active in the demo.
 - No private credentials or external delivery integrations are required for this demo.
 
 ## Publication boundary
 
-This contract authorizes local implementation and verification only. It does not authorize production deployment, DNS changes, source-site edits, CRM/email wiring or GitHub publication.
+The original migration contract authorized local implementation and verification only. Subsequent user instructions received before 2026-09-02 explicitly authorize publication to the `lividas-ai/akmendarba-redesign` GitHub repository and deployment as a Vercel demo/preview. They do not authorize DNS changes, edits to the source website, CRM/email wiring, or representing the draft as a formally release-approved production site.

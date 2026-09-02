@@ -2,6 +2,7 @@ import {
   assertValidSiteManifest,
 } from "@/template/validate-manifest";
 import {
+  clientText,
   pendingParity,
   sourceText,
   uiText,
@@ -32,6 +33,7 @@ const asNonEmpty = <T>(items: readonly T[]): NonEmpty<T> => {
 };
 
 const sources = [
+  ...([
   { id: "source-home", url: "https://akmendarba.lt/", title: "Pradžia" },
   { id: "source-about", url: "https://akmendarba.lt/apie-mus/", title: "Apie mus" },
   { id: "source-monuments", url: "https://akmendarba.lt/paminklai/", title: "Paminklai, Paminklų gamyba" },
@@ -45,14 +47,22 @@ const sources = [
   { id: "source-gallery-finishing", url: "https://akmendarba.lt/galerija/apdailos-galerija/", title: "Apdailos galerija" },
   { id: "source-contact", url: "https://akmendarba.lt/kontaktai/", title: "Kontaktai" },
   { id: "source-cookies-lt", url: "https://akmendarba.lt/slapukai/", title: "Slapukai" },
-  { id: "source-cookie-policy", url: "https://akmendarba.lt/cookie-policy/", title: "Cookie Policy" },
-].map((source) => ({
-  ...source,
-  kind: "url" as const,
-  canonicalUrl: source.url,
-  retrievedAt: capturedAt,
-  status: "captured" as const,
-})) satisfies readonly SourceRecord[];
+    { id: "source-cookie-policy", url: "https://akmendarba.lt/cookie-policy/", title: "Cookie Policy" },
+  ] as const).map((source) => ({
+    ...source,
+    kind: "url" as const,
+    canonicalUrl: source.url,
+    retrievedAt: capturedAt,
+    status: "captured" as const,
+  })),
+  {
+    id: "source-client-enhancements-2026-09-02",
+    kind: "client-input" as const,
+    artifactId: "codex-thread-2026-09-02-contact-form-stone-tools",
+    title: "Client request: contact form, saved stones and stone comparison",
+    receivedAt: "2026-09-02T10:00:00+03:00",
+  },
+] satisfies readonly SourceRecord[];
 
 const numberedFiles = (prefix: string, count: number) =>
   Array.from({ length: count }, (_, index) => `${prefix}-${index + 1}.jpg`);
@@ -410,6 +420,45 @@ const pages: readonly PageRecord[] = [
       },
     ],
   }),
+  {
+    id: "page-materials",
+    path: "/akmuo",
+    kind: "index",
+    title: clientText("Akmens pasirinkimas", evidence("source-client-enhancements-2026-09-02")),
+    navigationTitle: clientText("Akmuo", evidence("source-client-enhancements-2026-09-02")),
+    publication: "published",
+    blocks: [
+      {
+        id: "materials-hero",
+        type: "hero",
+        publication: "published",
+        data: {
+          heading: clientText("Akmens pasirinkimas", evidence("source-client-enhancements-2026-09-02")),
+          body: sourceText(
+            "Akmendarba apdirba granito bei marmuro gaminius.",
+            evidence("source-about", "Apie mus"),
+          ),
+          mediaId: toMediaId("Granite-1.jpg"),
+        },
+        parity: pendingParity(),
+      },
+      {
+        id: "materials-selector",
+        type: "function",
+        publication: "published",
+        data: { functionId: "function-material-selector" },
+        parity: pendingParity(),
+      },
+    ],
+    seo: {
+      title: clientText("Akmens pasirinkimas | Akmendarba", evidence("source-client-enhancements-2026-09-02")),
+      description: sourceText(
+        "Granito ir marmuro pasirinkimas Akmendarba gaminiams.",
+        evidence("source-about", "Apie mus"),
+      ),
+    },
+    parity: pendingParity(),
+  },
   page({
     id: "page-contact",
     path: "/kontaktai",
@@ -460,6 +509,13 @@ const pages: readonly PageRecord[] = [
         },
         parity: pendingParity(),
       },
+      {
+        id: "contact-enquiry-form",
+        type: "function",
+        publication: "published",
+        data: { functionId: "function-contact-enquiry" },
+        parity: pendingParity(),
+      },
     ],
   }),
   page({
@@ -499,6 +555,60 @@ const pages: readonly PageRecord[] = [
 
 const functions = [
   {
+    id: "function-contact-enquiry",
+    type: "form" as const,
+    implementationKey: "akmendarba.contact-enquiry-preview",
+    config: {
+      experience: "Contact enquiry preparation",
+      fields: ["name", "phoneOrEmail", "service", "message", "consent"],
+      delivery: "No network request; the browser prepares a reviewable summary only.",
+    },
+    evidence: evidence("source-client-enhancements-2026-09-02"),
+    publication: "published" as const,
+    testFixtureIds: ["fixture-contact-enquiry-local-preview"] as const,
+    parity: pendingParity(),
+    integrationStatus: "frontend-only" as const,
+    capability: {
+      experienceId: "experience-contact-enquiry",
+      capabilityId: "capability-contact-enquiry-input",
+      kind: "input" as const,
+      execution: "local" as const,
+      label: clientText("Kontaktinė užklausa", evidence("source-client-enhancements-2026-09-02")),
+      evidence: evidence("source-client-enhancements-2026-09-02"),
+    },
+    integrationBlocker: {
+      sourceId: "source-client-enhancements-2026-09-02",
+      functionId: "function-contact-enquiry",
+      publication: "published" as const,
+      rationale: "The client requested the form UI, but no email, CRM endpoint or delivery credentials have been supplied. The published demo therefore performs no remote submission and says so explicitly.",
+    },
+  },
+  {
+    id: "function-material-selector",
+    type: "selector" as const,
+    implementationKey: "akmendarba.material-selector",
+    config: {
+      experience: "Source-backed stone selection",
+      sourceBackedCategories: ["Granitas", "Marmuras"],
+      capabilities: ["saved-items", "comparison"],
+      persistence: "Browser localStorage only",
+      comparisonMaximum: 2,
+    },
+    evidence: evidence("source-client-enhancements-2026-09-02"),
+    publication: "published" as const,
+    testFixtureIds: ["fixture-material-save", "fixture-material-compare"] as const,
+    parity: pendingParity(),
+    integrationStatus: "complete" as const,
+    capability: {
+      experienceId: "experience-material-selector",
+      capabilityId: "capability-material-selection",
+      kind: "selection" as const,
+      execution: "local" as const,
+      label: clientText("Akmens išsaugojimas ir palyginimas", evidence("source-client-enhancements-2026-09-02")),
+      evidence: evidence("source-client-enhancements-2026-09-02"),
+    },
+  },
+  {
     id: "function-cookie-consent",
     type: "custom" as const,
     implementationKey: "akmendarba.cookie-consent",
@@ -529,6 +639,7 @@ const pageBySourceId = new Map<string, string>([
   ["source-contact", "page-contact"],
   ["source-cookies-lt", "page-cookies-lt"],
   ["source-cookie-policy", "page-cookie-policy"],
+  ["source-client-enhancements-2026-09-02", "page-materials"],
 ]);
 
 export const akmendarbaSiteManifest = {
@@ -547,7 +658,13 @@ export const akmendarbaSiteManifest = {
   sourceCoverage: sources.map((source) => ({
     sourceId: source.id,
     status: "migrated" as const,
-    destinations: [{ kind: "page" as const, id: pageBySourceId.get(source.id)! }] as const,
+    destinations: source.id === "source-client-enhancements-2026-09-02"
+      ? [
+          { kind: "page" as const, id: "page-materials" },
+          { kind: "function" as const, id: "function-contact-enquiry" },
+          { kind: "function" as const, id: "function-material-selector" },
+        ]
+      : [{ kind: "page" as const, id: pageBySourceId.get(source.id)! }],
     reviewedAt,
     note: source.id === "source-home"
       ? "The published notice persists its local acknowledgement; analytics and third-party tracking remain inactive."
@@ -569,6 +686,11 @@ export const akmendarbaSiteManifest = {
           { id: "nav-accessories", label: sourceText("Aksesuarai", evidence("source-accessories")), target: { kind: "page", pageId: "page-accessories" } },
           { id: "nav-finishing", label: sourceText("Apdaila", evidence("source-finishing")), target: { kind: "page", pageId: "page-finishing" } },
         ],
+      },
+      {
+        id: "nav-materials",
+        label: clientText("Akmuo", evidence("source-client-enhancements-2026-09-02")),
+        target: { kind: "page", pageId: "page-materials" },
       },
       {
         id: "nav-gallery",

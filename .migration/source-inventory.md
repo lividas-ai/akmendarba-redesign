@@ -18,5 +18,6 @@ The authoritative page list was captured from the public WordPress Pages API on 
 | `source-contact` | `https://akmendarba.lt/kontaktai/` | URL | 2026-08-31 | captured | live capture | Addresses, people, phone, email, legal/bank data, map and social URLs |
 | `source-cookies-lt` | `https://akmendarba.lt/slapukai/` | URL | 2026-08-31 | captured | live capture | Lithuanian cookie and browsing-data information |
 | `source-cookie-policy` | `https://akmendarba.lt/cookie-policy/` | URL | 2026-08-31 | captured | live capture | Legacy English cookie policy |
+| `source-client-enhancements-2026-09-02` | `codex-thread-2026-09-02-contact-form-stone-tools` | client input | 2026-09-02 | captured | conversation record | Client explicitly requested a contact form plus stone favourites and comparison |
 
-No public posts, products, calculators, forms, downloads or additional page records were returned in the approved page scope.
+No public posts, products, calculators, forms, downloads or additional page records were returned in the approved source-page scope. The additional `/akmuo/` interface and the form on `/kontaktai/` are traced to the 2026-09-02 client-input record above; they are not represented as source-site parity.

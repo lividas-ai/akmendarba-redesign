@@ -104,6 +104,7 @@ export type SiteMetadata = {
 export const primaryNavigation = [
   { id: "apie-mus", label: "Apie mus", href: "/apie-mus" },
   { id: "produkcija", label: "Produkcija", href: "/paminklai" },
+  { id: "akmuo", label: "Akmuo", href: "/akmuo" },
   { id: "galerija", label: "Galerija", href: "/galerija" },
   { id: "kontaktai", label: "Kontaktai", href: "/kontaktai" },
 ] as const satisfies readonly NavigationItem[];

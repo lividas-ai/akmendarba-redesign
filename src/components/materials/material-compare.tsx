@@ -3,34 +3,59 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Columns3, X } from "lucide-react";
-import { useEffect, useMemo, useRef } from "react";
-import type { Material, MaterialCategory } from "@/client/materials";
+import { useEffect, useRef } from "react";
+import type { Material } from "@/client/materials";
 
 type MaterialCompareProps = {
   materials: readonly Material[];
-  categoryNames: Readonly<Record<MaterialCategory, string>>;
+  maximum: number;
   onRemove: (slug: string) => void;
   onClear: () => void;
 };
 
 export function MaterialCompare({
   materials,
-  categoryNames,
+  maximum,
   onRemove,
   onClear,
 }: MaterialCompareProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const projectHref = useMemo(
-    () => `/projektas?akmenys=${encodeURIComponent(materials.map((material) => material.slug).join(","))}`,
-    [materials],
-  );
+  const openButtonRef = useRef<HTMLButtonElement>(null);
+  const returnToCollectionRef = useRef(false);
 
   useEffect(() => {
     if (materials.length === 0 && dialogRef.current?.open) dialogRef.current.close();
   }, [materials.length]);
 
   if (materials.length === 0) return null;
+
+  const contactHref = `/kontaktai?akmenys=${materials.map((material) => material.slug).join(",")}`;
+
+  function focusCollection() {
+    window.requestAnimationFrame(() => {
+      document.getElementById("collection-title")?.focus();
+    });
+  }
+
+  function removeMaterial(slug: string) {
+    if (materials.length === 1) {
+      returnToCollectionRef.current = true;
+      if (dialogRef.current?.open) dialogRef.current.close();
+      onRemove(slug);
+      focusCollection();
+      return;
+    }
+
+    onRemove(slug);
+  }
+
+  function clearMaterials() {
+    returnToCollectionRef.current = true;
+    if (dialogRef.current?.open) dialogRef.current.close();
+    onClear();
+    focusCollection();
+  }
 
   function openComparison() {
     dialogRef.current?.showModal();
@@ -44,7 +69,7 @@ export function MaterialCompare({
           <Columns3 aria-hidden="true" size={18} strokeWidth={1.5} />
           <div>
             <strong>Palyginimas</strong>
-            <span>{materials.length} iš 3</span>
+            <span>{materials.length} iš {maximum}</span>
           </div>
         </div>
 
@@ -54,7 +79,7 @@ export function MaterialCompare({
               <span>{material.name}</span>
               <button
                 type="button"
-                onClick={() => onRemove(material.slug)}
+                onClick={() => removeMaterial(material.slug)}
                 aria-label={`Pašalinti „${material.name}“ iš palyginimo`}
               >
                 <X aria-hidden="true" size={15} strokeWidth={1.7} />
@@ -64,11 +89,12 @@ export function MaterialCompare({
         </div>
 
         <div className="compare-drawer__actions">
-          <button className="compare-drawer__clear" type="button" onClick={onClear}>
+          <button className="compare-drawer__clear" type="button" onClick={clearMaterials}>
             Išvalyti
           </button>
           <button
             className="button button--primary"
+            ref={openButtonRef}
             type="button"
             disabled={materials.length < 2}
             onClick={openComparison}
@@ -83,6 +109,14 @@ export function MaterialCompare({
         ref={dialogRef}
         aria-labelledby="compare-dialog-title"
         aria-describedby="compare-dialog-description"
+        onClose={() => {
+          if (returnToCollectionRef.current) {
+            returnToCollectionRef.current = false;
+            focusCollection();
+          } else {
+            openButtonRef.current?.focus();
+          }
+        }}
         onClick={(event) => {
           if (event.target === dialogRef.current) dialogRef.current.close();
         }}
@@ -91,9 +125,9 @@ export function MaterialCompare({
           <header className="compare-dialog__header">
             <div>
               <span className="eyebrow">Atranka</span>
-              <h2 id="compare-dialog-title">Akmenų palyginimas</h2>
+              <h2 id="compare-dialog-title">Medžiagų palyginimas</h2>
               <p id="compare-dialog-description">
-                Lyginami tik kataloge žinomi duomenys. Galutinį pasirinkimą atlikite įvertinę konkrečią plokštę.
+                Rodoma tik tai, ką Akmendarba viešai pristato: granito ir marmuro kryptys bei jų šaltinio vaizdai.
               </p>
             </div>
             <button
@@ -123,7 +157,7 @@ export function MaterialCompare({
                         />
                       </span>
                       <span className="compare-table__name">{material.name}</span>
-                      <button type="button" onClick={() => onRemove(material.slug)}>
+                      <button type="button" onClick={() => removeMaterial(material.slug)}>
                         Pašalinti
                       </button>
                     </th>
@@ -134,13 +168,13 @@ export function MaterialCompare({
                 <tr>
                   <th scope="row">Akmens rūšis</th>
                   {materials.map((material) => (
-                    <td key={material.slug}>{categoryNames[material.category]}</td>
+                    <td key={material.slug}>{material.name}</td>
                   ))}
                 </tr>
                 <tr>
-                  <th scope="row">Natūrali variacija</th>
+                  <th scope="row">Šaltinio vaizdas</th>
                   {materials.map((material) => (
-                    <td key={material.slug}>Kiekviena plokštė turi savitą atspalvį ir raštą.</td>
+                    <td key={material.slug}>{material.sourceContext}</td>
                   ))}
                 </tr>
               </tbody>
@@ -149,10 +183,10 @@ export function MaterialCompare({
 
           <footer className="compare-dialog__footer">
             <p>
-              Katalogo vaizdai nėra konkrečios plokštės garantija. Projekto metu galima aptarti tinkamiausią pasirinkimą.
+              Konkrečių akmens pavadinimų, likučių ar techninių savybių viešame šaltinyje nepateikta. Juos patvirtinkite tiesiogiai su įmone.
             </p>
-            <Link className="button button--primary" href={projectHref}>
-              Pridėti atranką prie projekto
+            <Link className="button button--primary" href={contactHref}>
+              Aptarti pasirinkimą
               <ArrowRight aria-hidden="true" size={17} />
             </Link>
           </footer>

@@ -53,6 +53,7 @@ export const akmendarbaSiteConfig: ClientSiteConfig = {
       backToMainMenu: "Grįžti į pagrindinį meniu",
       sectionFallback: "Skiltis",
     },
+    savedItems: { label: "Išsaugota", countLabel: "Išsaugoti akmens variantai" },
   },
   contact: akmendarbaContactConfig,
   footer: {
@@ -62,7 +63,10 @@ export const akmendarbaSiteConfig: ClientSiteConfig = {
         id: "production",
         label: "Produkcija",
         ariaLabel: "Produkcija",
-        links: applications.map((item) => ({ label: item.shortTitle, href: item.href })),
+        links: [
+          { label: "Akmens pasirinkimas", href: "/akmuo" },
+          ...applications.map((item) => ({ label: item.shortTitle, href: item.href })),
+        ],
       },
       {
         id: "gallery",
@@ -102,6 +106,7 @@ export const akmendarbaSiteConfig: ClientSiteConfig = {
     { path: "/kapo-dengimai", changeFrequency: "monthly", priority: 0.85 },
     { path: "/aksesuarai", changeFrequency: "monthly", priority: 0.75 },
     { path: "/apdaila", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/akmuo", changeFrequency: "monthly", priority: 0.8 },
     { path: "/galerija", changeFrequency: "monthly", priority: 0.8 },
     { path: "/galerija/paminklu-galerija", changeFrequency: "monthly", priority: 0.75 },
     { path: "/galerija/kapo-dengimu-galerija", changeFrequency: "monthly", priority: 0.75 },
